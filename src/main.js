@@ -11,6 +11,8 @@ import MyClass from './class_study.js';
 import MyClass2 from './class_study2.js';
 // 导入Hello2组件
 import Hello2 from './components/Hello2.jsx';
+// 导入渲染的循环列表组件List
+import List from './components/List.jsx';
 // function DivCom(props) {
 // 	// g.通过属性传递过来的数据都是只读的，不能够修改
 // 	// 例如：在函数组件中props.name="李红"，这是错误的，函数组件内部接收的属性props只读，不能重新赋值
@@ -243,13 +245,13 @@ let info = '这是向Hello2子组件传递的数据';
 // 	};
 // }
 // 把Hello2组件也单独抽离出去
-
 ReactDOM.render(
 	// <DivCom name={name} age={age}></DivCom>,
 	// ...person中用到扩展符，表示属性扩散，
 	<div>
 		<DivCom {...person}></DivCom>
 		<Hello2 info={info} {...person}></Hello2>
+		<List></List>
 	</div>,
 	document.getElementById('app')
 );
