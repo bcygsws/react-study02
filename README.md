@@ -57,7 +57,7 @@
 ## 不同 jsx 文件样式的隔离
 
 -   方式一：main.js 文件中直接 import '样式文件路径'，得实时关注各个 jsx 文件定义的类名，不要重复。重复类名，可能造成样式的混乱
--   方式二：let obj={margin:10px 0,color:pink} <div style={obj}>;这种方式会定义很多的对象，虽然可以模块的形式导出，但样式的抽取、打包不方便
+-   方式二：let obj={margin:10px 0,color:pink} \<div style={obj}\>;这种方式会定义很多的对象，虽然可以模块的形式导出，但样式的抽取、打包不方便
 -   方式三：
     1. 在 css 目录下定义样式文件，文件命名要和组件有一定的关联，以便于查找
     2. 在 webpack.config.js（或 webpack.pub.config.js）中为 css-loader 配置开启模块化（modules:true;），并重定义类名的规范（localIdentName:'[local]--[hash:base64:5]'）
@@ -65,4 +65,3 @@
     4. 将类名修正。例如：原来是\<div className="user"\>\</div\>变更为\<div className={ObjStyle.use}\>\<\/div\>
 
 ## React 组件的生命周期
-
