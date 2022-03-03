@@ -1,8 +1,8 @@
 import React from 'react';
 // 用class类的方式创建组件
 // 向子组件Hello2传入数据
-// 1. 在function定义的组件中，拿到props值要先进行显式调用，而class定义的组件中，传递的属性可以
-// 直接this.props.键名可以直接获取，无需显式的定义参数props。props也是制度的（区别：class组件在构造器中声明的this.state数据
+// 1. 在function定义的组件中，拿到props值要先进行显式调用，而class定义的组件中，传递的属性在render函数中可以
+// 直接this.props.键名可以直接获取，无需显式的定义参数props。props也是只读的（区别：class组件在构造器中声明的this.state数据
 // 是组件的私有数据，可读可写）
 // 2. 对于向子组件传递的数据{...person} 获取传值时，无需出现person了，直接是props.name或者this.props.name就可以拿到值了
 // 原因是:{...person} 相当于name={name} age={age} address={address}。在render函数中打印了this.props对象结构，也能验证
@@ -12,7 +12,7 @@ import React from 'react';
 // 5.和在render函数中访问props属性，使用this.props不同。如果在构造函数中访问props,并不使用this.props了。而是在构造器中引入
 // 参数props,那么直接把形参props拿过来使用即可
 // 6.在构造函数除了处理参数props以外，还有一个重要的东西state。this.state,this.state中存放的是当前组件的私有数据。这类似于vue
-// 中的data(){return {};}。在render中代码片段（或者叫虚拟DOM）中访问当前组件的私有数据，直接使用this.state.键名来访问
+// 中的data(){return {};}。在render中代码片段（或者叫虚拟DOM）中访问当前组件的私有数据，直接使用【this.state.键名】来访问
 export default class Hello2 extends React.Component {
 	// constructor() {
 	// 	super();
@@ -89,6 +89,8 @@ export default class Hello2 extends React.Component {
 		// 7.解析方案：在setState中传入第二个函数参数，这种回调的方式，在jquery中也经常使用
 		this.setState(
 			function (preVal, props) {
+				console.log(preVal);// state的旧值，{msg: '这是Hello2组件的私有数据', info: '《艳骨》静姝'}
+				console.log(props);// 父组件或其他组件传递过来的属性值
 				console.log(this.state.msg);
 				return { msg: '私有数据msg的值被改变了' };
 			},
