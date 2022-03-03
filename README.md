@@ -18,7 +18,7 @@
 ## React 框架中创建组件的四种方式（一步步进化）
 
 -   React.createElement(标签,{属性 1：值 1，属性 2，值 2}||null,子元素或子节点)
--   使用 jsx 语法，字面量的方式创建。var Hello=<div></div>
+-   使用 jsx 语法，字面量的方式创建。var Hello=\<div\>\<\/div\>
 -   使用 jsx 语法，function 函数创建
 -   使用 jsx 语法，class 创建
 
@@ -53,3 +53,16 @@
 
 -   如果一个组件要存放自己的私有数据，或在组件的不同阶段执行不同的业务逻辑，此时非常适合使用有状态组件；
 -   如果一个组件只需要接收数据，并随之渲染组件，最好使用无状态组件，function 组件由于没有生命周期，运行速度要稍微快一些
+
+## 不同 jsx 文件样式的隔离
+
+-   方式一：main.js 文件中直接 import '样式文件路径'，得实时关注各个 jsx 文件定义的类名，不要重复。重复类名，可能造成样式的混乱
+-   方式二：let obj={margin:10px 0,color:pink} <div style={obj}>;这种方式会定义很多的对象，虽然可以模块的形式导出，但样式的抽取、打包不方便
+-   方式三：
+    1. 在 css 目录下定义样式文件，文件命名要和组件有一定的关联，以便于查找
+    2. 在 webpack.config.js（或 webpack.pub.config.js）中为 css-loader 配置开启模块化（modules:true;），并重定义类名的规范（localIdentName:'[local]--[hash:base64:5]'）
+    3. 在需要样式文件的 jsx 文件中，import ObjStyle form '样式文件路径'；
+    4. 将类名修正。例如：原来是\<div className="user"\>\</div\>变更为\<div className={ObjStyle.use}\>\<\/div\>
+
+## React 组件的生命周期
+

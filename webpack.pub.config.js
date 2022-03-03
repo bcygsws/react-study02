@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 对css等样式文件进行压缩
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
-// 压缩js代码，使用插件uglifyjs-webpack-plugin
+// 压缩js代码uglifyjs-webpack-plugin
 const UglifyJS = require('uglifyjs-webpack-plugin');
 module.exports = {
 	// 入口起点，可以指定多个入口。声明使用绝对路径，保证不出错
@@ -44,9 +44,7 @@ module.exports = {
 				collapseWhitespace: true, // 去除空格
 				removeComments: true, // 移除注释
 				removeAttributeQuotes: true // 移除属性中的引号
-			},
-			// title设定打包后文档的标题
-			title: '深入分析隔行变色案例'
+			}
 		}),
 		new CleanWebpackPlugin(),
 		// 抽离样式文件插件,webpack4以前使用ExtractTextWebpackPlugin抽取样式
@@ -56,6 +54,7 @@ module.exports = {
 		}),
 		// 压缩样式文件
 		new OptimizeCssAssetsWebpackPlugin({
+			// 配置css处理插件选项
 			cssProcessPluginOptions: {
 				preset: ['default', { discardComments: { removeAll: true } }]
 			}
@@ -107,7 +106,16 @@ module.exports = {
 			{
 				test: /\.css$/,
 				// style-loader换成MiniCssExtractPlugin.loader后即可完成对css的抽离
-				use: [MiniCssExtractPlugin.loader, 'css-loader']
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							localIdentName: '[local]--[hash:base64:5]'
+						}
+					}
+				]
 			},
 			{
 				test: /\.(scss|sass)$/,
@@ -119,7 +127,10 @@ module.exports = {
 						loader: 'css-loader',
 						options: {
 							url: false,
-							importLoaders: 2
+							importLoaders: 2,
+							// // 如果没有启用模块化，那么通过这种方式接收的MyList是一个空对象{}。import MyList from './css/list.scss';
+							modules: true,
+							localIdentName: '[local]--[hash:base64:5]'
 						}
 					},
 					'postcss-loader',
@@ -143,9 +154,10 @@ module.exports = {
 							// 后面再打包图片时，图片名称中用到了hash。因此，解析add.less文件中options url必须为true,如果在sass和css中有类似
 							// url的路径,毫无疑问，也必须让options选项中url为true
 							url: true,
-							importLoaders: 2 // 就算使用import样式，也会执行会面的loader
-							// modules: true,
-							// localIdentName: '[local]--[hash:base64:5]',
+							importLoaders: 2, // 就算使用import样式，也会执行会面的loader
+							modules: true,
+							// local原来的的类名，hash:5 5位的hash字符，name代表样式表文件的名称
+							localIdentName: '[local]--[hash:base64:5]'
 							// import: true,
 							// url: true, //启用url，默认true，如果设置false，则页面只是默认样式
 							// import: true, //禁止或启用@import, 默认true
@@ -167,8 +179,8 @@ module.exports = {
 					'less-loader'
 				]
 			},
-			// 处理index.html中的图片：webpack解析html标签中img引入的图片
-			// 参考文档：https://www.cnblogs.com/fightjianxian/p/12441638.html
+			// // 处理index.html中的图片：webpack解析html标签中img引入的图片
+			// // 参考文档：https://www.cnblogs.com/fightjianxian/p/12441638.html
 			// {
 			// 	test: /\.(html|htm)$/i,
 			// 	// use: 'html-withimg-loader'
@@ -184,6 +196,25 @@ module.exports = {
 			// // 直接传给file-loader。因此我们只需要安装url-loader即可
 			// // 处理css中的url图片，webpack解析css路径中的url图片。图片压缩和浏览器加前缀还要用到file-loader，因此file-loader
 			// // 最好也安装一下
+			// /**
+			//  *
+			//  * bug:html中的图片和样式文件url路径中的图片的路径纠缠：
+			//  * 注意：html-loader中处理的是打包前路径的相对关系
+			//  * a.因此index.html中图片中src="./images/bale.jpg"。打包后，图片仍然放在了images文件夹中了，路径相对关系不变。
+			//  * 由于html-loader处理了html中的图片仍然要走url-loader加载器，那么url-loader之后的options选项中就不能配置
+			//  * publicPath:'../images'(如果项目中仅仅css中有引入图片，完全可以这么做)或者../来调和打包后图片的路径
+			//  * b.如果是html和css中都存在图片,html中图片路径相对位置不变，而且处理html中图片的html-loader处理完成后，还要
+			//  * 交给url-loader处理，比如outPath:'./images',指示两种图片都打包在dist/images文件夹下。同时，limit(取两个图片大
+			//  * 小的最小值both_min，limit<最小值box_min,就可以实现图片都不打包成base64格式)。
+			//  * url中引入的图片路径：打包前url('../images/child.jpg') ，打包后url被解析成了url('/images/child.jpg')。需要提高
+			//  * 访问级别，在rules:[],{test:/\.less$/,use:{
+			//  * 		loader:MiniCssExtractPlugin.loader,
+			//  * 		options:{
+			//  * 		      // 将被url-loader处理器降低访问层级后的图片，访问级别抬高，即解析后的/images/child.jpg变成../images/child.jpg
+			//  * 					publicPath:'../'
+			//  * 						}
+			//  * }}
+			//  */
 			// {
 			// 	test: /\.(jpeg|bmp|png|jpg|gif)$/i,
 			// 	use: [
@@ -200,30 +231,30 @@ module.exports = {
 			// 				limit: 120 * 1024, // 图片的大小1个为123k,一个为208k。取两个最小值。limit小于最小值，才会打包成图片需要安装file-loader，limit<图片实际值，才会显示name格式的名字
 			// 				name: '[name]-[hash:8].[ext]'
 			// 			}
+			// 		},
+			// 		{
+			// 			loader: 'image-webpack-loader',
+			// 			options: {
+			// 				mozjpeg: {
+			// 					progressive: true
+			// 				},
+			// 				// optipng.enabled: false will disable optipng
+			// 				optipng: {
+			// 					enabled: false
+			// 				},
+			// 				pngquant: {
+			// 					quality: [0.65, 0.9],
+			// 					speed: 4
+			// 				},
+			// 				gifsicle: {
+			// 					interlaced: false
+			// 				},
+			// 				// the webp option will enable WEBP
+			// 				webp: {
+			// 					quality: 75
+			// 				}
+			// 			}
 			// 		}
-			// 		// {
-			// 		// 	loader: 'image-webpack-loader',
-			// 		// 	options: {
-			// 		// 		mozjpeg: {
-			// 		// 			progressive: true
-			// 		// 		},
-			// 		// 		// optipng.enabled: false will disable optipng
-			// 		// 		optipng: {
-			// 		// 			enabled: false
-			// 		// 		},
-			// 		// 		pngquant: {
-			// 		// 			quality: [0.65, 0.9],
-			// 		// 			speed: 4
-			// 		// 		},
-			// 		// 		gifsicle: {
-			// 		// 			interlaced: false
-			// 		// 		},
-			// 		// 		// the webp option will enable WEBP
-			// 		// 		webp: {
-			// 		// 			quality: 75
-			// 		// 		}
-			// 		// 	}
-			// 		// }
 			// 	]
 			// },
 			// 解析js或者jsx文件的新语法
