@@ -14,9 +14,7 @@ import Hello2 from './components/Hello2.jsx';
 // 导入渲染的循环列表组件List
 import List from './components/List.jsx';
 // 导入样式文件，在react-scripts@2.0.0 版本以上已经支持样式模块化了
-import './css/base.css';
-import './css/add.less';
-import './css/list.scss';
+// import './css/add.less'; // 这是属于子组件SubList的样式，在那个组件中引入
 // function DivCom(props) {
 // 	// g.通过属性传递过来的数据都是只读的，不能够修改
 // 	// 例如：在函数组件中props.name="李红"，这是错误的，函数组件内部接收的属性props只读，不能重新赋值

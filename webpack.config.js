@@ -107,7 +107,16 @@ module.exports = {
 			{
 				test: /\.css$/,
 				// style-loader换成MiniCssExtractPlugin.loader后即可完成对css的抽离
-				use: [MiniCssExtractPlugin.loader, 'css-loader']
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							localIdentName: '[local]--[hash:base64:5]'
+						}
+					}
+				]
 			},
 			{
 				test: /\.(scss|sass)$/,
@@ -119,7 +128,10 @@ module.exports = {
 						loader: 'css-loader',
 						options: {
 							url: false,
-							importLoaders: 2
+							importLoaders: 2,
+							// // 如果没有启用模块化，那么通过这种方式接收的MyList是一个空对象{}。import MyList from './css/list.scss';
+							modules: true,
+							localIdentName: '[local]--[hash:base64:5]'
 						}
 					},
 					'postcss-loader',
@@ -143,9 +155,10 @@ module.exports = {
 							// 后面再打包图片时，图片名称中用到了hash。因此，解析add.less文件中options url必须为true,如果在sass和css中有类似
 							// url的路径,毫无疑问，也必须让options选项中url为true
 							url: true,
-							importLoaders: 2 // 就算使用import样式，也会执行会面的loader
-							// modules: true,
-							// localIdentName: '[local]--[hash:base64:5]',
+							importLoaders: 2, // 就算使用import样式，也会执行会面的loader
+							modules: true,
+							// local原来的的类名，hash:5 5位的hash字符，name代表样式表文件的名称
+							localIdentName: '[local]--[hash:base64:5]'
 							// import: true,
 							// url: true, //启用url，默认true，如果设置false，则页面只是默认样式
 							// import: true, //禁止或启用@import, 默认true

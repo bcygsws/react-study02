@@ -1,0 +1,15 @@
+/* 如果在使用title类样式的jsx文件中，都使用全局导入，配合 import  '路径'; */
+/* 想让title成为全局样式,使用语法  :global(.类名) */
+/* 测试发现这个全局类样式，这种情况下不会对类进行重命名 */
+:global(.title) {
+	color: purple;
+}
+/* 如果使用import Title '../../css/SubList.jsx'，想为单个组件单独添加样式，就使用导入导入对象这种方式 */
+
+.title {
+	color: red;
+}
+
+/* 现在做一个改动，将subList组件中样式，模块化引入 import MyTitle from '../../css/subTitle.css;会发现这个红色的title
+只作用于子组件subList了 */
+/* 类名生成了字符串，这个字符串是依赖路径的，路径相同，生成的字符串就相同 */
