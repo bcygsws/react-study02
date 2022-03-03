@@ -1,0 +1,11 @@
+.list_container h3 {
+	font-size: 24px;
+	color: pink;
+	font-weight: 700;
+}
+.sub_container div.user {
+	font: italic 700 18px '楷体';
+}
+.sub_container div.content {
+	font: normal 700 18px '楷体';
+}

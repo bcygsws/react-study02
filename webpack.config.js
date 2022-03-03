@@ -15,7 +15,7 @@ module.exports = {
 	// entry: path.resolve(__dirname, 'src/main.js'),
 	// 抽离第三方包，entry改成一个对象
 	entry: {
-		app: path.resolve(__dirname, 'src/main.js'),
+		app: path.resolve(__dirname, 'src/main.js')
 		// vendors1: ['jquery']
 	},
 	// 输出配置
@@ -51,7 +51,7 @@ module.exports = {
 		// 抽离样式文件插件,webpack4以前使用ExtractTextWebpackPlugin抽取样式
 		new MiniCssExtractPlugin({
 			// 将所有的css、less、sass文件抽离出来，放在根目录下(打包后的dist/下)，并依据下面格式命名
-			// filename: 'css/[name].[contenthash:8].css'
+			filename: 'css/[name].[contenthash:8].css'
 		}),
 		// 压缩样式文件
 		new OptimizeCssAssetsWebpackPlugin({
@@ -104,69 +104,69 @@ module.exports = {
 		rules: [
 			// 配置解析样式或其他文件的loader
 			// .css文件
-			// {
-			// 	test: /\.css$/,
-			// 	// style-loader换成MiniCssExtractPlugin.loader后即可完成对css的抽离
-			// 	use: [MiniCssExtractPlugin.loader, 'css-loader']
-			// },
-			// {
-			// 	test: /\.(scss|sass)$/,
-			// 	use: [
-			// 		{
-			// 			loader: MiniCssExtractPlugin.loader
-			// 		},
-			// 		{
-			// 			loader: 'css-loader',
-			// 			options: {
-			// 				url: false,
-			// 				importLoaders: 2
-			// 			}
-			// 		},
-			// 		'postcss-loader',
-			// 		'sass-loader'
-			// 	]
-			// },
-			// {
-			// 	test: /\.less$/,
-			// 	use: [
-			// 		{
-			// 			loader: MiniCssExtractPlugin.loader,
-			// 			options: {
-			// 				publicPath: '../'
-			// 			}
-			// 		},
-			// 		{
-			// 			loader: 'css-loader',
-			// 			// 参考文档：https://blog.csdn.net/m0_45315697/article/details/106446801
-			// 			options: {
-			// 				// url设定为false,webpack不会解析url中路径,会产生一个问题。本案例中add.less中有一个url路径，路径引用了图片。
-			// 				// 后面再打包图片时，图片名称中用到了hash。因此，解析add.less文件中options url必须为true,如果在sass和css中有类似
-			// 				// url的路径,毫无疑问，也必须让options选项中url为true
-			// 				url: true,
-			// 				importLoaders: 2 // 就算使用import样式，也会执行会面的loader
-			// 				// modules: true,
-			// 				// localIdentName: '[local]--[hash:base64:5]',
-			// 				// import: true,
-			// 				// url: true, //启用url，默认true，如果设置false，则页面只是默认样式
-			// 				// import: true, //禁止或启用@import, 默认true
-			// 				// minimize: false, //压缩css代码, 默认false
-			// 				// 注意 : minimize这个属性移除了，这里设置不生效。
-			// 				// 如果要对css代码压缩，可以使用插件optimize-css-assets-webpack-plugin
-			// 				//  root: '/', //修改css中url指向的根目录, 默认值为/, 对于绝对路径, css-loader默认是不会对它进行处理的
-			// 				// modules: false, //开启css-modules模式, 默认值为flase
-			// 				// localIdentName: ‘[name]-[local]-[hash:base64:5]‘, //设置css-modules模式下local类名的命名
-			// 				// camelCase: false, //导出以驼峰化命名的类名, 默认false
-			// 				// sourceMap: false, //禁止或启用sourceMap, 默认false
-			// 				// importLoaders: 0, //在css-loader前应用的loader的数目, 默认为0
-			// 				// alias: {} //起别名, 默认{}
-			// 			}
-			// 		},
-			// 		// 需要配合postcss.config.js里面的autoprefixer使用
-			// 		// autoprefixer为样式添加前缀，压缩css文件等都需要postcss-loader
-			// 		'postcss-loader',
-			// 		'less-loader'
-			// 	]
-			// },
+			{
+				test: /\.css$/,
+				// style-loader换成MiniCssExtractPlugin.loader后即可完成对css的抽离
+				use: [MiniCssExtractPlugin.loader, 'css-loader']
+			},
+			{
+				test: /\.(scss|sass)$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader
+					},
+					{
+						loader: 'css-loader',
+						options: {
+							url: false,
+							importLoaders: 2
+						}
+					},
+					'postcss-loader',
+					'sass-loader'
+				]
+			},
+			{
+				test: /\.less$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: '../'
+						}
+					},
+					{
+						loader: 'css-loader',
+						// 参考文档：https://blog.csdn.net/m0_45315697/article/details/106446801
+						options: {
+							// url设定为false,webpack不会解析url中路径,会产生一个问题。本案例中add.less中有一个url路径，路径引用了图片。
+							// 后面再打包图片时，图片名称中用到了hash。因此，解析add.less文件中options url必须为true,如果在sass和css中有类似
+							// url的路径,毫无疑问，也必须让options选项中url为true
+							url: true,
+							importLoaders: 2 // 就算使用import样式，也会执行会面的loader
+							// modules: true,
+							// localIdentName: '[local]--[hash:base64:5]',
+							// import: true,
+							// url: true, //启用url，默认true，如果设置false，则页面只是默认样式
+							// import: true, //禁止或启用@import, 默认true
+							// minimize: false, //压缩css代码, 默认false
+							// 注意 : minimize这个属性移除了，这里设置不生效。
+							// 如果要对css代码压缩，可以使用插件optimize-css-assets-webpack-plugin
+							//  root: '/', //修改css中url指向的根目录, 默认值为/, 对于绝对路径, css-loader默认是不会对它进行处理的
+							// modules: false, //开启css-modules模式, 默认值为flase
+							// localIdentName: ‘[name]-[local]-[hash:base64:5]‘, //设置css-modules模式下local类名的命名
+							// camelCase: false, //导出以驼峰化命名的类名, 默认false
+							// sourceMap: false, //禁止或启用sourceMap, 默认false
+							// importLoaders: 0, //在css-loader前应用的loader的数目, 默认为0
+							// alias: {} //起别名, 默认{}
+						}
+					},
+					// 需要配合postcss.config.js里面的autoprefixer使用
+					// autoprefixer为样式添加前缀，压缩css文件等都需要postcss-loader
+					'postcss-loader',
+					'less-loader'
+				]
+			},
 			// // 处理index.html中的图片：webpack解析html标签中img引入的图片
 			// // 参考文档：https://www.cnblogs.com/fightjianxian/p/12441638.html
 			// {

@@ -1,0 +1,7 @@
+.sub_container .user {
+  padding: 0 5px;
+  margin-bottom: 10px;
+}
+.sub_container .content {
+  padding: 0 5px;
+}

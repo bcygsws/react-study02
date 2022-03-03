@@ -42,7 +42,8 @@ export default class List extends React.Component {
 		// item用于传递属性，index当作key值
 
 		return (
-			<div>
+			<div className="list_container">
+				<h3>评论列表案例</h3>
 				{/* 推荐这种方式，这也是Array的map方法的优点之一，map方法返回值是数组，数组仍然可以继续进行操作，因此map也支持连写 */}
 				{this.state.CommentList.map((item, index) => {
 					return <SubList {...item} key={index}></SubList>;

@@ -14,8 +14,8 @@ module.exports = {
 	// entry: path.resolve(__dirname, 'src/main.js'),
 	// 抽离第三方包，entry改成一个对象
 	entry: {
-		app: path.resolve(__dirname, 'src/main.js'),
-		vendors1: ['jquery']
+		app: path.resolve(__dirname, 'src/main.js')
+		// vendors1: ['jquery']
 	},
 	// 输出配置
 	output: {
@@ -67,20 +67,20 @@ module.exports = {
 			chunks: 'all', // async表示抽取异步模块，all表示对所有模块生效，initial表示对同步模块生效
 			cacheGroups: {
 				// 单独提取JS文件引入html
-				vendors: {
-					// 抽离第三方库
-					// 键值可以自定义
-					test: /[\\/]node_modules[\\/]/,
-					// chunks: 'initial',
-					name: 'vendors1', // 入口的entry的key
-					// 小经验：filename：节点不仅可以设置打包文件名还可以设置打包路径，output节点中也是类似情况
-					filename: 'js/jquery.js',
-					enforce: true, // 强制
-					priority: 10, // 抽离优先级,加了权重先抽离第三方模块
-					minSize: 0, // 大于0字节
-					minChunks: 1, //在分割之前，这个代码至少被引用1次
-					reuseExistingChunk: true
-				}
+				// vendors: {
+				// 	// 抽离第三方库
+				// 	// 键值可以自定义
+				// 	test: /[\\/]node_modules[\\/]/,
+				// 	// chunks: 'initial',
+				// 	name: 'vendors1', // 入口的entry的key
+				// 	// 小经验：filename：节点不仅可以设置打包文件名还可以设置打包路径，output节点中也是类似情况
+				// 	filename: 'js/jquery.js',
+				// 	enforce: true, // 强制
+				// 	priority: 10, // 抽离优先级,加了权重先抽离第三方模块
+				// 	minSize: 0, // 大于0字节
+				// 	minChunks: 1, //在分割之前，这个代码至少被引用1次
+				// 	reuseExistingChunk: true
+				// }
 			}
 		},
 		// 为 webpack 运行时代码创建单独的chunk
@@ -169,63 +169,63 @@ module.exports = {
 			},
 			// 处理index.html中的图片：webpack解析html标签中img引入的图片
 			// 参考文档：https://www.cnblogs.com/fightjianxian/p/12441638.html
-			{
-				test: /\.(html|htm)$/i,
-				// use: 'html-withimg-loader'
-				// html-loader解析图片，依据的是项目中原来index.html<img src="./images/bale.jpg"/>的位置；而html-withimg-loader则依据的是托管在内存中的根路径
-				use: {
-					loader: 'html-loader'
-				}
-			},
-			// url-loader和file-loader是什么关系呢？简答地说，url-loader封装了file-loader。url-loader不依赖于
-			// file-loader，即使用url-loader时，只需要安装url-loader即可，不需要安装file-loader，因为url-loader
-			// 内置了file-loader。通过上面的介绍，我们可以看到，url-loader工作分两种情况：1.文件大小小于limit参数，
-			// url-loader将会把文件转为DataURL；2.文件大小大于limit，url-loader会调用file-loader进行处理，参数也会
-			// 直接传给file-loader。因此我们只需要安装url-loader即可
-			// 处理css中的url图片，webpack解析css路径中的url图片。图片压缩和浏览器加前缀还要用到file-loader，因此file-loader
-			// 最好也安装一下
-			{
-				test: /\.(jpeg|bmp|png|jpg|gif)$/i,
-				use: [
-					{
-						// 图片大小126428
-						loader: 'url-loader',
-						options: {
-							esModule: false, // 新版file-loader使用了ES Module模块化方式，为避免和html-loader采用的common.js冲突，
-							// 将esModule配置为false就可以解决这个问题
-							outputPath: './images',
-							// publicPath: '../images', // 必须有，否则打包时，抽离的样式中url(/images)图片变成了和css同级了
-							// child.jpg图片大写为213,721
-							// limit: 214000, // 图片大小小于limit,图片转化为base64格式
-							limit: 120 * 1024, // 图片的大小1个为123k,一个为208k。取两个最小值。limit小于最小值，才会打包成图片需要安装file-loader，limit<图片实际值，才会显示name格式的名字
-							name: '[name]-[hash:8].[ext]'
-						}
-					}
-					// {
-					// 	loader: 'image-webpack-loader',
-					// 	options: {
-					// 		mozjpeg: {
-					// 			progressive: true
-					// 		},
-					// 		// optipng.enabled: false will disable optipng
-					// 		optipng: {
-					// 			enabled: false
-					// 		},
-					// 		pngquant: {
-					// 			quality: [0.65, 0.9],
-					// 			speed: 4
-					// 		},
-					// 		gifsicle: {
-					// 			interlaced: false
-					// 		},
-					// 		// the webp option will enable WEBP
-					// 		webp: {
-					// 			quality: 75
-					// 		}
-					// 	}
-					// }
-				]
-			},
+			// {
+			// 	test: /\.(html|htm)$/i,
+			// 	// use: 'html-withimg-loader'
+			// 	// html-loader解析图片，依据的是项目中原来index.html<img src="./images/bale.jpg"/>的位置；而html-withimg-loader则依据的是托管在内存中的根路径
+			// 	use: {
+			// 		loader: 'html-loader'
+			// 	}
+			// },
+			// // url-loader和file-loader是什么关系呢？简答地说，url-loader封装了file-loader。url-loader不依赖于
+			// // file-loader，即使用url-loader时，只需要安装url-loader即可，不需要安装file-loader，因为url-loader
+			// // 内置了file-loader。通过上面的介绍，我们可以看到，url-loader工作分两种情况：1.文件大小小于limit参数，
+			// // url-loader将会把文件转为DataURL；2.文件大小大于limit，url-loader会调用file-loader进行处理，参数也会
+			// // 直接传给file-loader。因此我们只需要安装url-loader即可
+			// // 处理css中的url图片，webpack解析css路径中的url图片。图片压缩和浏览器加前缀还要用到file-loader，因此file-loader
+			// // 最好也安装一下
+			// {
+			// 	test: /\.(jpeg|bmp|png|jpg|gif)$/i,
+			// 	use: [
+			// 		{
+			// 			// 图片大小126428
+			// 			loader: 'url-loader',
+			// 			options: {
+			// 				esModule: false, // 新版file-loader使用了ES Module模块化方式，为避免和html-loader采用的common.js冲突，
+			// 				// 将esModule配置为false就可以解决这个问题
+			// 				outputPath: './images',
+			// 				// publicPath: '../images', // 必须有，否则打包时，抽离的样式中url(/images)图片变成了和css同级了
+			// 				// child.jpg图片大写为213,721
+			// 				// limit: 214000, // 图片大小小于limit,图片转化为base64格式
+			// 				limit: 120 * 1024, // 图片的大小1个为123k,一个为208k。取两个最小值。limit小于最小值，才会打包成图片需要安装file-loader，limit<图片实际值，才会显示name格式的名字
+			// 				name: '[name]-[hash:8].[ext]'
+			// 			}
+			// 		}
+			// 		// {
+			// 		// 	loader: 'image-webpack-loader',
+			// 		// 	options: {
+			// 		// 		mozjpeg: {
+			// 		// 			progressive: true
+			// 		// 		},
+			// 		// 		// optipng.enabled: false will disable optipng
+			// 		// 		optipng: {
+			// 		// 			enabled: false
+			// 		// 		},
+			// 		// 		pngquant: {
+			// 		// 			quality: [0.65, 0.9],
+			// 		// 			speed: 4
+			// 		// 		},
+			// 		// 		gifsicle: {
+			// 		// 			interlaced: false
+			// 		// 		},
+			// 		// 		// the webp option will enable WEBP
+			// 		// 		webp: {
+			// 		// 			quality: 75
+			// 		// 		}
+			// 		// 	}
+			// 		// }
+			// 	]
+			// },
 			// 解析js或者jsx文件的新语法
 			{
 				test: /\.js(x?)$/,
