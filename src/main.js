@@ -13,6 +13,8 @@ import MyClass2 from './class_study2.js';
 import Hello2 from './components/Hello2.jsx';
 // 导入渲染的循环列表组件List
 import List from './components/List.jsx';
+// 导入计数器组件
+import Counter from './components/Counter.jsx';
 // 导入样式文件，在react-scripts@2.0.0 版本以上已经支持样式模块化了
 // import './css/add.less'; // 这是属于子组件SubList的样式，在那个组件中引入
 // function DivCom(props) {
@@ -254,6 +256,17 @@ ReactDOM.render(
 		<DivCom {...person}></DivCom>
 		<Hello2 info={info} {...person}></Hello2>
 		<List></List>
+		{/* 计数器组件，注释掉下面一行。不为initVal传默认属性，让它走defaultProps这个途径，获取默认值 */}
+		{/* <Counter initVal="3"></Counter> */}
+
+		{/* a.不传值，走defaultProps  */}
+		{/* 	<Counter></Counter> */}
+
+		{/* 传递了值，但是该值是字符串，和数字1相加，成了拼接字符串。这个时候需要在Counter中对数据类型，进行【类型校验】*/}
+		{/* <Counter initVal="的确传值了，但是传递的是个字符串哈哈哈"></Counter> */}
+		{/* 同样错误，这样传值，在state:props.initVal接收后，得到的值是字符串类型，传number,应该使用initVal={3} */}
+		{/* <Counter initVal="3"></Counter> */}
+		<Counter initVal={3}></Counter>
 	</div>,
 	document.getElementById('app')
 );
