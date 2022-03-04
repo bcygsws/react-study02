@@ -38,6 +38,20 @@ export default class BindThis extends React.Component {
 					value="第二种传参方式"
 					onClick={this.secondHandle}
 				/>
+				{/* 第三种传参的方式onClick中也要写给箭头函数，避免箭头函数书写的事件处理函数，在按钮没点击的情况下触发 */}
+				<hr />
+				<input
+					type="button"
+					value="this的第三种传参方式"
+					onClick={() => {
+						this.thirdHandle('💇', '🙂');
+					}}
+				/>
+				{/* 这种箭头函数直接传递参数的方式有个bug,系统在解析代码到当前位置时，看到thirdHandle是一个箭头函数，就会直接调用：
+			报一个错误：ncaught Error: Maximum update depth exceeded. This can happen when a component repeatedly calls 
+		setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent
+	 infinite loops. */}
+				{/* 解决办法：在onClick中也也一个箭头函数，返回的是函数代码，不是函数的调用，就不会出现没有点击按钮函数自己执行的问题了 */}
 			</div>
 		);
 	}
@@ -70,7 +84,7 @@ export default class BindThis extends React.Component {
 		});
 	}
 	secondHandle(arg1, arg2) {
-		console.log(this); // undefined
+		console.log(this); // undefined  在构造函数重赋值以后，this就正常了，打印结果是当前组件的实例
 		/**
 		 *
 		 * 在构造函数中bind了指向组件实例的this,然而此处仍然打印undefined
@@ -78,22 +92,45 @@ export default class BindThis extends React.Component {
 		 * 要接收以下绑定后的返回值
 		 * bind绑定是有返回值的，其返回值是：返回一个原函数的拷贝，并拥有指定的 this 值和初始参数
 		 * 见MDN文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
+		 * 【理解Array.prototype.slice.call(arguments)】
+		 * https://www.cnblogs.com/papi/p/9234964.html
 		 *
+		 * bind的三大作用
+		 * 1.绑定函数，修改this指向
+		 * 2.偏函数，实质是给函数添加一个预设值
+		 * function list(arguments){
+		 * 		return Array.prototype.slice.call(arguments);
+		 * }
+		 * var list1=list(123); // [1,2,3]
+		 *
+		 * var list2=list(null,39); // 其含义是给list设置第一个预设参数39
+		 * list2(1,2)  // (39,1,2)
+		 *
+		 *
+		 * 3.setTimeout(function(){}.bind(this),1000)  实质也是改变this的指向
 		 *
 		 */
 		this.setState({
-			msg: '第二种传参方式：' + arg1 + '---------------' + arg2
+			msg: '第二种传参方式：' + arg1 + arg2
 		});
 	}
+	thirdHandle = (arg1, arg2) => {
+		this.setState({
+			msg: '这是第三种绑定并传参方式:' + arg1 + arg2
+		});
+	};
 }
 
 /**
- * 
+ *
  * @ gitmoji-cli的使用
- * 
- * $ gitmoji -c 
- * 然后，选择一种emoji,提示输入标题和message信息
+ *
+ * $ gitmoji -c
+ * 然后，选择一种emoji,提示输入提交标题和提交的message信息
  * 接着，git push origin即可
- * 
- * 
+ *
+ * :memo: bind提交
+ *  bind绑定this并提交参数的三种方式
+ *
+ *
  */

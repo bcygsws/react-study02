@@ -9,6 +9,7 @@ import DivCom from './components/DivCom.jsx';
 // 导入类学习文件
 import MyClass from './class_study.js';
 import MyClass2 from './class_study2.js';
+import './bindUse.js';
 // 导入Hello2组件
 import Hello2 from './components/Hello2.jsx';
 // 导入渲染的循环列表组件List
