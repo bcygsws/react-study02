@@ -15,11 +15,14 @@ export default class BindThis extends React.Component {
       this指向后，立即执行 */}
 				{/* 插件Emoji Code的使用：键入ji根据提示选择需要的表情符号 */}
 				{/* 插件 Emoji插件，ctrl+shift+p 选择insert emoji ,进入选择emoji框，然后直接enter */}
+				{/* git Emoji commit中文版，点击源代码管理器中笑脸图标，会弹出选择emoji的下拉菜单供选择，即可切换 */}
 				<input
 					type="button"
 					value="this的第一种传递参数的方式"
 					onClick={this.firstHandle.bind(this, '⭐', '⭕')}
 				/>
+				<hr />
+				<input type="button" value="第二种传参方式" />
 			</div>
 		);
 	}
