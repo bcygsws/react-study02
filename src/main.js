@@ -15,6 +15,8 @@ import Hello2 from './components/Hello2.jsx';
 import List from './components/List.jsx';
 // 导入计数器组件
 import Counter from './components/Counter.jsx';
+import Parent from './components/TestReceiveProps.jsx';
+import BindThis from './components/ThisBind.jsx';
 // 导入样式文件，在react-scripts@2.0.0 版本以上已经支持样式模块化了
 // import './css/add.less'; // 这是属于子组件SubList的样式，在那个组件中引入
 // function DivCom(props) {
@@ -266,7 +268,10 @@ ReactDOM.render(
 		{/* <Counter initVal="的确传值了，但是传递的是个字符串哈哈哈"></Counter> */}
 		{/* 同样错误，这样传值，在state:props.initVal接收后，得到的值是字符串类型，传number,应该使用initVal={3} */}
 		{/* <Counter initVal="3"></Counter> */}
-		<Counter initVal={3}></Counter>
+		<Counter initVal={0}></Counter>
+		{/* 单独演示生命周期钩子componentWillReceiveProps */}
+		<Parent></Parent>
+		<BindThis></BindThis>
 	</div>,
 	document.getElementById('app')
 );
