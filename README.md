@@ -66,6 +66,68 @@
 
 ## 六、React 组件的生命周期
 
+### React@16.3开始的版本，生命周期钩子的原来的名字要使用，前面需要加一个 UNSAFE\_前缀（举例：componentWillUpdate，应该写作 UNSAFE_componentWillUpdate），要不然控制台就会提示警告信息
+
+### 在 React 属性，有一些属性必须传的。但是没有传，就会从默认属性 defaultProps 中获取这个【启动参数】
+
+-   启动参数以静态变量的方式，在 class 类组件中定义；例如：static defaultProps={initVal:0}
+
+### 对父组件或其他组件传递过来的属性，进行必要的类型校验,以确保当前组件拿到的是需要的数据类型
+
+-   react@15.x版本以后，类型校验需要的包已经被单独封装成了一个包，prop-types，安装改包：$ npm i prop-types@15.7.2 --save-dev
+-   在需要的组件中，导入一个对象；import ReactTypes from 'prop-types';
+-   在类组件中同样定义一个静态变量，static propTypes={initVal:ReactTypes.number};
+
+### 钩子 componentWillMount
+
+-   含义：该阶段组件还没有开始挂载，也没有开始渲染虚拟 dom
+-   整个生命周期阶段，只执行一次；可以调用 setState()方法，另外两个可以调用 setState 的钩子时 componentDidMount 和 componentWillReceiveProps
+-   可以拿到 this.state、this.props 中的数据
+-   可以调用自定义的函数
+-   不能够操作 dom。原因；虚拟 dom 都还没有开始渲染，如果获取虚拟 dom 对象(document.getElementById('myVal'))，结果是 null
+
+### render 函数渲染阶段
+
+-   含义：开始渲染虚拟 dom，render 函数执行完成，虚拟 dom 就渲染完成了，生成了一个虚拟 dom 树
+-   可以拿到数据，前面能够拿到的数据，也一样能拿到
+-   在 return 语句之前，获取虚拟 dom，仍然是 null
+-   render 函数调用次数是：大于等于 1 次。如果组件从渲染到销毁，没有触发属性或数据变化，就执行一次。一旦出现上述数据的变化，render 函数的执行次数，必然大于等于 2 次
+-   注意：render 函数在组件创建阶段和组件运行阶段都有调用，而且调用的是同一个 render 函数，因此 render 函数的调用次数，是组件创建阶段和组件运行阶段的 render 调用次数，一起计算
+-   render 阶段获取父组件或其他组件传递过来的属性值，直接使用 this.props.属性名就可以获取。这个 props 是固定写法，不依赖当前组件是否显式定义了构造函数，是否在构造函数中传递了参数
+
+### 钩子 componentDidMount
+
+-   含义：到该阶段虚拟 dom 已经创建完成，数据、虚拟 dom 和页面三者保持一致，数据已经渲染到页面上了
+-   该钩子在整个生命周期中，只执行一次。在钩子内部可以调用 setState 方法
+
+### 钩子 shouldComponentUpdate,有两个参数
+
+-   组件是否需要更新，需要返回一个布尔值。true 表示组件需要在页面上更新，值为 false 组件不会在页面上更新了，该钩子后面的生命周期钩子也不会执行了
+-   该钩子有两个参数 shouldComponentUpdate(nextProps,nextState),nextProps 中返回的是旧的属性值，nextState 中返回的是更新后的 state 对象值
+
+### 钩子 componentWillUpdate,有两个参数
+
+-   含义：组件即将重新挂载，还没有开始成重新渲染虚拟 dom
+-   两个参数：nextProps 返回的是当前组件的属性变化前的对象，nextState 是数据更新后新的 state 对象,同 shouldComponentUpdate 中一样
+
+### 钩子 render 函数
+
+-   已经在前面做了说明
+
+### 钩子 componentDidUpdate，有两个参数，prevProps,prevState;特殊：这两个参数都是变化前的对象，与前面一旧一新不同
+
+-   含义：该阶段更新的数据、重新渲染的虚拟 dom 和更新的页面保持一致，改变的数据已经重新渲染到页面中了
+-   prevProps 指 state 变化前传递的属性对象，prevState 指更新前的 state 对象
+
+### 钩子 componentWillUnmount
+
+-   含义：组件销毁阶段
+
+### 钩子 componentWillReceiveProps,有一个参数，nextProps
+
+-   父组件传递给子组件属性，只有当父组件中传递的这个值变化时，才触发这个钩子，结合 TestReceiveProps.jsx 案例理解
+-   nextProps 中返回的是传递过来的变化后的对象，当前子组件的 this.props 打印的还是传递的旧对象
+
 ## 七、bind 绑定 this 参数并传值的三种方式
 
 ### 结合案例 ThisBind.jsx
@@ -94,3 +156,13 @@
 #### 2.偏函数，基本用途是为函数预设一个初始参数
 
 #### 3.定时器修改 this 指向，setTimeout(function(){}.bind(this),1000)
+
+## 八、子组件向父组件传值的两种方式
+
+### 结合案例[父子组件之间的传值](https://blog.csdn.net/weixin_42881744/article/details/105706084)
+
+### 父传给子组件
+
+-   不用赘述，绑定属性，这个属性可以是变量，表达式值（如 initVal={0},也可以是函数名）
+### 子组件向父组件传值的两种方式
+

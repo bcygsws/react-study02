@@ -45,7 +45,7 @@ class Son extends React.Component {
 		);
 	}
 	// 这个钩子只有一个参数nextProps
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		//
 		console.log(this.props); // pmsg: '这是父组件传递的值'}
 		// 单独演示该钩子的执行
