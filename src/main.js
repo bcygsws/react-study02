@@ -18,11 +18,9 @@ import List from './components/List.jsx';
 import Counter from './components/Counter.jsx';
 import Parent from './components/TestReceiveProps.jsx';
 import BindThis from './components/ThisBind.jsx';
-<<<<<<< HEAD
 import Fat from './components/SonToFat.jsx';
-=======
-import Comment from './components/Comment.jsx'
->>>>>>> comment
+import Comment from './components/Comment.jsx';
+import MyContext from './components/context/Context.jsx';
 // 导入样式文件，在react-scripts@2.0.0 版本以上已经支持样式模块化了
 // import './css/add.less'; // 这是属于子组件SubList的样式，在那个组件中引入
 // function DivCom(props) {
@@ -282,6 +280,8 @@ ReactDOM.render(
 		<Fat></Fat>
 		{/* 评论列表案例 */}
 		<Comment></Comment>
+		{/* Context的用途，getChildContextProps 记忆：前三、后三、后二，1方法，两静态属性 */}
+		<MyContext></MyContext>
 	</div>,
 	document.getElementById('app')
 );
