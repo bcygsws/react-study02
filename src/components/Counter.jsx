@@ -103,6 +103,7 @@ export default class Counter extends React.Component {
 	// 数据、虚拟dom、页面三者一致，这个钩子执行完，进入组件运行阶段。这个钩子是最早可以操作dom的最早的钩子;这个钩子执行
 	// 完，就将进入【运行中】状态
 	// 类比vue中的mounted
+	// react@16.3版本开始，使用生命周期钩子，前面加一个UNSAFE_前缀，才不会报警告
 	UNSAFE_componentDidMount() {
 		console.log(document.getElementById('myVal')); // <p id="myVal">3</p>
 	}
@@ -115,7 +116,7 @@ export default class Counter extends React.Component {
 	// 	// 组件是否要更新。该钩子中必须翻译一个布尔值。返回是false,不会继续执行后面的生命周期函数，而是直接退回了【运行中】
 	// 状态，后面的render函数不渲染，页面就不更新。但是，state中count值被修改了
 	// nextProps是向子组件传递的值，是旧值。nextState也是一个对象，里面是state变化后的值
-	shouldComponentUpdate(nextProps, nextState) {
+	UNSAFE_shouldComponentUpdate(nextProps, nextState) {
 		console.log(nextProps); // {initVal:3}  还是属性变化前的值
 		console.log(nextState); // {msg:'ok',count:4}  state中的值已经发生改变
 		// console.log(typeof nextState.count); // number
@@ -141,8 +142,8 @@ export default class Counter extends React.Component {
 				nextState.count
 		);
 	}
-	// 	// 组件的新数据、重新渲染的虚拟DOM和新页面保持一致
-	componentDidUpdate(prevProps, prevState) {
+		// 组件的新数据、重新渲染的虚拟DOM和新页面保持一致
+	UNSAFE_componentDidUpdate(prevProps, prevState) {
 		console.log(prevProps,prevState);
 		console.log(this.myRef.current && this.myRef.current.innerHTML); // 1
 	}
