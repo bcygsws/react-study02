@@ -143,7 +143,8 @@ export default class Counter extends React.Component {
 		);
 	}
 	// 	// 组件的新数据、重新渲染的虚拟DOM和新页面保持一致
-	UNSAFE_componentDidUpdate(nextProps, prevState) {
+	UNSAFE_componentDidUpdate(prevProps, prevState) {
+		console.log(prevProps, prevState);
 		console.log(this.myRef.current && this.myRef.current.innerHTML); // 1
 	}
 }
