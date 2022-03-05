@@ -4,12 +4,15 @@
  *
  *
  */
+// 导入样式文件
+import myBind from '../css/bind.less';
 import React from 'react';
 export default class BindThis extends React.Component {
+	myRef = React.createRef();
 	constructor(props) {
 		super(props);
 		// this指向实例
-		this.state = { msg: '' };
+		this.state = { msg: '这是默认的msg' };
 		// a.第二种绑定方式：在构造函数中绑定
 		// b.bind绑定 后的返回值是原函数的一个拷贝，并包括改造后的this指向和参数
 		// 必须重新赋值，否则仅仅this.secondHandle.bind(this, '〽️', '⬅️');事件处理函数中的this还是指向undefined
@@ -18,7 +21,7 @@ export default class BindThis extends React.Component {
 	render() {
 		// console.log(this);// 渲染函数render中的this是当前组件的实例
 		return (
-			<div>
+			<div className={myBind.b_container}>
 				<h3>绑定this并传参的几种方式</h3>
 				{/* 注意区分：bind 以及apply/call都可以改变this指向。不同之处在于bind改变this指向不是立即执行。而后者，call/applay改变
       this指向后，立即执行 */}
@@ -52,6 +55,28 @@ export default class BindThis extends React.Component {
 		setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent
 	 infinite loops. */}
 				{/* 解决办法：在onClick中也也一个箭头函数，返回的是函数代码，不是函数的调用，就不会出现没有点击按钮函数自己执行的问题了 */}
+				<hr />
+				{/* 1.在vue中我们可以定义v-model指令实现双向数据绑定，数据变化页面跟着变化。但是，在React中就没有指令的概念，因此React默认
+			是不支持双向绑定的。只实现了数据的单向绑定；案例：实现text文本框中实时输入内容，state随着输入内容的变化而变化 */}
+				{/* 2.当我们为文本框的value绑定了state属性后，state属性中的内容渲染到了文本框内，但是不能更改了。添加一个readOnly
+			内容变成了只读；如果想更改，必须为文本框绑定一个onChange事件，事件的逻辑自己定义 */}
+				{/* 3.onChange要实时触发，和按钮不同。onChange={this.textChange},不能写成onChange={()=>{this.textChange}} */}
+				{/* <input
+					type="text"
+					name="txt"
+					id="txt"
+					value={this.state.msg}
+					readOnly
+				/> */}
+				<input
+					type="text"
+					name="txt"
+					id="txt"
+					value={this.state.msg}
+					onChange={this.textChange}
+					ref={this.myRef}
+				/>
+				<p>{this.state.msg}</p>
 			</div>
 		);
 	}
@@ -120,6 +145,35 @@ export default class BindThis extends React.Component {
 	thirdHandle = (arg1, arg2) => {
 		this.setState({
 			msg: '这是第三种绑定并传参方式:' + arg1 + arg2
+		});
+	};
+	// 方式1：使用document.getElementById取实时value值，不推荐
+	// 方式2；使用ref myRef=React.createRef();
+	// textChange = () => {
+	// 	// 如果想要在文本框在触发onChange，同时把文本框最新的值保存到state中
+	// 	console.log(this.myRef.current);
+	// 	this.setState({
+	// 		msg: this.myRef.current.value
+	// 	});
+	// };
+	// 方式3；使用事件对象参数来拿到value值
+	/**
+	 *
+	 * @ react16版本以上，打印e是看不到target的值的，target的值一直是null
+	 * 原因：react官方解释：The SyntheticEvent objects are pooled.
+	 * This means that the SyntheticEvent object will be reused and
+	 * all properties will be nullified after the event handler has been called. For example, this won’t work:
+	 *
+	 * 如果要生效，需要在里面调用
+	 *
+	 */
+	textChange = (e) => {
+		// persist()方法阻止react重置它的属性，这样console.log才能正确的打印出e
+		e.persist();
+		console.log(e);
+		// 最好放在setTimeout()中做一个延迟
+		this.setState({
+			msg: e.target.value
 		});
 	};
 }
