@@ -18,6 +18,7 @@ import List from './components/List.jsx';
 import Counter from './components/Counter.jsx';
 import Parent from './components/TestReceiveProps.jsx';
 import BindThis from './components/ThisBind.jsx';
+import Comment from './components/Comment.jsx'
 // 导入样式文件，在react-scripts@2.0.0 版本以上已经支持样式模块化了
 // import './css/add.less'; // 这是属于子组件SubList的样式，在那个组件中引入
 // function DivCom(props) {
@@ -273,6 +274,8 @@ ReactDOM.render(
 		{/* 单独演示生命周期钩子componentWillReceiveProps */}
 		<Parent></Parent>
 		<BindThis></BindThis>
+		{/* 评论列表案例 */}
+		<Comment></Comment>
 	</div>,
 	document.getElementById('app')
 );
