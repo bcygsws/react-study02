@@ -1,6 +1,6 @@
-## 项目构建
+## 一、项目构建
 
-## 项目 webpack-senior 已经完成了 bable 和 webpack 的配置，相关插件和配置文件复用
+## 二、项目 webpack-senior 已经完成了 bable 和 webpack 的配置，相关插件和配置文件复用
 
 ### 装 react 相关包
 
@@ -11,11 +11,11 @@
 -   需要安装插件，@babel/preset-react 包来解析这种尖括号语法
 -   插件还需要引入到.babelrc 配置文件中
 
-## 项目运行
+## 三、项目运行
 
 -   $ npm run dev
 
-## React 框架中创建组件的四种方式（一步步进化）
+## 四、React 框架中创建组件的四种方式（一步步进化）
 
 -   React.createElement(标签,{属性 1：值 1，属性 2，值 2}||null,子元素或子节点)
 -   使用 jsx 语法，字面量的方式创建。var Hello=\<div\>\<\/div\>
@@ -54,7 +54,7 @@
 -   如果一个组件要存放自己的私有数据，或在组件的不同阶段执行不同的业务逻辑，此时非常适合使用有状态组件；
 -   如果一个组件只需要接收数据，并随之渲染组件，最好使用无状态组件，function 组件由于没有生命周期，运行速度要稍微快一些
 
-## 不同 jsx 文件样式的隔离
+## 五、同 jsx 文件样式的隔离
 
 -   方式一：main.js 文件中直接 import '样式文件路径'，得实时关注各个 jsx 文件定义的类名，不要重复。重复类名，可能造成样式的混乱
 -   方式二：let obj={margin:10px 0,color:pink} \<div style={obj}\>;这种方式会定义很多的对象，虽然可以模块的形式导出，但样式的抽取、打包不方便
@@ -64,4 +64,25 @@
     3. 在需要样式文件的 jsx 文件中，import ObjStyle form '样式文件路径'；
     4. 将类名修正。例如：原来是\<div className="user"\>\</div\>变更为\<div className={ObjStyle.use}\>\<\/div\>
 
-## React 组件的生命周期
+## 六、React 组件的生命周期
+
+## 七、bind 绑定 this 参数并传值的三种方式
+
+### 结合案例 ThisBind.jsx
+
+### 三种方式
+
+#### 1.在 render 函数调用处绑定
+
+-   绑定处，onClick={this.firstHandle.bind(this[,arg1,arg2])}
+-   接收处，事件处理函数写成普通函数就可以了
+
+#### 2.在构造函数中绑定并赋值
+
+-   绑定处， constructor(props){super(props); this.secondHandle=this.secondHandle.bind(this,arg1,arg2);}
+-   接收处，secondHandle 写成普通函数就可以了
+
+#### 3.使用箭头函数-要解决解析到调用处即执行的问题
+
+-   绑定处，onClick={()=>this.secondHandle(arg1,arg1)};注意不能写成 onClick={this.thirdHandle(arg1,arg2)}这样编译器解析到此处时就会发现 this.thirdHandle()是一个箭头函数，而且立即调用。这不是预期的结果，onClick 事件的目的是人为地来触发，而不是让系统解析代码时触发
+-   接收处，thirdHandle=(arg1,arg2)=>{console.log(this)}; 接收处写成箭头函数
