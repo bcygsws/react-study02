@@ -90,7 +90,10 @@ export default class BindThis extends React.Component {
 		 * 在构造函数中bind了指向组件实例的this,然而此处仍然打印undefined
 		 * 解决方案：
 		 * 要接收以下绑定后的返回值
-		 * bind绑定是有返回值的，其返回值是：返回一个原函数的拷贝，并拥有指定的 this 值和初始参数
+		 * bind绑定是有返回值的，其返回值是：返回一个原函数的拷贝，并拥有指定的 this 指向和初始参数
+		 * 【区别】bind apply/call 都可以修改this的执行，不同之处在于this修改执行后不是立即执行的。
+		 * 备注：call()方法的作用和 apply() 方法类似，区别就是call()方法接受的是参数列表，而apply()方法接受的是一个参数数组。
+		 * 记忆联想：apply---参数列表时数组Array
 		 * 见MDN文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 		 * 【理解Array.prototype.slice.call(arguments)】
 		 * https://www.cnblogs.com/papi/p/9234964.html

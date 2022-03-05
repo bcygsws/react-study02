@@ -86,3 +86,11 @@
 
 -   绑定处，onClick={()=>this.secondHandle(arg1,arg1)};注意不能写成 onClick={this.thirdHandle(arg1,arg2)}这样编译器解析到此处时就会发现 this.thirdHandle()是一个箭头函数，而且立即调用。这不是预期的结果，onClick 事件的目的是人为地来触发，而不是让系统解析代码时触发
 -   接收处，thirdHandle=(arg1,arg2)=>{console.log(this)}; 接收处写成箭头函数
+
+### 辅助知识-bind 的三种用法，结合案例 bindUse.js 理解
+
+#### 1.创建绑定函数，react 中前两种都是使用 bind 绑定 this 并传参
+
+#### 2.偏函数，基本用途是为函数预设一个初始参数
+
+#### 3.定时器修改 this 指向，setTimeout(function(){}.bind(this),1000)
