@@ -64,7 +64,7 @@ export default class Comment extends React.Component {
 		return JSON.parse(localStorage.getItem('list'));
 	};
 	// 初始化数据在componentWillMount钩子中进行
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		if (localStorage.getItem('list')) {
 			this.setState({
 				CommentList: JSON.parse(localStorage.getItem('list'))
