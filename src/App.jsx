@@ -11,8 +11,6 @@ export default class App extends React.Component {
 		super(props);
 	}
 	render() {
-		console.log(this);
-		console.log(this.props.match);
 		return (
 			<HashRouter>
 				<div>
