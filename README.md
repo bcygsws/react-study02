@@ -164,5 +164,30 @@
 ### 父传给子组件
 
 -   不用赘述，绑定属性，这个属性可以是变量，表达式值（如 initVal={0},也可以是函数名）
+
 ### 子组件向父组件传值的两种方式
 
+## 九、Context 特性的使用方法
+
+### 使用场景
+
+-   祖父级组件给孙子组件传递一个属性，常规情况下，需要层层传递。祖父传给父组件，父组件才传递给子组件，这种方式将不需要接收数据的父组件也牵涉其中。更何苦，如果层级更深，这种传递灵活性低，而且代码冗余
+-   为此，React 引入了 Context 特性来解决这个问题
+
+### 使用步骤
+
+1. 在需要发送数据的顶层组件，定义一个方法，getChildContext,该方法有返回值，返回一个对象，对象的键是要传递的属性的键。如：eturn {fontSize:this.state.fontSize}
+
+2. 同样在该顶层组件中，进行一个数据校验，对要传递出去的数据进行校验，定义一个静态变量 static childContextTypes=fontSize:ReactTypes.number}
+
+3. 在接收处组件，同样地对接收的数据进行类型校验，此时要定义的检验变量是 contextTypes。如：static contextTypes=fontSize:ReactTypes.number}
+
+4. 在 render 函数或者其他位置，使用 this.context.键名来获取值。例如：this.context.fontSize
+
+### 记忆方式
+
+-   getChildContextTypes,前三、后三、后二
+-   一个方法，两个静态属性
+-   在发送数据处，前三、后三，即：getChildContext 方法，childContextTypes 类型校验
+-   在接收数据处，后二，contextTypes
+-   然后，获取值使用，this.context.[键名]
