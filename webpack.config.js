@@ -104,17 +104,20 @@ module.exports = {
 		rules: [
 			// 配置解析样式或其他文件的loader
 			// .css文件
+			// 在一个项目中，一般自定义样式使用less和scss，因为这两种方式书写样式代码更简洁。为了避免样式的覆盖问题，可以开启模块化，导入
+			// 样式时，带上一个对象。而对于css文件本身，通常不建议开启模块化，原因是：一些第三方库中依赖的样式文件是.css文件，对.css文件
+			// 开启模块化，可能会影响第三方库组件的显示效果
 			{
 				test: /\.css$/,
 				// style-loader换成MiniCssExtractPlugin.loader后即可完成对css的抽离
 				use: [
 					MiniCssExtractPlugin.loader,
 					{
-						loader: 'css-loader',
-						options: {
-							modules: true,
-							localIdentName: '[local]--[hash:base64:5]'
-						}
+						loader: 'css-loader'
+						// options: {
+						// 	modules: true,
+						// 	localIdentName: '[local]--[hash:base64:5]'
+						// }
 					}
 				]
 			},

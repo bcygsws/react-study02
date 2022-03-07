@@ -11,6 +11,42 @@ import BindThis from '../components/ThisBind.jsx';
 import Fat from '../components/SonToFat.jsx';
 import Comment from '../components/Comment.jsx';
 import MyContext from '../components/context/Context.jsx';
+/**
+ *
+ * @antd ui库的使用：
+ * 参考文档：https://3x.ant.design/docs/react/introduce-cn
+ * 第一步：import { DatePicker } from 'antd';
+ *	ReactDOM.render(<DatePicker />, mountNode);
+ *
+ * 第二步：导入antd（@4.16.13）。所依赖的样式：import 'antd/dist/antd.css';
+ *
+ * 按需加载也有两种方式
+ * 1.安装插件，babel-plugin-import。版本（@1.13.3）然后在.babelrc文件中配置，此种方法无需再引入样式文件，也可以按需加载
+ * {
+ *		"plugins": [
+ *    		["import", {
+ *      "libraryName": "antd",
+ *      "libraryDirectory": "es",
+ *      "style": "css" // `style: true` 会加载 less 文件
+ *   			 }]
+ *  		]
+ *		}
+ *
+ * 2.只导入datapick文件的js和css样式，也是按需导入
+ *
+ * 在About.jsx组件中验证
+ *
+ * 牢记：
+ * 1.在我们书写第三方样式时，适宜使用less或者scss,这两种文件书写样式也更简洁，然后专门为less和scss样式开启模块化
+ * 2.而对于css文件，一般第三方库，比如antd导入库依赖的样式时，样式文件一般是css文件，如果开启模块化，将影响库中的组件渲染
+ * 的效果。因此，样式文件，使用的大致方针是：
+ * a.自定义文件，使用less或者scss,并开启模块化
+ * b.第三方库依赖的样式文件，一般是css文件，在webpack配置文件中不要为css文件开启模块化
+ *
+ *
+ *
+ *
+ */
 let person = {
 	name: '张三',
 	age: 15,

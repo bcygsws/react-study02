@@ -6,6 +6,8 @@ import { HashRouter, Route, Link, Switch } from 'react-router-dom';
 import Home from './views/Home.jsx';
 import Movie from './views/Movie.jsx';
 import About from './views/About.jsx';
+// 引入DatePicker依赖的样式,在App.jsx文件中引入，安装并配置插件babel-plugin-import按需导入antd组件库
+// import 'antd/dist/antd.css';
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -25,6 +27,8 @@ export default class App extends React.Component {
 					<Link to="/movie/top250/10">电影</Link>
 					<Link to="/about">关于</Link>
 					{/* 在同一时刻，只渲染一个组件，使用Switch标签包裹所有Route路由规则 */}
+					{/* v3 v4可以使用Route标签嵌套来实现路由嵌套，v5版本路由嵌套
+					参考文档：https://blog.csdn.net/Vue2018/article/details/100559895?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~aggregatepage~first_rank_ecpm_v1~rank_v31_ecpm-2-100559895.pc_agg_new_rank&utm_term=hashrouter+%E5%B5%8C%E5%A5%97&spm=1000.2123.3001.4430 */}
 					<Switch>
 						<Route path="/home" component={Home}></Route>
 						{/* 4.那么如何获取Route路由规则中的参数呢？现在render函数中打印一下组件实例this */}
