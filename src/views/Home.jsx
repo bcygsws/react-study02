@@ -47,6 +47,26 @@ import MyContext from '../components/context/Context.jsx';
  *
  *
  */
+// 优化
+// 1.按需导入组件
+//  让我们看看现在流行的动态导入工具库：react-loadable。它基础封装了未来JS的新语法import()。
+// const GenerateTags = Loadable({
+//   loader: () =>
+//     import(/* webpackChunkName: "generateTags" */ "./GenerateTags"),
+//     loading: LoadingSpinner
+// });
+// 2.@babel/runtime-corejs2,按需引入，即需要使用新特性，打包什么新特性，减小打包的体积
+// 参考文档1：
+// 参考文档2；https://lequ7.com/guan-yu-javascript-qian-duan-ye-mian-liu-lan-qi-jian-rong-wen-ti-de-jie-jue.html
+// useBuildIns，蕴含三个取值entry、usage、false。
+// entry，在入口文件引入全副的polyfill。长处是彻底解决兼容问题，毛病是导致最终代码体积比拟大。
+// usage，依据代码的应用状况引入polyfill。长处是按需引入代码体积减小很多，毛病是node_modules中的高版本javascript检测不进去，引入不了polyfill。
+// false，不增加polyfill也不解决兼容问题。
+// 能够看到三个值都有一些毛病，须要一种既能按需引入又能解决node_modules中兼容问题的计划
+// @babel/runtime只能处理关键字，然而@babel/runtime-corejs2在此基础上还能处理Promise以及新的
+// 原生方法（比如：string.padStart）。因此，我们使用@babel/runtime-corejs2就无需使用@babel/runtime了
+
+
 let person = {
 	name: '张三',
 	age: 15,
