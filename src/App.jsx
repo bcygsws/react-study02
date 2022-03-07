@@ -2,10 +2,12 @@ import React from 'react';
 // 导入react-router相关的包，web中使用react-router-dom,可以根据是开发web还是App，选择安装不同的包
 // 按需导出常用的三个
 import { HashRouter, Route, Link, Switch } from 'react-router-dom';
+import loadable from './utils/loadable.js';
 // 导入views中的三个子组件
 import Home from './views/Home.jsx';
-import Movie from './views/Movie.jsx';
-import About from './views/About.jsx';
+// Home是主页一开始默认显示，Movie和About组件，使用react-loadable包动态导入
+const Movie = loadable(() => import('./views/Movie.jsx'));
+const About = loadable(() => import('./views/About.jsx'));
 // 引入DatePicker依赖的样式,在App.jsx文件中引入，安装并配置插件babel-plugin-import按需导入antd组件库
 // import 'antd/dist/antd.css';
 export default class App extends React.Component {

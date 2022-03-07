@@ -10,13 +10,20 @@ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 // 压缩js代码uglifyjs-webpack-plugin
 const UglifyJS = require('uglifyjs-webpack-plugin');
 module.exports = {
-	mode: 'development',
+	mode:'development',
 	// 入口起点，可以指定多个入口。声明使用绝对路径，保证不出错
 	// entry: path.resolve(__dirname, 'src/main.js'),
 	// 抽离第三方包，entry改成一个对象
 	entry: {
-		app: path.resolve(__dirname, 'src/main.js')
-		// vendors1: ['jquery']
+		app: path.resolve(__dirname, 'src/main.js'),
+		vendors: [
+			'react',
+			'react-dom',
+			'react-router-dom',
+			'react-loadable',
+			'prop-types'
+		],
+		antd1: 'antd'
 	},
 	// 输出配置
 	output: {
@@ -63,27 +70,59 @@ module.exports = {
 	],
 	// 抽离公共模块，包括第三方库和自定义库
 	optimization: {
+		// minimize: true, // webpack4默认是开启压缩的，可以不写
 		splitChunks: {
 			chunks: 'all', // async表示抽取异步模块，all表示对所有模块生效，initial表示对同步模块生效
+			minSize: 0, // 大于0字节
+			automaticNameDelimiter: '~',
 			cacheGroups: {
 				// 单独提取JS文件引入html
-				// vendors: {
-				// 	// 抽离第三方库
-				// 	// 键值可以自定义
-				// 	test: /[\\/]node_modules[\\/]/,
-				// 	// chunks: 'initial',
-				// 	name: 'vendors1', // 入口的entry的key
-				// 	// 小经验：filename：节点不仅可以设置打包文件名还可以设置打包路径，output节点中也是类似情况
-				// 	filename: 'js/jquery.js',
-				// 	enforce: true, // 强制
-				// 	priority: 10, // 抽离优先级,加了权重先抽离第三方模块
-				// 	minSize: 0, // 大于0字节
-				// 	minChunks: 1, //在分割之前，这个代码至少被引用1次
-				// 	reuseExistingChunk: true
-				// }
+				vendors: {
+					// 抽离第三方库
+					chunks: 'all',
+					// 键值可以自定义
+					test: /^(react|react-dom|react-router-dom|prop-types|react-loadable)$/,
+					// test: /[\/]node_modules[\/]/,
+					// test: (module) =>
+					// 	/react/.test(module.context) ||
+					// 	/react-dom/.test(module.context) ||
+					// 	/react-router-dom/.test(module.context) ||
+					// 	/prop-types/.test(module.context),
+					// enforce: true, // 强制
+					name: 'vendors', // 入口的entry的key
+					minChunks: 1, //在分割之前，这个代码至少被引用1次
+					priority: 100 // 抽离优先级,加了权重先抽离第三方模块
+					// 小经验：filename：节点不仅可以设置打包文件名还可以设置打包路径，output节点中也是类似情况
+					// filename: 'js/vendors1.js',
+					// reuseExistingChunk: true
+				},
+				// antd包单独抽离
+				antd1: {
+					// test: (module) => /antd/.test(module.context),
+					chunks: 'all',
+					test: /^antd$/,
+					name: 'antd1',
+					// enforce: true, // 强制
+					priority: 90,
+					minChunks: 1
+				},
+				'async-chunks': {
+					chunks: 'async',
+					minChunks: 1,
+					name: 'async-chunks',
+					priority: 80
+				},
+				// 其他公共包
+				commons: {
+					chunks: 'all',
+					minChunks: 2,
+					name: 'commons',
+					priority: 70
+				}
 			}
 		},
-		// 为 webpack 运行时代码创建单独的chunk
+		// 为 webpack 在客户端运行时，会首先加载webpack相关的代码，例如：require函数等，这部分代码会随着业务代码的修改
+		// 而变化（存储了chunk id等信息）。如果不抽取出来，这些代码会打包到vendor中，导致vendor每次都要被用户重新加载
 		runtimeChunk: {
 			name: 'manifest'
 		},
@@ -100,6 +139,10 @@ module.exports = {
 			})
 		]
 	},
+	// externals中配置了【从输出的bundle.js中排除依赖】的方法
+	externals: {
+		moment: 'moment'
+	},
 	module: {
 		rules: [
 			// 配置解析样式或其他文件的loader
@@ -107,6 +150,11 @@ module.exports = {
 			// 在一个项目中，一般自定义样式使用less和scss，因为这两种方式书写样式代码更简洁。为了避免样式的覆盖问题，可以开启模块化，导入
 			// 样式时，带上一个对象。而对于css文件本身，通常不建议开启模块化，原因是：一些第三方库中依赖的样式文件是.css文件，对.css文件
 			// 开启模块化，可能会影响第三方库组件的显示效果
+			// 方式2：当然也可以写两个关于css文件的解析规则：
+			// {test:/\.css$/,include:/node_modules/,use:[MiniCssExtractPlugin.loader,'css-loader']}
+			// {test:/\.css$/,exclude:/node_modules/,use:[MiniCssExtractPlugin.loader,{loader:'css-loader',options:{modules:true,localIdentName:'[local]--[hash:base64:5]'}}]}
+			// 注意：模块化只针对id和类选择器起作用，对标签选择器不起作用。同时，冠以:global的全局样式，也不会被模块化
+			// 详情：参考https://www.cnblogs.com/guolao/p/11830098.html
 			{
 				test: /\.css$/,
 				// style-loader换成MiniCssExtractPlugin.loader后即可完成对css的抽离
@@ -271,5 +319,12 @@ module.exports = {
 				exclude: /node_modules/
 			}
 		]
+	},
+	// 开发服务配置
+	devServer: {
+		// port: '3002',
+		progress: true, // 显示加载进度条
+		contentBase: './dist', // 映射地址
+		compress: true // 是否压缩
 	}
 };
