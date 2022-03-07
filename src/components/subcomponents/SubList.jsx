@@ -7,7 +7,7 @@ import React from 'react';
 // 注意：这个对象的键值是字符串，是为了防止类名冲突。类名MyList.sub_container=之前的sub_container,MyList.user=之前的类名
 import MySub from '../../css/sub.less';
 // import '../../css/subTitle.css';
-import Title from '../../css/subTitle.css';
+import Title from '../../css/subTitle.less';
 console.log(MySub);
 function SubList(props) {
 	// import导入到main.js文件中是全局样式；对于单个组件推荐这种对象写样式的方式

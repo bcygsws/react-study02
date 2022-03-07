@@ -48,7 +48,7 @@ import ListStyle from '../css/list.scss';
  */
 // 导入List的子组件SubList
 // 导入title类样式需要的文件
-import ListTitle from '../css/listTitle.css';
+import ListTitle from '../css/listTitle.less';
 console.log(ListTitle);
 export default class List extends React.Component {
 	constructor(props) {
