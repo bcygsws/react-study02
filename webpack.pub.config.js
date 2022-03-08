@@ -9,6 +9,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 // 压缩js代码uglifyjs-webpack-plugin
 const UglifyJS = require('uglifyjs-webpack-plugin');
+// gzip压缩
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 module.exports = {
 	// 入口起点，可以指定多个入口。声明使用绝对路径，保证不出错
 	// entry: path.resolve(__dirname, 'src/main.js'),
@@ -46,6 +48,8 @@ module.exports = {
 			template: path.resolve(__dirname, 'src/index.html'),
 			// 托管后文件名仍叫做index.html
 			filename: 'index.html',
+			// 组块
+			// chunks: ['vendors', 'commons', 'index'],
 			// 压缩html文件
 			minify: {
 				collapseWhitespace: true, // 去除空格
@@ -65,6 +69,15 @@ module.exports = {
 			cssProcessPluginOptions: {
 				preset: ['default', { discardComments: { removeAll: true } }]
 			}
+		}),
+		// gzip压缩
+		// 还需要在nginx中配置gzip压缩相关的内容，参考：https://ly1024.blog.csdn.net/article/details/109580024?spm=1001.2101.3001.6650.12&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-12.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-12.pc_relevant_default&utm_relevant_index=17
+		new CompressionWebpackPlugin({
+			filename: '[path].gz[query]', // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
+			algorithm: 'gzip', // 算法
+			test: new RegExp('\\.(js|css)$'), // 压缩 js 与 css
+			threshold: 10240, // 只处理比这个值大的资源。按字节计算
+			minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理
 		})
 	],
 	// 抽离公共模块，包括第三方库和自定义库
@@ -97,9 +110,9 @@ module.exports = {
 				},
 				// antd包单独抽离
 				antd1: {
-					// test: (module) => /antd/.test(module.context),
-					test: /^antd$/,
-					chunks: 'all',
+					test: (module) => /antd/.test(module.context),
+					// test: /^antd$/,
+					chunks: 'initial',
 					minChunks: 1,
 					name: 'antd1',
 					// enforce: true, // 强制
@@ -140,6 +153,9 @@ module.exports = {
 	},
 	// externals中配置了【从输出的bundle.js中排除依赖】的方法
 	externals: {
+		react: 'React',
+		'react-dom': 'ReactDOM',
+		antd: 'antd',
 		moment: 'moment'
 	},
 	module: {
