@@ -11,6 +11,9 @@ import BindThis from '../components/ThisBind.jsx';
 import Fat from '../components/SonToFat.jsx';
 import Comment from '../components/Comment.jsx';
 import MyContext from '../components/context/Context.jsx';
+import { Link, Route, Switch } from 'react-router-dom';
+// 模块化导入样式
+import StyleH from '../css/base.less';
 /**
  *
  * @antd ui库的使用：
@@ -43,9 +46,6 @@ import MyContext from '../components/context/Context.jsx';
  * a.自定义文件，使用less或者scss,并开启模块化
  * b.第三方库依赖的样式文件，一般是css文件，在webpack配置文件中不要为css文件开启模块化
  *
- *
- *
- *
  */
 // 优化
 // 1.按需导入组件
@@ -66,25 +66,61 @@ import MyContext from '../components/context/Context.jsx';
 // @babel/runtime只能处理关键字，然而@babel/runtime-corejs2在此基础上还能处理Promise以及新的
 // 原生方法（比如：string.padStart）。因此，我们使用@babel/runtime-corejs2就无需使用@babel/runtime了
 
-
-let person = {
-	name: '张三',
-	age: 15,
-	gender: '男',
-	address: '上海'
-};
-let info = '这是向Hello2子组件传递的数据';
 // 导入Context组件
 export default class Home extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			person: {
+				name: '张三',
+				age: 15,
+				gender: '男',
+				address: '上海'
+			},
+			info: '这是向Hello2子组件传递的数据'
+		};
 	}
 	render() {
 		return (
-			<div>
+			<div className={StyleH.home_container}>
 				<h3>这是Home组件</h3>
-				<DivCom {...person}></DivCom>
-				<Hello2 info={info} {...person}></Hello2>
+				<Link to="/home/div_com">
+					父组件给子组件DivCom绑定属性person
+				</Link>
+				<Link to="/home/hello2">
+					父组件给子组件Hello2绑定属性person和info
+				</Link>
+				<Switch>
+					{/* 父组件给子组件传值显示，DivCom组件和Hello2组件 */}
+					<Route
+						path="/home/div_com"
+						component={() => (
+							<DivCom {...this.state.person}></DivCom>
+						)}
+					></Route>
+					{/* 特别注意：如果Hello2中使用name作为子组件Hello2的接收名称，然后person对象结构：name={this.state.person.name}，
+					出现了重名的绑定属性名，则对象中的解构的name覆盖前面字符串的name。
+					总结：父组件给子组件绑定属性时，如果出现重名的键，包括一个是属性，一个是对象解构出来的键名，出现重名。那么，规律是写在
+					后面传递的属性值，覆盖前面的属性值 */}
+					<Route
+						path="/home/hello2"
+						component={() => (
+							<Hello2
+								info={this.state.info}
+								{...this.state.person}
+							></Hello2>
+						)}
+					></Route>
+					{/* <Route
+						path="/home/hello2"
+						component={() => (
+							<Hello2
+							{...this.state.person}
+								name={this.state.info}
+							></Hello2>
+						)}
+					></Route> */}
+				</Switch>
 				<List></List>
 				{/* 计数器组件，注释掉下面一行。不为initVal传默认属性，让它走defaultProps这个途径，获取默认值 */}
 				{/* <Counter initVal="3"></Counter> */}

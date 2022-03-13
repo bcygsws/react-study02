@@ -1,8 +1,5 @@
 /**
- *
  * @ 关于this绑定
- *
- *
  */
 // 导入样式文件
 import myBind from '../css/bind.less';

@@ -5,6 +5,7 @@ import { HashRouter, Route, Link, Switch } from 'react-router-dom';
 import loadable from './utils/loadable.js';
 // 导入views中的三个子组件
 import Home from './views/Home.jsx';
+import AppStyle from './css/app.less';
 // Home是主页一开始默认显示，Movie和About组件，使用react-loadable包动态导入
 const Movie = loadable(() => import('./views/Movie.jsx'));
 const About = loadable(() => import('./views/About.jsx'));
@@ -17,7 +18,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<HashRouter>
-				<div>
+				<div className={AppStyle.app}>
 					<h3>这是App根组件</h3>
 					{/* 创建三个超链接 */}
 					<Link to="/home">首页</Link>
