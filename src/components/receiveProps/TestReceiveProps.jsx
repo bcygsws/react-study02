@@ -15,14 +15,14 @@ export default class Parent extends React.Component {
 		return (
 			<div>
 				<h2>该组件单独演示生命周期钩子componentWillReceiveProps</h2>
-				{/* 向子组件传递一个属性值pmsg */}
-				<Son pmsg={this.state.pmsg}></Son>
 				{/* 点击按钮，修改state中的值，观察子组件Son中的componentWillReceiveProps钩子的变化 */}
 				<input
 					type="button"
 					value="父组件修改state中pmsg值"
 					onClick={this.handle}
 				/>
+				{/* 向子组件传递一个属性值pmsg */}
+				<Son pmsg={this.state.pmsg}></Son>
 			</div>
 		);
 	}

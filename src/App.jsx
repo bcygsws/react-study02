@@ -1,7 +1,7 @@
 import React from 'react';
 // 导入react-router相关的包，web中使用react-router-dom,可以根据是开发web还是App，选择安装不同的包
 // 按需导出常用的三个
-import { HashRouter, Route, Link, Switch } from 'react-router-dom';
+import { HashRouter, Route, NavLink, Switch, Redirect } from 'react-router-dom';
 import loadable from './utils/loadable.js';
 // 导入views中的三个子组件
 import Home from './views/Home.jsx';
@@ -21,14 +21,29 @@ export default class App extends React.Component {
 				<div className={AppStyle.app}>
 					<h3>这是App根组件</h3>
 					{/* 创建三个超链接 */}
-					<Link to="/home">首页</Link>
+					<NavLink
+						to="/home"
+						activeStyle={{ color: 'red', fontSize: '36px' }}
+					>
+						首页
+					</NavLink>
 					{/* 	<Link to="/movie">电影</Link> */}
 					{/* 1.默认路由规则中的匹配时模糊匹配的，Route 中/movie对应Movie中。若将Link中的路由改为to="/movie/top250/10"，
         仍可以匹配movie组件 */}
 					{/* 2.那么如何精确匹配呢？只需要在Route规则中响应位置添加属性exact即可，验证：/movie/top250/10 不能匹配到Movie组件了 */}
 					{/* 3.在Route规则中也配置参数，才能重新匹配Movie */}
-					<Link to="/movie/top250/10">电影</Link>
-					<Link to="/about">关于</Link>
+					<NavLink
+						to="/movie/top250/10"
+						activeStyle={{ color: 'red', fontSize: '36px' }}
+					>
+						电影
+					</NavLink>
+					<NavLink
+						to="/about"
+						activeStyle={{ color: 'red', fontSize: '36px' }}
+					>
+						关于
+					</NavLink>
 					{/* 在同一时刻，只渲染一个组件，使用Switch标签包裹所有Route路由规则 */}
 					{/* v3 v4可以使用Route标签嵌套来实现路由嵌套，v5版本路由嵌套
 					参考文档：https://blog.csdn.net/Vue2018/article/details/100559895?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~aggregatepage~first_rank_ecpm_v1~rank_v31_ecpm-2-100559895.pc_agg_new_rank&utm_term=hashrouter+%E5%B5%8C%E5%A5%97&spm=1000.2123.3001.4430 */}
@@ -41,6 +56,7 @@ export default class App extends React.Component {
 							exact
 						></Route>
 						<Route path="/about" component={About}></Route>
+						<Redirect from="/" to="/home" exact />
 					</Switch>
 				</div>
 			</HashRouter>

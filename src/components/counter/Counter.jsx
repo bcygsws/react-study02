@@ -17,20 +17,13 @@ export default class Counter extends React.Component {
 		};
 		console.log(this.myRef);
 	}
-	// 组件即将要挂载，还没有开始渲染虚拟DOM--->类比vue中的created阶段
-	// componentWillMount() {
-	// 	// 此时还不能操作虚拟dom
-	// 	console.log(document.getElementById('myVal')); // null
-	// 	// 但是在此之前，state数据已经初始化了，可以访问
-	// 	console.log(this.state.msg); // ok
-	// 	// 调用自定义函数myFun,在组件即将挂载阶段，已经可以调用自定义函数了
-	// 	this.myFun(); // 这是我自定义的函数myFun，和生命周期无关
-	// }
 	/**
 	 * @ defaultProps
 	 * 在一个组件中，一定有一些数据是必须的。哪怕用户又没有传这种【启动参数】。这是组件内部默认给自己提供一个默认值。这是一种保护机制
-	 * a.本例中，如果在main.js中为Counter组件传递了属性。就使用属性传递的值。
-	 * 		问题来了？传递过来的值如果不是数字怎么办？
+	 * a.本例中，如果为Counter组件绑定了initVal属性,就一定会使用属性传递的值。即使绑定的是个字符串，也会使用绑定的值，而不会去取defaultProps
+	 * 正确的数字0来使用
+	 * 
+	 * 	问题来了？传递过来的值如果不是数字怎么办？
 	 * 要进行类型校验，【类型校验】。类型校验 
 	 * 1.需要安装另外一个包，prop-types。
 	 * 说明：在React 15.3版本以下，做类型校验，不需要额外安装包prop-types，这个包当时被集成在react@15 这个包中
@@ -49,6 +42,10 @@ export default class Counter extends React.Component {
 	 * 在class类中，定义一个静态成员defaultProps
 	 * static defaultProps={initVal:0};
 	 *
+	 * c.因此，类型校验，弹出警告。说明Counter一定是传递了值，而且这个值不是我们校验中规定的类型。
+	 * c1.为Counter绑定了initVal值，就一定会使用它，无论校验是否显示警告
+	 * c2.走defaultProps只有一种可能，就是没有为Counter绑定属性initVal
+	 * 
 	 */
 	static defaultProps = { initVal: 0 };
 	static propTypes = {
@@ -69,7 +66,7 @@ export default class Counter extends React.Component {
 		console.log(this.myRef.current); // 就可以获取原生对象了
 		// a.开始渲染时，下面的结果0变成1时，下面的结果：this.myRef.current结果是null。下面的也是null
 		// b.属性改变，从变成1，this.myRef.current对象有了，前面为真。这个表达式的值取决于后面，运行阶段，
-		// render再次执行模板还没更新。this.myRef.current.innerHTML。拿到的是旧值0，更新后的值在componentDidUpdate中才能拿到
+		// render再次执行模板还没更新。this.myRef.current.innerHTML。拿到的是旧值3，更新后的值在componentDidUpdate中才能拿到
 		// c.对比钩子componentDidUpdate中打印结果，那个阶段才变成1
 		console.log(this.myRef.current && this.myRef.current.innerHTML);
 		// 但是ref在react 16.3以后，已经被弃用了。myRef=React.createRef();
@@ -100,6 +97,15 @@ export default class Counter extends React.Component {
 			count: this.state.count + 1
 		});
 	};
+		// 组件即将要挂载，还没有开始渲染虚拟DOM--->类比vue中的created阶段
+	// UNSAFE_componentWillMount() {
+	// 	// 此时还不能操作虚拟dom
+	// 	console.log(document.getElementById('myVal')); // null
+	// 	// 但是在此之前，state数据已经初始化了，可以访问
+	// 	console.log(this.state.msg); // ok
+	// 	// 调用自定义函数myFun,在组件即将挂载阶段，已经可以调用自定义函数了
+	// 	this.myFun(); // 这是我自定义的函数myFun，和生命周期无关
+	// }
 	// 数据、虚拟dom、页面三者一致，这个钩子执行完，进入组件运行阶段。这个钩子是最早可以操作dom的最早的钩子;这个钩子执行
 	// 完，就将进入【运行中】状态
 	// 类比vue中的mounted
@@ -115,8 +121,9 @@ export default class Counter extends React.Component {
 	// }
 	// 	// 组件是否要更新。该钩子中必须翻译一个布尔值。返回是false,不会继续执行后面的生命周期函数，而是直接退回了【运行中】
 	// 状态，后面的render函数不渲染，页面就不更新。但是，state中count值被修改了
+	// 重点：经测试，不能再这个钩子前加UNSAFE_前缀，否则这个钩子不执行
 	// nextProps是向子组件传递的值，是旧值。nextState也是一个对象，里面是state变化后的值
-	UNSAFE_shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps, nextState) {
 		console.log(nextProps); // {initVal:3}  还是属性变化前的值
 		console.log(nextState); // {msg:'ok',count:4}  state中的值已经发生改变
 		// console.log(typeof nextState.count); // number
@@ -142,9 +149,9 @@ export default class Counter extends React.Component {
 				nextState.count
 		);
 	}
-	// 	// 组件的新数据、重新渲染的虚拟DOM和新页面保持一致
-	UNSAFE_componentDidUpdate(prevProps, prevState) {
-		console.log(prevProps, prevState);
-		console.log(this.myRef.current && this.myRef.current.innerHTML); // 1
+		// 组件的新数据、重新渲染的虚拟DOM和新页面保持一致
+	componentDidUpdate(prevProps, prevState) {
+		console.log(prevProps, prevState);// {initVal: 3} {msg: 'ok', count: 3}
+		console.log(this.myRef.current && this.myRef.current.innerHTML); // 4
 	}
 }

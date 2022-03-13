@@ -6,9 +6,9 @@
  */
 import React from 'react';
 // 导入子组件
-import Base from './subcomponents/Base.jsx';
+import Base from './Base.jsx';
 // 导入样式文件comment.less
-import MyCom from '../css/comment.less';
+import MyCom from '../../css/comment.less';
 export default class Comment extends React.Component {
 	// 定义文本框存储Ref的容器
 	txtRef = React.createRef();
@@ -59,13 +59,10 @@ export default class Comment extends React.Component {
 			</div>
 		);
 	}
-	// 定义一个函数专门处理本地存储的数据
-	persistData = () => {
-		return JSON.parse(localStorage.getItem('list'));
-	};
 	// 初始化数据在componentWillMount钩子中进行
 	UNSAFE_componentWillMount() {
 		if (localStorage.getItem('list')) {
+			// 这个阶段，就是在组件渲染前，获取CommentList
 			this.setState({
 				CommentList: JSON.parse(localStorage.getItem('list'))
 			});
@@ -90,8 +87,9 @@ export default class Comment extends React.Component {
 			user: user,
 			content: content
 		});
-		// 将数据存入本地存储
+		// JSON.stringify()将数组(也是一个对象)存入本地磁盘,掉电也能保存
 		localStorage.setItem('list', JSON.stringify(this.state.CommentList));
+		// 基于最新的CommentList渲染虚拟dom
 		this.setState({
 			CommentList: this.state.CommentList
 		});

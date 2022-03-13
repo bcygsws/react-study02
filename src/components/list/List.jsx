@@ -33,8 +33,8 @@ className={Title.title}，则调用
  */
 
 import React from 'react';
-import SubList from './subcomponents/SubList.jsx';
-import ListStyle from '../css/list.scss';
+import SubList from './SubList.jsx';
+import ListStyle from '../../css/list.scss';
 
 /**
  *
@@ -48,11 +48,11 @@ import ListStyle from '../css/list.scss';
  */
 // 导入List的子组件SubList
 // 导入title类样式需要的文件
-import ListTitle from '../css/listTitle.less';
+import ListTitle from '../../css/listTitle.less';
 console.log(ListTitle);
 export default class List extends React.Component {
 	constructor(props) {
-		super();
+		super(props);
 		this.state = {
 			CommentList: [
 				{ user: '张三', content: '哈哈，沙发' },
@@ -86,7 +86,8 @@ export default class List extends React.Component {
 			<div className={ListStyle.list_container}>
 				{/* <h3 className="title">评论列表案例</h3> */}
 				<h3 className={ListTitle.title}>评论列表案例</h3>
-				{/* 推荐这种方式，这也是Array的map方法的优点之一，map方法返回值是数组，数组仍然可以继续进行操作，因此map也支持连写 */}
+				{/* 推荐这种方式，这也是Array的map方法的优点之一，map方法返回值是数组，数组仍然可以继续进行操作，因此map也支持连写
+				注意：花括号{}渲染数据时，模板中不能放对象，放对象将报错，但是可以放数组 */}
 				{this.state.CommentList.map((item, index) => {
 					return <SubList {...item} key={index}></SubList>;
 				})}

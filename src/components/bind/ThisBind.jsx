@@ -1,15 +1,18 @@
 /**
- * @ 关于this绑定
+ * @
+ * 1. react中关于this绑定的三种方式
+ * 2. input:text 文本框中value绑定了state中属性值后，需要配合onChange方法，来实时更新文本框中的内容
+ *
  */
 // 导入样式文件
-import myBind from '../css/bind.less';
 import React from 'react';
+import myBind from '../../css/bind.less';
 export default class BindThis extends React.Component {
 	myRef = React.createRef();
 	constructor(props) {
 		super(props);
 		// this指向实例
-		this.state = { msg: '这是默认的msg' };
+		this.state = { msg: '这是默认的msg', txt_msg: '这是文本框原有的值' };
 		// a.第二种绑定方式：在构造函数中绑定
 		// b.bind绑定 后的返回值是原函数的一个拷贝，并包括改造后的this指向和参数
 		// 必须重新赋值，否则仅仅this.secondHandle.bind(this, '〽️', '⬅️');事件处理函数中的this还是指向undefined
@@ -68,12 +71,12 @@ export default class BindThis extends React.Component {
 				<input
 					type="text"
 					name="txt"
-					id="txt"
-					value={this.state.msg}
+					value={this.state.txt_msg}
 					onChange={this.textChange}
 					ref={this.myRef}
+					className={myBind.txt}
 				/>
-				<p>{this.state.msg}</p>
+				<p>{this.state.txt_msg}</p>
 			</div>
 		);
 	}
@@ -170,7 +173,7 @@ export default class BindThis extends React.Component {
 		console.log(e);
 		// 最好放在setTimeout()中做一个延迟
 		this.setState({
-			msg: e.target.value
+			txt_msg: e.target.value
 		});
 	};
 }
