@@ -11,6 +11,8 @@ import ThisBind from '../components/bind/ThisBind.jsx';
 import Fat from '../components/comunication/SonToFat.jsx';
 import Comment from '../components/comment/Comment.jsx';
 import MyContext from '../components/context/Context.jsx';
+import Count from '../components/redux/Count.jsx';
+import Person from '../components/redux/Person.jsx';
 import { Link, Route, Switch } from 'react-router-dom';
 // 模块化导入样式
 import StyleH from '../css/base.less';
@@ -105,6 +107,7 @@ export default class Home extends React.Component {
 				</Link>
 				<Link to="/home/bind">绑定this的三种方式</Link>
 				<Link to="/home/comment">手动添加评论，实时显示评论列表</Link>
+				<Link to="/home/redux">同级组件Count和Person之间共享状态</Link>
 				<Switch>
 					{/* 父组件给子组件传值显示，DivCom组件和Hello2组件 */}
 					<Route
@@ -150,6 +153,17 @@ export default class Home extends React.Component {
 					<Route path="/home/bind" component={ThisBind}></Route>
 					{/* 评论列表案例 */}
 					<Route path="/home/comment" component={Comment}></Route>
+					<Route
+						path="/home/redux"
+ 						component={() => {
+							return (
+								<div>
+									<Count></Count>
+									<Person></Person>
+								</div>
+							);
+						}}
+					></Route>
 				</Switch>
 				{/* 计数器组件，注释掉下面一行。不为initVal传默认属性，让它走defaultProps这个途径，获取默认值 */}
 				{/* <Counter initVal="3"></Counter> */}
