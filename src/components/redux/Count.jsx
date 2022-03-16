@@ -46,6 +46,7 @@ class Count extends React.Component {
 				<button onClick={this.incrementIfOdd}>当前总数为奇数+</button>
 				&nbsp;
 				<button onClick={this.incrementAsync}>异步+</button>&nbsp;
+				<p>Salary当前工资为：{this.props.money}</p>
 				<hr />
 			</div>
 		);
@@ -68,7 +69,8 @@ class Count extends React.Component {
 export default connect(
 	(state) => ({
 		count: state.count,
-		person: state.person
+		person: state.person,
+		money: state.money
 	}),
 	{
 		increment: incrementAction,

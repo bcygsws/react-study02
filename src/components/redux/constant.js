@@ -4,3 +4,5 @@
 export const INCREMENT = 'increment';
 export const DECREMENT = 'decrement';
 export const ADDPERSON = 'addPerson';
+export const ADD = 'addMoney';
+export const REMOVE = 'removeMoney';

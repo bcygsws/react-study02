@@ -13,6 +13,8 @@ import Comment from '../components/comment/Comment.jsx';
 import MyContext from '../components/context/Context.jsx';
 import Count from '../components/redux/Count.jsx';
 import Person from '../components/redux/Person.jsx';
+// 导入Salary组件
+import Salary from '../components/redux/Salary.jsx';
 import { Link, Route, Switch } from 'react-router-dom';
 // 模块化导入样式
 import StyleH from '../css/base.less';
@@ -155,11 +157,12 @@ export default class Home extends React.Component {
 					<Route path="/home/comment" component={Comment}></Route>
 					<Route
 						path="/home/redux"
- 						component={() => {
+						component={() => {
 							return (
 								<div>
 									<Count></Count>
 									<Person></Person>
+									<Salary></Salary>
 								</div>
 							);
 						}}

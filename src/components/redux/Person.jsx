@@ -54,6 +54,8 @@ class Person extends React.Component {
 						);
 					})}
 				</ul>
+				<p>Salary当前工资为：{this.props.money}</p>
+				<hr />
 			</div>
 		);
 	}
@@ -63,7 +65,8 @@ class Person extends React.Component {
 export default connect(
 	(state) => ({
 		person: state.person,
-		count: state.count
+		count: state.count,
+		money: state.money
 	}),
 	{
 		addPerson: createPerson
