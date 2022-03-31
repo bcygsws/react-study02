@@ -104,7 +104,7 @@ export default class Counter extends React.Component {
 	// 完，就将进入【运行中】状态
 	// 类比vue中的mounted
 	UNSAFE_componentDidMount() {
-		console.log(document.getElementById('myVal')); // <p id="myVal">3</p>
+		console.log(document.getElementById('myVal')); // <p id="myVal">0</p>
 	}
 	// 接收到属性，是否变化;nextProps参数是数据变化后的DOM
 	// 注意：这个钩子在本组件中，没有接受到变化的属性。本组件中state变化，直接走shouldComponentUpdate,然后是componentWillUpdate这个路径
@@ -116,8 +116,8 @@ export default class Counter extends React.Component {
 	// 状态，后面的render函数不渲染，页面就不更新。但是，state中count值被修改了
 	// nextProps是向子组件传递的值，是旧值。nextState也是一个对象，里面是state变化后的值
 	shouldComponentUpdate(nextProps, nextState) {
-		console.log(nextProps); // {initVal:3}  还是属性变化前的值
-		console.log(nextState); // {msg:'ok',count:4}  state中的值已经发生改变
+		console.log(nextProps); // {initVal:0}  还是属性变化前的值
+		console.log(nextState); // {msg:'ok',count:1}  state中的值已经发生改变
 		// console.log(typeof nextState.count); // number
 		/* 需求：如果count值是偶数更新页面，count值是奇数不更新页面 */
 		// if (nextState.count % 2 === 0) {
@@ -143,7 +143,8 @@ export default class Counter extends React.Component {
 	}
 	// 	// 组件的新数据、重新渲染的虚拟DOM和新页面保持一致
 	componentDidUpdate(prevProps, prevState) {
-		console.log(prevProps,prevState);
+		// 拿到的prevProps和prevState都是旧的对象
+		console.log(prevProps, prevState); // 变成1后，这两个对象都拿到的是旧值{initVal: 0} {msg: 'ok', count: 0}
 		console.log(this.myRef.current && this.myRef.current.innerHTML); // 1
 	}
 }
