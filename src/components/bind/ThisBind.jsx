@@ -1,8 +1,13 @@
 /**
+<<<<<<< HEAD:src/components/bind/ThisBind.jsx
  * @
  * 1. react中关于this绑定的三种方式
  * 2. input:text 文本框中value绑定了state中属性值后，需要配合onChange方法，来实时更新文本框中的内容
  *
+=======
+ *
+ * @ 关于this绑定
+>>>>>>> bind:src/components/ThisBind.jsx
  */
 // 导入样式文件
 import React from 'react';
@@ -23,7 +28,7 @@ export default class BindThis extends React.Component {
 		return (
 			<div className={myBind.b_container}>
 				<h3>绑定this并传参的几种方式</h3>
-				{/* 注意区分：bind 以及apply/call都可以改变this指向。不同之处在于bind改变this指向不是立即执行。而后者，call/applay改变
+				{/* 注意区分：bind 以及apply/call都可以改变this指向。不同之处在于bind改变this指向不是立即执行。而后者，call/apply改变
       this指向后，立即执行 */}
 				{/* 插件Emoji Code的使用：键入ji根据提示选择需要的表情符号 */}
 				{/* 插件 Emoji插件，ctrl+shift+p 选择insert emoji ,进入选择emoji框，然后直接enter */}
@@ -70,8 +75,14 @@ export default class BindThis extends React.Component {
 				/> */}
 				<input
 					type="text"
+<<<<<<< HEAD:src/components/bind/ThisBind.jsx
 					name="txt"
 					value={this.state.txt_msg}
+=======
+					className={myBind.txt}
+					id="txt"
+					value={this.state.msg}
+>>>>>>> bind:src/components/ThisBind.jsx
 					onChange={this.textChange}
 					ref={this.myRef}
 					className={myBind.txt}
