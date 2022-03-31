@@ -4,7 +4,7 @@
 :global(.title) {
 	color: purple;
 }
-/* 如果使用import Title '../../css/SubList.jsx'，想为单个组件单独添加样式，就使用导入导入对象这种方式 */
+/* 如果使用import Title '../../css/SubList.jsx'，想为单个组件单独添加样式，就使用导入对象这种方式 */
 
 .title {
 	color: red;

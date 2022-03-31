@@ -15,6 +15,7 @@ function SubList(props) {
 	return (
 		<div className={MySub.sub_container}>
 			<h6 className={Title.title}>这是sub的标题</h6>
+			<h6 className="title">这是sub的标题</h6>
 			<div className={MySub.user}>
 				评论人：
 				{/* 注意：写style样式是两层括号，外层表示写js代码，内层花括号是样式对象 */}
