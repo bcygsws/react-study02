@@ -1,13 +1,8 @@
 /**
-<<<<<<< HEAD:src/components/bind/ThisBind.jsx
  * @
  * 1. react中关于this绑定的三种方式
  * 2. input:text 文本框中value绑定了state中属性值后，需要配合onChange方法，来实时更新文本框中的内容
  *
-=======
- *
- * @ 关于this绑定
->>>>>>> bind:src/components/ThisBind.jsx
  */
 // 导入样式文件
 import React from 'react';
@@ -75,17 +70,11 @@ export default class BindThis extends React.Component {
 				/> */}
 				<input
 					type="text"
-<<<<<<< HEAD:src/components/bind/ThisBind.jsx
-					name="txt"
-					value={this.state.txt_msg}
-=======
 					className={myBind.txt}
 					id="txt"
 					value={this.state.msg}
->>>>>>> bind:src/components/ThisBind.jsx
 					onChange={this.textChange}
 					ref={this.myRef}
-					className={myBind.txt}
 				/>
 				<p>{this.state.txt_msg}</p>
 			</div>
