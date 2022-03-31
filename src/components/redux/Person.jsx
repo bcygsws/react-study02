@@ -23,6 +23,8 @@ class Person extends React.Component {
 	};
 	add = () => {
 		const { name, age } = this.state;
+		// 在person_reducer.js文件纯函数中默认preState值
+		// const initState = [{ id: 1, name: 'tom', age: 18 }];
 		const { person } = this.props;
 		const id = person.length + 1;
 		var personObj = { id, name, age };

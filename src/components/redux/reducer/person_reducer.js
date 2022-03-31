@@ -8,6 +8,7 @@ export default function personReducer(preState = initState, action) {
 	const { type, data } = action;
 	switch (type) {
 		case ADDPERSON:
+			// 类似于数组的unshift功能，在对象数组的开头位置添加了一个元素
 			return [data, ...preState];
 		default:
 			return preState;
