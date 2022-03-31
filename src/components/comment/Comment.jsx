@@ -59,6 +59,10 @@ export default class Comment extends React.Component {
 			</div>
 		);
 	}
+	// 定义一个函数专门处理本地存储的数据
+	// persistData = () => {
+	// 	return JSON.parse(localStorage.getItem('list'));
+	// };
 	// 初始化数据在componentWillMount钩子中进行
 	UNSAFE_componentWillMount() {
 		if (localStorage.getItem('list')) {
