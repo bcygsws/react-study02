@@ -1,8 +1,6 @@
 /**
  *
  * @ 关于this绑定
- *
- *
  */
 // 导入样式文件
 import myBind from '../css/bind.less';
@@ -23,7 +21,7 @@ export default class BindThis extends React.Component {
 		return (
 			<div className={myBind.b_container}>
 				<h3>绑定this并传参的几种方式</h3>
-				{/* 注意区分：bind 以及apply/call都可以改变this指向。不同之处在于bind改变this指向不是立即执行。而后者，call/applay改变
+				{/* 注意区分：bind 以及apply/call都可以改变this指向。不同之处在于bind改变this指向不是立即执行。而后者，call/apply改变
       this指向后，立即执行 */}
 				{/* 插件Emoji Code的使用：键入ji根据提示选择需要的表情符号 */}
 				{/* 插件 Emoji插件，ctrl+shift+p 选择insert emoji ,进入选择emoji框，然后直接enter */}
@@ -70,7 +68,7 @@ export default class BindThis extends React.Component {
 				/> */}
 				<input
 					type="text"
-					name="txt"
+					className={myBind.txt}
 					id="txt"
 					value={this.state.msg}
 					onChange={this.textChange}

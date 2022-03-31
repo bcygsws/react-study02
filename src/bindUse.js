@@ -45,7 +45,7 @@ function list() {
 function addArg(arg1, arg2) {
 	return arg1 + arg2;
 }
-const list1 = list(1, 2, 3); // [1,2,3]
+const list1 = list(1, 2); // [1,2]
 console.log(list1);
 const preFirst = list.bind(null, 37);
 /* 
