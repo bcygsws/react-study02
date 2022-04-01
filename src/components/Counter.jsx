@@ -8,9 +8,9 @@ export default class Counter extends React.Component {
 	constructor(props) {
 		super(props); // 出现extends关键字，要调用一下父组件的构造函数，有参数，就传参数
 		// 初始化数据
-		console.log(props); // {initVal: '3'}
+		console.log(props); // {initVal: '0'}
 		console.log(typeof props.initVal); // string类型
-		// 居然不是number类型。在属性中传递number型，应该用initVal={3}。而不是initVal="3"
+		// 居然不是number类型。在属性中传递number型，应该用initVal={0}。而不是initVal="0"
 		this.state = {
 			msg: 'ok',
 			count: props.initVal
@@ -62,7 +62,25 @@ export default class Counter extends React.Component {
 	render() {
 		// 在return之前虚拟dom还没有创建完成，自然也是拿不到的。当return执行完，虚拟dom才能创建完成
 		// console.log(document.getElementById('myVal')); // null
-		// React中也可以使用ref来获取原生对象，只是在引用时不需要$符号。但是ref这种方式在React16.3以后也被弃用了
+		/**
+		 *
+		 * React中ref属性获取原生对象
+		 * 参考：https://mayouchen.blog.csdn.net/article/details/81218688?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_default&utm_relevant_index=1
+		 * 1.ref="myRef",this.refs.myRef拿原生对象，已经被弃用
+		 * 2.改为ref function的方式,推荐
+		 * 例如：<span ref={(ele)=>{this.myRef=ele;}}></span>
+		 * this.myRef就是原生对象
+		 *
+		 * 3.在React 的16.3版本以后，在构造函数中，使用
+		 * 	3.1 this.myRef= React.createRef();的方式，然后绑定到获取的那个原生对象上
+		 * 	3.2 <span ref={this.myRef}></span>
+		 *	3.3 this.myRef.current拿到原生对象
+		 *
+		 * react16.3版本以后，引入的React.createRef和React.forwardRef
+		 *
+		 *
+		 */
+		//
 		// console.log(this.refs.pRef || this.refs.pRef.innerHTML);// 已经弃用
 		// console.log(this.myRef.pRef && this.myRef.pRef.innerHTML);
 		console.log(this.myRef);
