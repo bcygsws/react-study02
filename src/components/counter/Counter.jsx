@@ -8,9 +8,9 @@ export default class Counter extends React.Component {
 	constructor(props) {
 		super(props); // 出现extends关键字，要调用一下父组件的构造函数，有参数，就传参数
 		// 初始化数据
-		console.log(props); // {initVal: '3'}
+		console.log(props); // {initVal: '0'}
 		console.log(typeof props.initVal); // string类型
-		// 居然不是number类型。在属性中传递number型，应该用initVal={3}。而不是initVal="3"
+		// 居然不是number类型。在属性中传递number型，应该用initVal={0}。而不是initVal="0"
 		this.state = {
 			msg: 'ok',
 			count: props.initVal
@@ -59,7 +59,25 @@ export default class Counter extends React.Component {
 	render() {
 		// 在return之前虚拟dom还没有创建完成，自然也是拿不到的。当return执行完，虚拟dom才能创建完成
 		// console.log(document.getElementById('myVal')); // null
-		// React中也可以使用ref来获取原生对象，只是在引用时不需要$符号。但是ref这种方式在React16.3以后也被弃用了
+		/**
+		 *
+		 * React中ref属性获取原生对象
+		 * 参考：https://mayouchen.blog.csdn.net/article/details/81218688?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_default&utm_relevant_index=1
+		 * 1.ref="myRef",this.refs.myRef拿原生对象，已经被弃用
+		 * 2.改为ref function的方式,推荐
+		 * 例如：<span ref={(ele)=>{this.myRef=ele;}}></span>
+		 * this.myRef就是原生对象
+		 *
+		 * 3.在React 的16.3版本以后，在构造函数中，使用
+		 * 	3.1 this.myRef= React.createRef();的方式，然后绑定到获取的那个原生对象上
+		 * 	3.2 <span ref={this.myRef}></span>
+		 *	3.3 this.myRef.current拿到原生对象
+		 *
+		 * react16.3版本以后，引入的React.createRef和React.forwardRef
+		 *
+		 *
+		 */
+		//
 		// console.log(this.refs.pRef || this.refs.pRef.innerHTML);// 已经弃用
 		// console.log(this.myRef.pRef && this.myRef.pRef.innerHTML);
 		console.log(this.myRef);
@@ -111,7 +129,7 @@ export default class Counter extends React.Component {
 	// 类比vue中的mounted
 	// react@16.3版本开始，使用生命周期钩子，前面加一个UNSAFE_前缀，才不会报警告
 	UNSAFE_componentDidMount() {
-		console.log(document.getElementById('myVal')); // <p id="myVal">3</p>
+		console.log(document.getElementById('myVal')); // <p id="myVal">0</p>
 	}
 	// 接收到属性，是否变化;nextProps参数是数据变化后的DOM
 	// 注意：这个钩子在本组件中，没有接受到变化的属性。本组件中state变化，直接走shouldComponentUpdate,然后是componentWillUpdate这个路径
@@ -124,8 +142,8 @@ export default class Counter extends React.Component {
 	// 重点：经测试，不能再这个钩子前加UNSAFE_前缀，否则这个钩子不执行
 	// nextProps是向子组件传递的值，是旧值。nextState也是一个对象，里面是state变化后的值
 	shouldComponentUpdate(nextProps, nextState) {
-		console.log(nextProps); // {initVal:3}  还是属性变化前的值
-		console.log(nextState); // {msg:'ok',count:4}  state中的值已经发生改变
+		console.log(nextProps); // {initVal:0}  还是属性变化前的值
+		console.log(nextState); // {msg:'ok',count:1}  state中的值已经发生改变
 		// console.log(typeof nextState.count); // number
 		/* 需求：如果count值是偶数更新页面，count值是奇数不更新页面 */
 		// if (nextState.count % 2 === 0) {
@@ -151,7 +169,8 @@ export default class Counter extends React.Component {
 	}
 		// 组件的新数据、重新渲染的虚拟DOM和新页面保持一致
 	componentDidUpdate(prevProps, prevState) {
-		console.log(prevProps, prevState);// {initVal: 3} {msg: 'ok', count: 3}
-		console.log(this.myRef.current && this.myRef.current.innerHTML); // 4
+		// 拿到的prevProps和prevState都是旧的对象
+		console.log(prevProps, prevState); // 变成1后，这两个对象都拿到的是旧值{initVal: 0} {msg: 'ok', count: 0}
+		console.log(this.myRef.current && this.myRef.current.innerHTML); // 1
 	}
 }
