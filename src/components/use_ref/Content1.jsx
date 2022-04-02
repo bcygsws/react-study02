@@ -17,8 +17,8 @@ import React from 'react';
 
 // 第二种写法：定义一个高阶组件HOC
 // 被包装的组件
-const Hoc1 = (WrappedComponent) => {
-	// 返回一个有状态组件
+const Hoc = (WrappedComponent) => {
+	// 返回一个有状态组件-类组件是有状态的，有state
 	return class extends React.Component {
 		render() {
 			// this.props继续传递给包装组件WrappedComponent
@@ -34,7 +34,7 @@ const Content1 = (props) => {
 	);
 };
 // 包装的过程
-export default Hoc1(Content1);
+export default Hoc(Content1);
 // 高阶组件的本质是函数：输入一个组件，得到一个新组件（增强过的组件）
 // 高阶组件会把所有接收到的props透传，传递给被包裹的组件
 
