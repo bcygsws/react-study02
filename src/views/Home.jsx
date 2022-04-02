@@ -15,6 +15,10 @@ import Count from '../components/redux/Count.jsx';
 import Person from '../components/redux/Person.jsx';
 // 导入Salary组件
 import Salary from '../components/redux/Salary.jsx';
+// 导入演示forwardRef的RefHome组件
+import RefHome from '../components/use_ref/RefHome.jsx';
+import RefHome1 from '../components/use_ref/RefHome1.jsx';
+import RefHome2 from '../components/use_ref/RefHome2.jsx';
 import { Link, Route, Switch } from 'react-router-dom';
 // 模块化导入样式
 import StyleH from '../css/base.less';
@@ -110,6 +114,16 @@ export default class Home extends React.Component {
 				<Link to="/home/bind">绑定this的三种方式</Link>
 				<Link to="/home/comment">手动添加评论，实时显示评论列表</Link>
 				<Link to="/home/redux">同级组件Count和Person之间共享状态</Link>
+				{/* 演示forwardRef的用法的组件RefHome */}
+				<Link to="/home/forward_ref">
+					演示forwardRef，React@16.3版本推出的函数组件
+				</Link>
+				<Link to="/home/forward_ref1">
+					演示forwardRef，React@16.3版本推出的函数组件-方式1
+				</Link>
+				<Link to="/home/forward_ref2">
+					演示forwardRef，React@16.3版本推出的函数组件-方式2
+				</Link>
 				<Switch>
 					{/* 父组件给子组件传值显示，DivCom组件和Hello2组件 */}
 					<Route
@@ -166,6 +180,15 @@ export default class Home extends React.Component {
 								</div>
 							);
 						}}
+					></Route>
+					<Route path="/home/forward_ref" component={RefHome}></Route>
+					<Route
+						path="/home/forward_ref1"
+						component={RefHome1}
+					></Route>
+					<Route
+						path="/home/forward_ref2"
+						component={RefHome2}
 					></Route>
 				</Switch>
 				{/* 计数器组件，注释掉下面一行。不为initVal传默认属性，让它走defaultProps这个途径，获取默认值 */}
