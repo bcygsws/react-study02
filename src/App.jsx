@@ -9,6 +9,8 @@ import AppStyle from './css/app.less';
 // Home是主页一开始默认显示，Movie和About组件，使用react-loadable包动态导入
 const Movie = loadable(() => import('./views/Movie.jsx'));
 const About = loadable(() => import('./views/About.jsx'));
+// 导入route.less样式文件
+import RouteStyles from './css/route.less';
 // 引入DatePicker依赖的样式,在App.jsx文件中引入，安装并配置插件babel-plugin-import按需导入antd组件库
 // import 'antd/dist/antd.css';
 export default class App extends React.Component {
@@ -18,13 +20,10 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<HashRouter>
-				<div className={AppStyle.app}>
+				<div className={RouteStyles.container}>
 					<h3>这是App根组件</h3>
 					{/* 创建三个超链接 */}
-					<NavLink
-						to="/home"
-						activeStyle={{ color: 'red', fontSize: '36px' }}
-					>
+					<NavLink to="/home" activeClassName={RouteStyles.selected}>
 						首页
 					</NavLink>
 					{/* 	<Link to="/movie">电影</Link> */}
@@ -34,14 +33,11 @@ export default class App extends React.Component {
 					{/* 3.在Route规则中也配置参数，才能重新匹配Movie */}
 					<NavLink
 						to="/movie/top250/10"
-						activeStyle={{ color: 'red', fontSize: '36px' }}
+						activeClassName={RouteStyles.selected}
 					>
 						电影
 					</NavLink>
-					<NavLink
-						to="/about"
-						activeStyle={{ color: 'red', fontSize: '36px' }}
-					>
+					<NavLink to="/about" activeClassName={RouteStyles.selected}>
 						关于
 					</NavLink>
 					{/* 在同一时刻，只渲染一个组件，使用Switch标签包裹所有Route路由规则 */}
@@ -56,6 +52,7 @@ export default class App extends React.Component {
 							exact
 						></Route>
 						<Route path="/about" component={About}></Route>
+						{/* 由根路径，重定向到/home配置Route */}
 						<Redirect from="/" to="/home" exact />
 					</Switch>
 				</div>
@@ -70,7 +67,12 @@ export default class App extends React.Component {
  * path="/"
  * component={组件名称}
  *
- * Link表示一个路由链接，类似Vue router-link
+ * 关于Link
+ * 参考文档：https://blog.csdn.net/lhjuejiang/article/details/80366839
+ * Link表示一个路由链接，类似Vue router-link。NavLink是Link的一个特定版，可以对路由进行修饰，
+ * a.有activeClassName和activeStyle来美化选中的那个路由
+ * b.isActive(function(){})链接是否激活的额外业务逻辑，例如：奇数时激活
+ *
  * 1.在src中创建一个根组件App，并导入到main.js中，与此同时App当做ReactDom.render(<App</App>)
  * 2.在App.jsx中按需导入,$ import {HashRouter,Route,Link} from 'react-router-dom';
  * 3.将App.jsx中的顶层div上加上一对HashRouter标签,HashRouter中只能出现一个根元素，上面组件中的div。HashRouter本身不会解析成
