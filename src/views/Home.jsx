@@ -15,6 +15,8 @@ import MyContext from '../components/context/Context.jsx';
 import { Route, Link } from 'react-router-dom';
 // 导入查询参数，query或者search所需要的组件UseQuery
 import UseQuery from '../components/route/UseQuery.jsx';
+// 导入样式
+import RouteStyle from '../css/route.less';
 /**
  *
  * @antd ui库的使用：
@@ -84,7 +86,7 @@ export default class Home extends React.Component {
 	}
 	render() {
 		return (
-			<div>
+			<div className={RouteStyle.container}>
 				<h3>这是Home组件</h3>
 				<Link to="/home/use_query?name='张三'">查询参数的获取</Link>
 				{/* 	<Link
