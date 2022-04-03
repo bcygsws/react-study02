@@ -18,10 +18,10 @@ import Salary from '../components/redux/Salary.jsx';
 // 导入演示forwardRef的UseRef组件
 import UseRef from '../components/use_ref/UseRef.jsx';
 import { Link, Route, Switch } from 'react-router-dom';
-// 模块化导入样式
-import StyleH from '../css/base.less';
 // 导入查询参数，query或者search所需要的组件UseQuery
 import UseQuery from '../components/route/UseQuery.jsx';
+// 导入样式
+import RouteStyle from '../css/route.less';
 /**
  *
  * @antd ui库的使用：
@@ -90,7 +90,7 @@ export default class Home extends React.Component {
 	}
 	render() {
 		return (
-			<div className={StyleH.home_container}>
+			<div className={RouteStyle.container}>
 				<h3>这是Home组件</h3>
 				<Link to="/home/div_com">
 					父组件给子组件DivCom绑定属性person
