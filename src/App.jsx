@@ -2,6 +2,7 @@ import React from 'react';
 // 导入react-router相关的包，web中使用react-router-dom,可以根据是开发web还是App，选择安装不同的包
 // 按需导出常用的三个
 import { HashRouter, Route, NavLink, Switch, Redirect } from 'react-router-dom';
+import AppStyle from './css/app.less';
 import loadable from './utils/loadable.js';
 // 导入views中的三个子组件
 import Home from './views/Home.jsx';
