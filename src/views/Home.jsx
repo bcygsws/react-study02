@@ -74,13 +74,6 @@ import UseQuery from '../components/route/UseQuery.jsx';
 // @babel/runtime只能处理关键字，然而@babel/runtime-corejs2在此基础上还能处理Promise以及新的
 // 原生方法（比如：string.padStart）。因此，我们使用@babel/runtime-corejs2就无需使用@babel/runtime了
 
-let person = {
-	name: '张三',
-	age: 15,
-	gender: '男',
-	address: '上海'
-};
-let info = '这是向Hello2子组件传递的数据';
 // 导入Context组件
 export default class Home extends React.Component {
 	constructor(props) {
@@ -201,9 +194,6 @@ export default class Home extends React.Component {
 					<Route path="/home/useRef" component={UseRef}></Route>
 					<Route path="/home/use_query" component={UseQuery}></Route>
 				</Switch>
-				<DivCom {...person}></DivCom>
-				<Hello2 info={info} {...person}></Hello2>
-				<List></List>
 				{/* 计数器组件，注释掉下面一行。不为initVal传默认属性，让它走defaultProps这个途径，获取默认值 */}
 				{/* <Counter initVal="3"></Counter> */}
 				{/* a.不传值，走defaultProps  */}
