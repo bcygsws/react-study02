@@ -20,6 +20,10 @@ import UseRef from '../components/use_ref/UseRef.jsx';
 import { Link, Route, Switch } from 'react-router-dom';
 // 模块化导入样式
 import StyleH from '../css/base.less';
+// 按需导入路由导航需要的组件
+import { Route, Link } from 'react-router-dom';
+// 导入查询参数，query或者search所需要的组件UseQuery
+import UseQuery from '../components/route/UseQuery.jsx';
 /**
  *
  * @antd ui库的使用：
@@ -72,6 +76,13 @@ import StyleH from '../css/base.less';
 // @babel/runtime只能处理关键字，然而@babel/runtime-corejs2在此基础上还能处理Promise以及新的
 // 原生方法（比如：string.padStart）。因此，我们使用@babel/runtime-corejs2就无需使用@babel/runtime了
 
+let person = {
+	name: '张三',
+	age: 15,
+	gender: '男',
+	address: '上海'
+};
+let info = '这是向Hello2子组件传递的数据';
 // 导入Context组件
 export default class Home extends React.Component {
 	constructor(props) {
@@ -115,6 +126,23 @@ export default class Home extends React.Component {
 				<Link to="/home/useRef">
 					使用forwardRef演示ref的使用，并体会高阶组件
 				</Link>
+				<Link to="/home/use_query?name='张三'">查询参数的获取</Link>
+				{/* 	<Link
+					to={{
+						pathname: '/home/use_query',
+						query: { name: '张三' }
+					}}
+				>
+					查询参数的获取
+				</Link> */}
+				{/* 	<Link
+					to={{
+						pathname: '/home/use_query',
+						state: { name: '张三' }
+					}}
+				>
+					查询参数的获取
+				</Link> */}
 				<Switch>
 					{/* 父组件给子组件传值显示，DivCom组件和Hello2组件 */}
 					<Route
@@ -173,7 +201,11 @@ export default class Home extends React.Component {
 						}}
 					></Route>
 					<Route path="/home/useRef" component={UseRef}></Route>
+					<Route path="/home/use_query" component={UseQuery}></Route>
 				</Switch>
+				<DivCom {...person}></DivCom>
+				<Hello2 info={info} {...person}></Hello2>
+				<List></List>
 				{/* 计数器组件，注释掉下面一行。不为initVal传默认属性，让它走defaultProps这个途径，获取默认值 */}
 				{/* <Counter initVal="3"></Counter> */}
 				{/* a.不传值，走defaultProps  */}
