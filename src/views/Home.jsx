@@ -11,6 +11,10 @@ import BindThis from '../components/ThisBind.jsx';
 import Fat from '../components/SonToFat.jsx';
 import Comment from '../components/Comment.jsx';
 import MyContext from '../components/context/Context.jsx';
+// 按需导入路由导航需要的组件
+import { Route, Link } from 'react-router-dom';
+// 导入查询参数，query或者search所需要的组件UseQuery
+import UseQuery from '../components/route/UseQuery.jsx';
 /**
  *
  * @antd ui库的使用：
@@ -66,7 +70,6 @@ import MyContext from '../components/context/Context.jsx';
 // @babel/runtime只能处理关键字，然而@babel/runtime-corejs2在此基础上还能处理Promise以及新的
 // 原生方法（比如：string.padStart）。因此，我们使用@babel/runtime-corejs2就无需使用@babel/runtime了
 
-
 let person = {
 	name: '张三',
 	age: 15,
@@ -83,6 +86,24 @@ export default class Home extends React.Component {
 		return (
 			<div>
 				<h3>这是Home组件</h3>
+				<Link to="/home/use_query?name='张三'">查询参数的获取</Link>
+				{/* 	<Link
+					to={{
+						pathname: '/home/use_query',
+						query: { name: '张三' }
+					}}
+				>
+					查询参数的获取
+				</Link> */}
+				{/* 	<Link
+					to={{
+						pathname: '/home/use_query',
+						state: { name: '张三' }
+					}}
+				>
+					查询参数的获取
+				</Link> */}
+				<Route path="/home/use_query" component={UseQuery}></Route>
 				<DivCom {...person}></DivCom>
 				<Hello2 info={info} {...person}></Hello2>
 				<List></List>
