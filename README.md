@@ -224,3 +224,24 @@ L## 一、项目构建
 -   key 中的值用于编程式导航，Actions.movieitem(可以传参,如：{id:item.id})
 -   title 一旦声明，就会在页面的顶部生成一个导航条，title 中的值是导航条名称，还自动有一个返回键
 -   hideNavBar={true}可以隐藏导航条
+
+## 十一、React 懒加载的实现：react-loadable 插件
+
+### 基本使用
+
+-   引入 react-loadable 插件，import Loadable from 'react-loadable';
+-   定义一个 loadable.js 文件，参数里接收一个函数作为参数
+-   export default (loader)=>{
+-   return Loadable({
+-   loader,
+-   loading(){
+-   return <div>加载中……</div>
+-                  }
+-              })
+-   }
+
+### 定义一函数，模拟上面 export default 暴露的函数
+
+#### 思想：定义一个高阶组件，在组件中使用文件的异步加载来模拟组件的 lan 加载
+
+#### 具体实现：见本项目：utils/loadable.js 文件末尾
