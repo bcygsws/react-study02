@@ -21,9 +21,10 @@ export default class Fat extends React.Component {
 			</div>
 		);
 	}
-	// 父组件中定义一个回调函数，接收子组件传递过来的数据
+	// 父组件中定义函数，接收子组件传递过来的数据，setState更新页面
 	ReceiveData = (data) => {
 		console.log(data);
+		// 触发页面的更新
 		this.setState({
 			pmsg: data
 		});

@@ -11,6 +11,27 @@ export default class GrandSon extends React.Component {
 		this.state = {};
 	}
 	render() {
+		// 点击Context，fontSize+1后，打印的结果，清晰的看到context是和props同一层级的属性
+		/* 
+		
+		GrandSon {props: {…}, context: {…}, refs: {…}, updater: {…}, state: {…}, …}
+		context: {fontSize: 33}fontSize: 33[[Prototype]]: Object
+		props: {color: 'red'}
+		refs: {}
+		state: {}
+		updater: {isMounted: ƒ, enqueueSetState: ƒ, enqueueReplaceState: ƒ, enqueueForceUpdate: ƒ}
+		__reactInternalMemoizedMaskedChildContext: {fontSize: 33}
+		__reactInternalMemoizedUnmaskedChildContext: {fontSize: 33}
+		_reactInternalFiber: FiberNode {tag: 1, key: null, stateNode: GrandSon, elementType: ƒ, type: ƒ, …}
+		_reactInternalInstance: {_processChildContext: ƒ}isMounted: (...)replaceState: (...)
+		[[Prototype]]: Component
+		
+		
+		
+		
+		
+		*/
+		console.log(this);
 		return (
 			<div>
 				{/* this.props就是一个对象了，外层就包裹一层花括号就可以了 */}

@@ -1,6 +1,0 @@
-.b_container {
-  background-color: #ddd;
-}
-.b_container #txt {
-  width: 100%;
-}

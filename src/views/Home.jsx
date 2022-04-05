@@ -1,16 +1,27 @@
 import React from 'react';
-import DivCom from '../components/DivCom.jsx';
+import DivCom from '../components/fat_toson/DivCom.jsx';
 // 导入Hello2组件
-import Hello2 from '../components/Hello2.jsx';
+import Hello2 from '../components/fat_toson/Hello2.jsx';
 // 导入渲染的循环列表组件List
-import List from '../components/List.jsx';
+import List from '../components/list/List.jsx';
 // 导入计数器组件
-import Counter from '../components/Counter.jsx';
-import Parent from '../components/TestReceiveProps.jsx';
-import BindThis from '../components/ThisBind.jsx';
-import Fat from '../components/SonToFat.jsx';
-import Comment from '../components/Comment.jsx';
+import Counter from '../components/counter/Counter.jsx';
+import Parent from '../components/receiveProps/TestReceiveProps.jsx';
+import ThisBind from '../components/bind/ThisBind.jsx';
+import Fat from '../components/comunication/SonToFat.jsx';
+import Comment from '../components/comment/Comment.jsx';
 import MyContext from '../components/context/Context.jsx';
+import Count from '../components/redux/Count.jsx';
+import Person from '../components/redux/Person.jsx';
+// 导入Salary组件
+import Salary from '../components/redux/Salary.jsx';
+// 导入演示forwardRef的UseRef组件
+import UseRef from '../components/use_ref/UseRef.jsx';
+import { Link, Route, Switch } from 'react-router-dom';
+// 导入查询参数，query或者search所需要的组件UseQuery
+import UseQuery from '../components/route/UseQuery.jsx';
+// 导入样式
+import RouteStyle from '../css/route.less';
 /**
  *
  * @antd ui库的使用：
@@ -43,9 +54,6 @@ import MyContext from '../components/context/Context.jsx';
  * a.自定义文件，使用less或者scss,并开启模块化
  * b.第三方库依赖的样式文件，一般是css文件，在webpack配置文件中不要为css文件开启模块化
  *
- *
- *
- *
  */
 // 优化
 // 1.按需导入组件
@@ -66,46 +74,136 @@ import MyContext from '../components/context/Context.jsx';
 // @babel/runtime只能处理关键字，然而@babel/runtime-corejs2在此基础上还能处理Promise以及新的
 // 原生方法（比如：string.padStart）。因此，我们使用@babel/runtime-corejs2就无需使用@babel/runtime了
 
-
-let person = {
-	name: '张三',
-	age: 15,
-	gender: '男',
-	address: '上海'
-};
-let info = '这是向Hello2子组件传递的数据';
 // 导入Context组件
 export default class Home extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			person: {
+				name: '张三',
+				age: 15,
+				gender: '男',
+				address: '上海'
+			},
+			info: '这是向Hello2子组件传递的数据'
+		};
 	}
 	render() {
 		return (
-			<div>
+			<div className={RouteStyle.container}>
 				<h3>这是Home组件</h3>
-				<DivCom {...person}></DivCom>
-				<Hello2 info={info} {...person}></Hello2>
-				<List></List>
+				<Link to="/home/div_com">
+					父组件给子组件DivCom绑定属性person
+				</Link>
+				<Link to="/home/hello2">
+					父组件给子组件Hello2绑定属性person和info
+				</Link>
+				<Link to="/home/list">
+					评论列表的渲染Array.map()的返回值还是数组
+				</Link>
+				<Link to="/home/counter">
+					计数器案例-体会defaultProps默认属性和类型校验，以及生命周期钩子
+				</Link>
+				<Link to="/home/to_fat">子组件给父组件传值</Link>
+				<Link to="/home/receive_props">
+					演示生命周期钩子componentWillReceiveProps
+				</Link>
+				<Link to="/home/context">
+					Context特性：getChildContextProps，前三、后三、后二
+				</Link>
+				<Link to="/home/bind">绑定this的三种方式</Link>
+				<Link to="/home/comment">手动添加评论，实时显示评论列表</Link>
+				<Link to="/home/redux">同级组件Count和Person之间共享状态</Link>
+				<Link to="/home/useRef">
+					使用forwardRef演示ref的使用，并体会高阶组件
+				</Link>
+				<Link to="/home/use_query?name='张三'">查询参数的获取</Link>
+				{/* 	<Link
+					to={{
+						pathname: '/home/use_query',
+						query: { name: '张三' }
+					}}
+				>
+					查询参数的获取
+				</Link> */}
+				{/* 	<Link
+					to={{
+						pathname: '/home/use_query',
+						state: { name: '张三' }
+					}}
+				>
+					查询参数的获取
+				</Link> */}
+				<Switch>
+					{/* 父组件给子组件传值显示，DivCom组件和Hello2组件 */}
+					<Route
+						path="/home/div_com"
+						component={() => (
+							<DivCom {...this.state.person}></DivCom>
+						)}
+					></Route>
+					{/* 特别注意：如果Hello2中使用name作为子组件Hello2的接收名称，然后person对象结构：name={this.state.person.name}，
+					出现了重名的绑定属性名，则对象中的解构的name覆盖前面字符串的name。
+					总结：父组件给子组件绑定属性时，如果出现重名的键，包括一个是属性，一个是对象解构出来的键名，出现重名。那么，规律是写在
+					后面传递的属性值，覆盖前面的属性值 */}
+					<Route
+						path="/home/hello2"
+						component={() => (
+							<Hello2
+								info={this.state.info}
+								{...this.state.person}
+							></Hello2>
+						)}
+					></Route>
+					{/* <Route
+						path="/home/hello2"
+						component={() => (
+							<Hello2
+							{...this.state.person}
+								name={this.state.info}
+							></Hello2>
+						)}
+					></Route> */}
+					<Route path="/home/list" component={List}></Route>
+					<Route
+						path="/home/counter"
+						component={() => <Counter initVal={3}></Counter>}
+					></Route>
+					<Route path="/home/to_fat" component={Fat}></Route>
+					<Route
+						path="/home/receive_props"
+						component={Parent}
+					></Route>
+					{/* Context的用途，getChildContextProps 记忆：前三、后三、后二，1方法，两静态属性 */}
+					<Route path="/home/context" component={MyContext}></Route>
+					<Route path="/home/bind" component={ThisBind}></Route>
+					{/* 评论列表案例 */}
+					<Route path="/home/comment" component={Comment}></Route>
+					<Route
+						path="/home/redux"
+						component={() => {
+							return (
+								<div>
+									<Count></Count>
+									<Person></Person>
+									<Salary></Salary>
+								</div>
+							);
+						}}
+					></Route>
+					<Route path="/home/useRef" component={UseRef}></Route>
+					<Route path="/home/use_query" component={UseQuery}></Route>
+				</Switch>
 				{/* 计数器组件，注释掉下面一行。不为initVal传默认属性，让它走defaultProps这个途径，获取默认值 */}
 				{/* <Counter initVal="3"></Counter> */}
-
 				{/* a.不传值，走defaultProps  */}
 				{/* 	<Counter></Counter> */}
-
-				{/* 传递了值，但是该值是字符串，和数字1相加，成了拼接字符串。这个时候需要在Counter中对数据类型，进行【类型校验】*/}
+				{/* b.传递了值，但是该值是字符串，和数字1相加，成了拼接字符串。这个时候需要在Counter中对数据类型，进行【类型校验】*/}
 				{/* <Counter initVal="的确传值了，但是传递的是个字符串哈哈哈"></Counter> */}
-				{/* 同样错误，这样传值，在state:props.initVal接收后，得到的值是字符串类型，传number,应该使用initVal={3} */}
+				{/* c.同样错误，这样传值，在state:props.initVal接收后，得到的值是字符串类型，传number,应该使用initVal={3} */}
 				{/* <Counter initVal="3"></Counter> */}
-				<Counter initVal={0}></Counter>
-				{/* 单独演示生命周期钩子componentWillReceiveProps */}
-				<Parent></Parent>
-				<BindThis></BindThis>
 				{/* 子组件给父组件传值的两种方式 */}
-				<Fat></Fat>
-				{/* 评论列表案例 */}
-				<Comment></Comment>
-				{/* Context的用途，getChildContextProps 记忆：前三、后三、后二，1方法，两静态属性 */}
-				<MyContext></MyContext>
+				{/* <Fat></Fat> */}
 			</div>
 		);
 	}

@@ -31,28 +31,27 @@ export default class Hello2 extends React.Component {
 	render() {
 		console.log(this.props); // {info: '这是向Hello2子组件传递的数据', name: '张三', age: 15, gender: '男', address: '上海'}
 		{
-			/* Strict mode checks are run in development mode only; they do not impact the production build. 相关文档：https://reactjs.org/docs/strict-mode.html*/
+			/* Strict mode checks are run in development mode only; they do not impact the production build. 
+			相关文档：https://reactjs.org/docs/strict-mode.html 严格模式使用方式很简单，在最外层放一对<React.StrictMode>标签*/
 		}
 		return (
-			<React.StrictMode>
-				<div>
-					<h3>这是class类创建的组件</h3>
-					<p>
-						父组件中传递过来的数据{this.props.info}---
-						{this.props.address}
-					</p>
-					<p>组件Hello2的私有数据渲染:{this.state.msg}</p>
-					{/* 点击下面的按钮修改上面的this.state中msg的值:注意：1.不能使用js中原生onclick方法*/}
-					{/* 1.1 不能使用vue中 @click的形式而是使用“驼峰命名法”onClick；2. */}
-					{/* 1.2 事件的值应该是函数的调用，是js代码，肯定会用花括号，还需要使用this。因为changeMsg在和当前元素并列的函数，调用时
+			<div>
+				<h3>这是class类创建的组件</h3>
+				<p>
+					父组件中传递过来的数据:{this.props.info}---
+					{this.props.address}
+				</p>
+				<p>组件Hello2的私有数据:{this.state.msg}</p>
+				{/* 点击下面的按钮修改上面的this.state中msg的值:注意：1.不能使用js中原生onclick方法*/}
+				{/* 1.1 不能使用vue中 @click的形式而是使用“驼峰命名法”onClick；2. */}
+				{/* 1.2 事件的值应该是函数的调用，是js代码，肯定会用花括号，还需要使用this。因为changeMsg在和当前元素并列的函数，调用时
 				用{this.changeMsg} */}
-					<input
-						type="button"
-						value="点击按钮修改私有数据msg的值"
-						onClick={this.changeMsg}
-					/>
-				</div>
-			</React.StrictMode>
+				<input
+					type="button"
+					value="点击按钮修改私有数据msg的值"
+					onClick={this.changeMsg}
+				/>
+			</div>
 		);
 	}
 	// 直接报错：main.js:219 Uncaught ReferenceError: changeMsg is not defined
@@ -89,8 +88,8 @@ export default class Hello2 extends React.Component {
 		// 7.解析方案：在setState中传入第二个函数参数，这种回调的方式，在jquery中也经常使用
 		this.setState(
 			function (preVal, props) {
-				console.log(preVal);// state的旧值，{msg: '这是Hello2组件的私有数据', info: '《艳骨》静姝'}
-				console.log(props);// 父组件或其他组件传递过来的属性值
+				console.log(preVal); // state的旧值，{msg: '这是Hello2组件的私有数据', info: '《艳骨》静姝'}
+				console.log(props); // 父组件或其他组件传递过来的属性值
 				console.log(this.state.msg);
 				return { msg: '私有数据msg的值被改变了' };
 			},

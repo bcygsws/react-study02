@@ -4,7 +4,11 @@
 :global(.title) {
 	color: purple;
 }
-/* 如果使用import Title '../../css/SubList.jsx'，想为单个组件单独添加样式，就使用导入导入对象这种方式 */
+/* 
+如果使用import SubTitle '../../css/SubList.jsx'，就使用导入导入对象这种方式 ,
+在SubList中观察一级标题和二级标题。:global作用于一级标题，加:global后类名就不会加hash值，使用className="title"
+.title没有:global修饰，类名可以添加hash;作用于二级标题，className={SubTitle.title}
+*/
 
 .title {
 	color: red;

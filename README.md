@@ -1,4 +1,4 @@
-## 一、项目构建
+L## 一、项目构建
 
 ## 二、项目 webpack-senior 已经完成了 bable 和 webpack 的配置，相关插件和配置文件复用
 
@@ -184,10 +184,79 @@
 
 4. 在 render 函数或者其他位置，使用 this.context.键名来获取值。例如：this.context.fontSize
 
-### 记忆方式
+### 记忆方式+
 
 -   getChildContextTypes,前三、后三、后二
 -   一个方法，两个静态属性
 -   在发送数据处，前三、后三，即：getChildContext 方法，childContextTypes 类型校验
 -   在接收数据处，后二，contextTypes
 -   然后，获取值使用，this.context.[键名]
+
+## 十、react 的路由
+
+### react-router-dom
+
+-   {HashRouter,Link,NavLink,Route,Redirect,withRouter}按需导入
+-   HashRouter 只出现一次，放在 App.jsx 的最外层，且只出现一次
+-   Link 和 NavLink 相当于 vue 中 router-link,NavLink 是 Link 的特定版，有 activeStyle、activeClassName、isActive(f) 路由是否激活的额外业务逻辑
+-   Route 有两个作用，一设定路由规则：完成路由地址和组件的匹配；还是一个占位符，相当于 vue 中的 router-view
+-   Redirect 是路由重定向，是单标签\<Redirect from="/" to="/home" exact \/\>
+
+### react 的四种路由参数
+
+-   [参考文档](https://blog.csdn.net/glorydx/article/details/104769742)
+-   [参考文档 1](https://www.cnblogs.com/huihuihero/p/12165344.html)
+
+-   a. Route 中路由参数 params，\<Route path="/home/:type/:id" \/\>,进入的页面中 this.props.match.params.type、this.props.match.params.id
+-   b. search 参数：\<Link to="/home?name=rx" \>\<\/Link\>，接收 this.props.location.search，拿到这个值是一个编码过的字符串。组件：UseQuery 中做了演示，?name='%E5%BC%A0%E4%B8%89'。参数会出现在地址栏，刷新页面后，参数保持
+-   c.query 查询字符串，\<Link to={{pathname:'/home',query:{name'rx'}}} \>\<\/Link\> ，接收时 this.props.location.query 拿到的是一个对象{name:'张三'}，地址栏不会出现参数，刷新页面后参数消失
+-   d. state 隐式传参，和 query 传参类似，传参不会出现在地址栏中，但是在 HashRouter 中刷新当前页面，参数会消失。对比之下，state 隐式传参时，传参的信息不会暴露在 url 中，更安全。缺点：在 HashRouter 中，刷新页面中参数消失，但是在 HistoryRouter 中参数不会消失
+-   e. withRouter 高阶组件，将 history、location 和 match 三大对象，添加到 this.props 下
+
+### react-native-router-flux,用于 RN 开发中的路由导航
+
+#### Router 按需导入，类似 HashRouter，放在 Main.js 文件中的最外层
+
+#### Router 下嵌套 Stack,Stack 用于为路由分组，不表示具体路由，常用属性 key="字符串"
+
+#### Scene 类似 react-router-dom 中的 Route,有多个常用属性，key="movieitem" component={组件名称} title="电影详情" hideNavBar={true}
+
+-   key 中的值用于编程式导航，Actions.movieitem(可以传参,如：{id:item.id})
+-   title 一旦声明，就会在页面的顶部生成一个导航条，title 中的值是导航条名称，还自动有一个返回键
+-   hideNavBar={true}可以隐藏导航条
+
+## 十一、React 懒加载的实现：react-loadable 插件
+
+### 基本使用
+
+-   引入 react-loadable 插件，import Loadable from 'react-loadable';
+-   定义一个 loadable.js 文件，参数里接收一个函数作为参数
+-   export default (loader)=>{
+-   return Loadable({
+-   loader,
+-   loading(){
+-   return <div>加载中……</div>
+-                                }
+-                            })
+-   }
+
+### 定义一函数，模拟上面 export default 暴露的函数
+
+#### 思想：定义一个高阶组件，在组件中使用文件的异步加载来模拟组件的 lan 加载
+
+#### 具体实现：见本项目：utils/loadable.js 文件末尾
+
+## 十二、解决 React 引入 Ant Design 导致 bundle 过大问题
+
+### 使用场景
+
+-   生产环境打包时，使用 webpack-bundle-analyzer 插件可视化分析时，一个较大的包，是由于 D:\Web-project\react-study02\node_modules\_@ant-design_icons@2.1.1@@ant-design\icons\lib 路径下的 dist.js 文件引起的，这个文件大小有 530kb,引起打包时 async-chunks 这个包过大
+
+### 解决办法
+
+-   仅使用于 ant-design3.x 版本，ant-design4.x 版本已经支持按需加载，不会出现这个问题
+-   可视化插件分析时，很容易看到是全量引入了 矢量图标， SVG - ICONS
+-   在 webpack.pub.config.js 文件中增加一级的 resolve 节点，配置一个别名 alias,@ant-design/icons/lib/dist 路径替换成自己在 utils 文件夹下创建的文件 icons.js
+-   然后，运行$:npm run pub 打包，发现 async-chunks.js 文件果然减小到了 285kib，之前为 647kib，减小到了原来的 1/3
+
+[参考文档](https://blog.csdn.net/u012392251/article/details/104951475)
