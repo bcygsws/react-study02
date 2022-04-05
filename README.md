@@ -236,8 +236,8 @@ L## 一、项目构建
 -   loader,
 -   loading(){
 -   return <div>加载中……</div>
--                  }
--              })
+-                                }
+-                            })
 -   }
 
 ### 定义一函数，模拟上面 export default 暴露的函数
@@ -245,3 +245,18 @@ L## 一、项目构建
 #### 思想：定义一个高阶组件，在组件中使用文件的异步加载来模拟组件的 lan 加载
 
 #### 具体实现：见本项目：utils/loadable.js 文件末尾
+
+## 十二、解决 React 引入 Ant Design 导致 bundle 过大问题
+
+### 使用场景
+
+-   生产环境打包时，使用 webpack-bundle-analyzer 插件可视化分析时，一个较大的包，是由于 D:\Web-project\react-study02\node_modules\_@ant-design_icons@2.1.1@@ant-design\icons\lib 路径下的 dist.js 文件引起的，这个文件大小有 530kb,引起打包时 async-chunks 这个包过大
+
+### 解决办法
+
+-   仅使用于 ant-design3.x 版本，ant-design4.x 版本已经支持按需加载，不会出现这个问题
+-   可视化插件分析时，很容易看到是全量引入了 矢量图标， SVG - ICONS
+-   在 webpack.pub.config.js 文件中增加一级的 resolve 节点，配置一个别名 alias,@ant-design/icons/lib/dist 路径替换成自己在 utils 文件夹下创建的文件 icons.js
+-   然后，运行$:npm run pub 打包，发现 async-chunks.js 文件果然减小到了 285kib，之前为 647kib，减小到了原来的 1/3
+
+[参考文档](https://blog.csdn.net/u012392251/article/details/104951475)

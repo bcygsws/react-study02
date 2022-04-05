@@ -23,7 +23,10 @@ module.exports = {
 			'react-dom',
 			'react-router-dom',
 			'react-loadable',
-			'prop-types'
+			'prop-types',
+			'redux',
+			'react-redux',
+			'redux-thunk'
 		],
 		antd1: 'antd'
 	},
@@ -86,15 +89,15 @@ module.exports = {
 		// minimize: true, // webpack4默认是开启压缩的，可以不写
 		splitChunks: {
 			chunks: 'all', // async表示抽取异步模块，all表示对所有模块生效，initial表示对同步模块生效
-			minSize: 0, // 大于0字节
 			automaticNameDelimiter: '~',
+			minSize: 30000, // js文件之和大于30000，就会拆分。之和小于30000，这些文件会被打包成一个文件
 			cacheGroups: {
 				// 单独提取JS文件引入html
 				vendors: {
 					// 抽离第三方库
 					chunks: 'all',
 					// 键值可以自定义
-					test: /^(react|react-dom|react-router-dom|prop-types|react-loadable)$/,
+					test: /^(react|react-dom|react-router-dom|prop-types|react-loadable|redux|react-redux|redux-thunk)$/,
 					// test: /[\/]node_modules[\/]/,
 					// test: (module) =>
 					// 	/react/.test(module.context) ||
@@ -113,7 +116,6 @@ module.exports = {
 				antd1: {
 					test: (module) => /antd/.test(module.context),
 					// test: /^antd$/,
-					chunks: 'initial',
 					minChunks: 1,
 					name: 'antd1',
 					// enforce: true, // 强制
@@ -121,14 +123,14 @@ module.exports = {
 				},
 				'async-chunks': {
 					chunks: 'async',
-					minChunks: 1,
+					minChunks: 1, // minChunks最少引用的次数，是1次
 					name: 'async-chunks',
 					priority: 80
 				},
 				// 其他公共包
 				commons: {
 					chunks: 'all',
-					minChunks: 2,
+					minChunks: 1,
 					name: 'commons',
 					priority: 70
 				}
@@ -143,7 +145,7 @@ module.exports = {
 		minimizer: [
 			new UglifyJS({
 				include: /\.js$/,
-				parallel: true, // 采用多线程并发
+				parallel: true, // 采用多线程并发,[ˈpærəlel]
 				uglifyOptions: {
 					output: {
 						comments: false // 删除代码中的注释
@@ -342,5 +344,13 @@ module.exports = {
 		progress: true, // 显示加载进度条
 		contentBase: './dist', // 映射地址
 		compress: true // 是否压缩
+	},
+	resolve: {
+		alias: {
+			'@ant-design/icons/lib/dist': path.resolve(
+				__dirname,
+				'src/utils/icons.js'
+			)
+		}
 	}
 };
