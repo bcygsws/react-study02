@@ -26,9 +26,11 @@ module.exports = {
 			'prop-types',
 			'redux',
 			'react-redux',
-			'redux-thunk'
+			'redux-thunk',
+			'nprogress'
 		],
-		antd1: 'antd'
+		antd1: 'antd',
+		axios: 'axios'
 	},
 	// 输出配置
 	output: {
@@ -100,7 +102,7 @@ module.exports = {
 					// 抽离第三方库
 					chunks: 'all',
 					// 键值可以自定义
-					test: /^(react|react-dom|react-router-dom|prop-types|react-loadable|redux|react-redux|redux-thunk)$/,
+					test: /^(react|react-dom|react-router-dom|prop-types|react-loadable|redux|react-redux|redux-thunk|nprogress)$/,
 					// test: /[\/]node_modules[\/]/,
 					// test: (module) =>
 					// 	/react/.test(module.context) ||
@@ -122,6 +124,12 @@ module.exports = {
 					minChunks: 1,
 					name: 'antd1',
 					// enforce: true, // 强制
+					priority: 100
+				},
+				axios: {
+					test: /^axios$/,
+					minChunks: 1,
+					name: 'axios',
 					priority: 100
 				},
 				'async-chunks': {
