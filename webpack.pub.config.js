@@ -81,8 +81,14 @@ module.exports = {
 		// gzip压缩
 		// 还需要在nginx中配置gzip压缩相关的内容，参考：https://ly1024.blog.csdn.net/article/details/109580024?spm=1001.2101.3001.6650.12&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-12.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-12.pc_relevant_default&utm_relevant_index=17
 		new CompressionWebpackPlugin({
+<<<<<<< HEAD
 			// filename:'[path].gz[query]' // 这种方式只会生成一个.gz文件，所有的拆包的js文件，公用这一个.gz文件，而下面这种
 			// 写法，会为符合条件的每个包都生成一个.gz文件
+=======
+			// filename: '[path].gz[query]', // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
+			// 总结：解决命名冲突，不再是所有文件公用一个.gz文件，而是为每个满足条件(具体说threshold中的设定值，大于1M的才会gzip压缩)
+			// 的打包js文件，都生成一个同名的.gz文件
+>>>>>>> master
 			filename: '[path][base].gz', // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
 			algorithm: 'gzip', // 算法
 			test: new RegExp('\\.(js|css)$'), // 压缩 js 与 css
