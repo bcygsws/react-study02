@@ -1,7 +1,11 @@
 /**
  *
  * @ axios和NProgress顶部进度条的配置(为有后台请求异步任务的组件，添加顶部进度条，提升体验)
- *
+ * 参考文档：
+ * https://blog.csdn.net/DcTbnk/article/details/107720660?spm=1001.2101.3001.6650.5&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-5.pc_relevant_aa&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-5.pc_relevant_aa&utm_relevant_index=6
+ * NProgress配置参考文档；
+ * https://blog.csdn.net/m0_37890289/article/details/109739783
+ * 
  *
  *
  */
