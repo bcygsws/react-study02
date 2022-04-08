@@ -135,8 +135,8 @@ module.exports = {
 				},
 				axios: {
 					test: /^axios$/,
-					name: 'axios',
 					minChunks: 1,
+					name: 'axios',
 					priority: 100
 				},
 				'async-chunks': {

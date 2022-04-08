@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // 路由需要的组件react-router-dom
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import RefHome from './RefHome.jsx';
 import RefHome1 from './RefHome1.jsx';
 import RefHome2 from './RefHome2.jsx';
@@ -21,18 +21,20 @@ export default class UseRef extends Component {
 				<Link to="/home/useRef/forward_ref2">
 					演示forwardRef，React@16.3版本推出的函数组件-借用withRouter高阶组件和forwardRef
 				</Link>
-				<Route
-					path="/home/useRef/forward_ref"
-					component={RefHome}
-				></Route>
-				<Route
-					path="/home/useRef/forward_ref1"
-					component={RefHome1}
-				></Route>
-				<Route
-					path="/home/useRef/forward_ref2"
-					component={RefHome2}
-				></Route>
+				<Switch>
+					<Route
+						path="/home/useRef/forward_ref"
+						component={RefHome}
+					></Route>
+					<Route
+						path="/home/useRef/forward_ref1"
+						component={RefHome1}
+					></Route>
+					<Route
+						path="/home/useRef/forward_ref2"
+						component={RefHome2}
+					></Route>
+				</Switch>
 			</div>
 		);
 	}

@@ -236,8 +236,8 @@ L## 一、项目构建
 -   loader,
 -   loading(){
 -   return <div>加载中……</div>
--                                }
--                            })
+-                                      }
+-                                  })
 -   }
 
 ### 定义一函数，模拟上面 export default 暴露的函数
@@ -260,3 +260,19 @@ L## 一、项目构建
 -   然后，运行$:npm run pub 打包，发现 async-chunks.js 文件果然减小到了 285kib，之前为 647kib，减小到了原来的 1/3
 
 [参考文档](https://blog.csdn.net/u012392251/article/details/104951475)
+
+## 十三、react 视频播放解决方案
+
+### 方案一、video-react
+
+-   [video-react 播放器](https://video-react.js.org/components/player/)
+
+### 方案二、使用 JoL-player 插件
+
+-   [视频演示-知乎地址](https://www.zhihu.com/zvideo/1413964811906981888)
+-   [插件-github 地址](https://github.com/lgf196/JoL-player)
+
+### 方案三、使用 react-player 插件，推荐
+
+-   [react-player 插件，开发小院](http://www.voidcc.com/project/react-player)
+-   [github 官网](https://github.com/cookpete/react-player)
