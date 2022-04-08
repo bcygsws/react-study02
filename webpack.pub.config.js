@@ -32,7 +32,9 @@ module.exports = {
 			'nprogress'
 		],
 		antd1: 'antd',
-		axios: 'axios'
+		axios: 'axios',
+		// 体积较大的包单独抽离
+		react_player: 'react-player'
 	},
 	// 输出配置
 	output: {
@@ -137,6 +139,12 @@ module.exports = {
 					test: /^axios$/,
 					minChunks: 1,
 					name: 'axios',
+					priority: 100
+				},
+				react_player: {
+					test: /^react-player$/,
+					minChunks: 1,
+					name: 'react_player',
 					priority: 100
 				},
 				'async-chunks': {
