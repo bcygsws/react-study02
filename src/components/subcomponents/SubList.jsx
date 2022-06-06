@@ -18,7 +18,7 @@ function SubList(props) {
 			<div className={MySub.user}>
 				评论人：
 				{/* 注意：写style样式是两层括号，外层表示写js代码，内层花括号是样式对象 */}
-				<span style={{ textDecoration: 'underline', color: 'red' }}>
+				<span style={{ textDecoration: 'underline', color: 'hotpink' }}>
 					{props.user}
 				</span>
 			</div>
