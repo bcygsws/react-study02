@@ -79,12 +79,14 @@ export default class List extends React.Component {
 
 		// 写法2：直接在return语句中使用Array的map方法进行遍历，map意思是进行某个操作，然后返回一个数组，或者一个空数组。重要：
 		// 这并不违反【再见括号内只能使用表达式，其含义可以延展为本身是表达式，或者js代码返回值是表达式】
+		// 数组map，就是数组中的每一项都经过提供的函数（提供的函数可以有返回值return这种形式，也可以没有返回值，提供的函数如：
+		// x=>x*2，只是做了一步操作把数值数组每个元素的值乘以2）进行重新格式化，返回一个新的数组中
 		// 拿到main.js传递过来的数组CommentList
 		// item用于传递属性，index当作key值
 
 		return (
 			<div className={ListStyle.list_container}>
-				{/* <h3 className="title">评论列表案例</h3> */}
+				<h3 className="title">评论列表案例</h3>
 				<h3 className={ListTitle.title}>评论列表案例</h3>
 				{/* 推荐这种方式，这也是Array的map方法的优点之一，map方法返回值是数组，数组仍然可以继续进行操作，因此map也支持连写
 				注意：花括号{}渲染数据时，模板中不能放对象，放对象将报错，但是可以放数组 */}
