@@ -10,6 +10,9 @@
 	],
 	"plugins": [
 		"@babel/transform-runtime",
+		// babel-runtime和babel-polyfill的作用介绍和使用 https://www.jianshu.com/p/73ba084795ce
 		["@babel/plugin-proposal-class-properties", { "loose": false }]
+		// @babel/plugin-proposal-class-properties 及 属性的赋值与定义的区别,loose:false，严格模式，直接解析成defineProperty形式
+		// https://blog.csdn.net/youlinhuanyan/article/details/107867162
 	]
 }
