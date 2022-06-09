@@ -34,7 +34,7 @@ export default class Comment extends React.Component {
 					type="text"
 					name="user"
 					id="user"
-					value={this.username}
+					value={this.state.username}
 					ref={this.txtRef}
 					onChange={this.userChange}
 				/>
