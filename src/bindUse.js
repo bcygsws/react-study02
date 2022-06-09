@@ -37,6 +37,28 @@ console.log(unbindGetX()); // 81
 const bindGetX = module.getX.bind(module);
 // 同样是执行时绑定，getX中this的指向已经通过bind绑定做了修改
 console.log(bindGetX()); // 42
+/**
+ *
+ * @ call和apply更改this指向
+ *
+ *
+ *
+ */
+window.y = 88;
+const module1 = {
+	y: 47,
+	getY: function () {
+		return this.y;
+	}
+};
+const bindGetY = module1.getY; // 这个第三方变量bindGetY接收的过程，丢失了this原来的指向module1
+console.log(bindGetY()); // 88
+// 对比，bind绑定使用，call/apply来更改this指向
+console.log(module1.getY.call(module1)); // 47
+// 1.call/apply更改this指向后立即执行
+// 2.call和apply只是临时更改了一次this的指向
+// 下面一行调用bindGetY发现还是使用的是window中的y值
+console.log(bindGetY()); // 88
 
 // 二、偏函数-最基本的用途就是使得函数有一个预设的初始值
 function list() {
@@ -48,6 +70,7 @@ function addArg(arg1, arg2) {
 const list1 = list(1, 2, 3); // [1,2,3]
 console.log(list1);
 const preFirst = list.bind(null, 37);
+console.log(preFirst(1, 2, 3)); //  [37,1,2,3]
 /* 
 preFirst在被list.bind(null,37)赋值后，list实际上变成下面的情形，给list增加了第一个预设参数
 function list(37,arg1,arg2,……){
@@ -59,8 +82,6 @@ function list(37,arg1,arg2,……){
 
 
 */
-const list2 = preFirst(1, 2);
-console.log(list2); // [37,1,2]
 
 const add1 = addArg(1, 2);
 console.log(add1); // 3
