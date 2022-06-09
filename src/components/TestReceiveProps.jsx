@@ -51,6 +51,19 @@ class Son extends React.Component {
 		// 单独演示该钩子的执行
 		console.log(nextProps); // {pmsg: '娃哈哈'}
 	}
+	shouldComponentUpdate(nextProps, nextState) {
+		console.log(nextProps); // {pmsg: '娃哈哈'}
+		console.log(nextState); // null
+		return true;
+	}
+	componentWillUpdate(nextProps, nextState) {
+		console.log(nextProps); // {pmsg: '娃哈哈'}
+		console.log(nextState); // null
+	}
+	componentDidUpdate(prevProps, prevState) {
+		console.log(prevProps);// {pmsg: '这是父组件传递的值'}
+		console.log(prevState);// null
+	}
 }
 /**
  *
