@@ -15,7 +15,7 @@ export default class Counter extends React.Component {
 			msg: 'ok',
 			count: props.initVal
 		};
-		console.log(this.myRef);
+		console.log(this.myRef); // 初始渲染时，{current:null}
 	}
 	/**
 	 * @ defaultProps
@@ -128,8 +128,8 @@ export default class Counter extends React.Component {
 	// 完，就将进入【运行中】状态
 	// 类比vue中的mounted
 	// react@16.3版本开始，使用生命周期钩子，前面加一个UNSAFE_前缀，才不会报警告
-	UNSAFE_componentDidMount() {
-		console.log(document.getElementById('myVal')); // <p id="myVal">0</p>
+	componentDidMount() {
+		console.log(document.getElementById('myVal')); // 初始渲染时,<p id="myVal">0</p>
 	}
 	// 接收到属性，是否变化;nextProps参数是数据变化后的DOM
 	// 注意：这个钩子在本组件中，没有接受到变化的属性。本组件中state变化，直接走shouldComponentUpdate,然后是componentWillUpdate这个路径
@@ -157,7 +157,7 @@ export default class Counter extends React.Component {
 		return true; // 让它一直更新，以确保后面的生命周期函数能够执行
 	}
 	// 	// 组件即将更新，此时还没有开始重新渲染虚拟DOM。但是数据已经更新完成了
-	UNSAFE_componentWillUpdate(nextProps, nextState) {
+	componentWillUpdate(nextProps, nextState) {
 		// 获取的dom还是旧的，是更新以前的
 		console.log(document.getElementById('myVal').innerText);
 		console.log(
@@ -167,10 +167,9 @@ export default class Counter extends React.Component {
 				nextState.count
 		);
 	}
-		// 组件的新数据、重新渲染的虚拟DOM和新页面保持一致
+	// 	// 组件的新数据、重新渲染的虚拟DOM和新页面保持一致
 	componentDidUpdate(prevProps, prevState) {
-		// 拿到的prevProps和prevState都是旧的对象
-		console.log(prevProps, prevState); // 变成1后，这两个对象都拿到的是旧值{initVal: 0} {msg: 'ok', count: 0}
+		console.log(prevProps, prevState);
 		console.log(this.myRef.current && this.myRef.current.innerHTML); // 1
 	}
 }

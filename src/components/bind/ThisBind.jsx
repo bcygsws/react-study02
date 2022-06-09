@@ -116,7 +116,18 @@ export default class BindThis extends React.Component {
 		 * 解决方案：
 		 * 要接收以下绑定后的返回值
 		 * bind绑定是有返回值的，其返回值是：返回一个原函数的拷贝，并拥有指定的 this 指向和初始参数
-		 * 【区别】bind apply/call 都可以修改this的执行，不同之处在于this修改执行后不是立即执行的。
+		 * 【区别】
+		 * 1.bind 和apply/call 都可以修改this的执行，不同之处在于bind修改this指向后(bind绑定后生成的新函数，叫绑定函数)，
+		 * 不是立即执行的。而apply/call是立即执行
+		 * 2.apply第一个参数是要改变的指向，如果第一个参数传入null或者undefined，那么this指向浏览器默认的window;而且apply
+		 * 和call只是临时改变一次this的指向
+		 * 
+		 * 
+		 * 参考文档；https://blog.csdn.net/weixin_49199001/article/details/109674791
+		 * 参考文档1：https://zhuanlan.zhihu.com/p/82340026
+		 * 
+		 * 
+		 * 
 		 * 备注：call()方法的作用和 apply() 方法类似，区别就是call()方法接受的是参数列表，而apply()方法接受的是一个参数数组。
 		 * 记忆联想：apply---参数列表时数组Array
 		 * 见MDN文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
@@ -126,12 +137,12 @@ export default class BindThis extends React.Component {
 		 * bind的三大作用
 		 * 1.绑定函数，修改this指向
 		 * 2.偏函数，实质是给函数添加一个预设值
-		 * function list(arguments){
-		 * 		return Array.prototype.slice.call(arguments);
-		 * }
-		 * var list1=list(123); // [1,2,3]
+		 *  function list(arguments){
+		 * 	 return Array.prototype.slice.call(arguments);
+		 *  }
+		 *  var list1=list(1,2,3); // [1,2,3]
 		 *
-		 * var list2=list(null,39); // 其含义是给list设置第一个预设参数39
+		 * var list2=list.bind(null,39); // 其含义是给list设置第一个预设参数39
 		 * list2(1,2)  // (39,1,2)
 		 *
 		 *
