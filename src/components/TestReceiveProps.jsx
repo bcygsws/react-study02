@@ -2,6 +2,13 @@
  *
  * @ 单独的组件演示React生命周期钩子钩子 componentWillReceiveProps
  *
+ * 父组件注入的属性发生改变时，子组件中最早在componentWillReceiveProps的唯一参数nextProps可以拿到最新的props值
+ * 而对于this.props,只能在componentDidUpdated(){
+ * 			console.log(this.props);// 只能在更新渲染完成的钩子中才能获得this.props是最新值，前面的所有钩子中拿到的this.props的旧值
+ * };
+ *
+ *
+ *
  */
 import React from 'react';
 export default class Parent extends React.Component {
@@ -48,21 +55,28 @@ class Son extends React.Component {
 	UNSAFE_componentWillReceiveProps(nextProps) {
 		//
 		console.log(this.props); // pmsg: '这是父组件传递的值'}
+		console.log(this.props.pmsg);
 		// 单独演示该钩子的执行
 		console.log(nextProps); // {pmsg: '娃哈哈'}
 	}
 	shouldComponentUpdate(nextProps, nextState) {
+		console.log(this.props); // {pmsg: '这是父组件传递的值'}
+		console.log(this.props.pmsg);
 		console.log(nextProps); // {pmsg: '娃哈哈'}
 		console.log(nextState); // null
 		return true;
 	}
 	componentWillUpdate(nextProps, nextState) {
+		console.log(this.props); // {pmsg: '这是父组件传递的值'}
+		console.log(this.props.pmsg);
 		console.log(nextProps); // {pmsg: '娃哈哈'}
 		console.log(nextState); // null
 	}
 	componentDidUpdate(prevProps, prevState) {
-		console.log(prevProps);// {pmsg: '这是父组件传递的值'}
-		console.log(prevState);// null
+		console.log(this.props); // {pmsg: '娃哈哈'}
+		console.log(this.props.pmsg);
+		console.log(prevProps); // {pmsg: '这是父组件传递的值'}
+		console.log(prevState); // null
 	}
 }
 /**

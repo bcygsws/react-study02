@@ -66,6 +66,20 @@
 
 ## 六、React 组件的生命周期
 
+### React16 生命周期钩子
+
+#### 关于 componentWillReceiveProps 生命周期钩子的说明
+
+-   结合 TestReceiveProps.jsx 组件演示
+-   回想 react 生命周期钩子流程图，在 react 中有两种方式引起组件更新；而 componentWillReceiveProps 是属性变化引起组件更新的处理钩子
+-   属性变化将引起，componentWillReceiveProps、shouldComponentUpdate、componentWillUpdate、render、componentDidUpdate 这五个钩子执行
+-   在 componentWillReceiveProps 的唯一参数 nextProps 中，可以最早拿到父组件更新注入子组件的属性值 -但是，对于子组件对象中的 this.props，唯有到了更新渲染完成的阶段，即 componentDidUpdate 阶段，才能拿到更新后的 this.props 的新值
+-   componentDidUpdated(){
+-   console.log(this.props);// 只能在更新渲染完成的钩子中获得 this.props 最新值，前面的钩子中拿到的 this.props 的旧值
+-   };
+
+### React17 生命周期钩子
+
 ## 七、bind 绑定 this 参数并传值的三种方式
 
 ### 结合案例 ThisBind.jsx
