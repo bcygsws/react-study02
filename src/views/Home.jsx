@@ -96,21 +96,22 @@ export default class Home extends React.Component {
 		return (
 			<div className={RouteStyle.container}>
 				<h3>这是Home组件</h3>
+				{/* 文件夹fat_toson */}
 				<Link to="/home/div_com">
-					父组件给子组件DivCom绑定属性person
+					一、父组件给子组件DivCom绑定属性person
 				</Link>
 				<Link to="/home/hello2">
-					父组件给子组件Hello2绑定属性person和info
+					二、父组件给子组件Hello2绑定属性person和info
 				</Link>
 				<Link to="/home/list">
-					评论列表的渲染Array.map()的返回值还是数组
+					三、评论列表的渲染Array.map()的返回值还是数组
 				</Link>
 				<Link to="/home/counter">
-					计数器案例-体会defaultProps默认属性和类型校验，以及生命周期钩子
+					四、计数器案例-体会defaultProps默认属性和类型校验，以及生命周期钩子
 				</Link>
-				<Link to="/home/to_fat">子组件给父组件传值</Link>
+				<Link to="/home/to_fat">五、子组件给父组件传值</Link>
 				<Link to="/home/receive_props">
-					演示生命周期钩子componentWillReceiveProps
+					六、演示生命周期钩子componentWillReceiveProps
 				</Link>
 				<Link to="/home/context">
 					Context特性：getChildContextProps，前三、后三、后二
