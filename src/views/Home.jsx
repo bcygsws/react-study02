@@ -28,7 +28,7 @@ import MyVideo from '../components/player/MyVideo.jsx';
 import RouteStyle from '../css/route.less';
 /**
  *
- * @antd ui库的使用：
+ * @ antd ui库的使用：
  * 参考文档：https://3x.ant.design/docs/react/introduce-cn
  * 第一步：import { DatePicker } from 'antd';
  *	ReactDOM.render(<DatePicker />, mountNode);

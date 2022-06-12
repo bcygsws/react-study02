@@ -50,7 +50,7 @@ export default class App extends React.Component {
 							exact
 						></Route>
 						<Route path="/about" component={About}></Route>
-						{/* 由根路径，重定向到/home配置Route */}
+						{/* 由根路径，重定向到/home配置Route，注意Redirect是单标签;vue中重定向也是用redirect,不过是小写单词*/}
 						<Redirect from="/" to="/home" exact />
 					</Switch>
 				</div>
