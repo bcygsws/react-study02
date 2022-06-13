@@ -87,6 +87,7 @@ export default class List extends React.Component {
 
 		return (
 			<div className={ListStyle.list_container}>
+				{/* title将引用subTitle.less中:global(.title)全局定义的样式，所有第一个h3标题显示为紫色 */}
 				<h3 className="title">评论列表案例</h3>
 				<h3 className={ListTitle.title}>评论列表案例</h3>
 				{/* 推荐这种方式，这也是Array的map方法的优点之一，map方法返回值是数组，数组仍然可以继续进行操作，因此map也支持连写

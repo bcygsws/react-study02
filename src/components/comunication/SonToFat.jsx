@@ -2,6 +2,10 @@
  *
  * @ 演示：子组件给父组件传值的两种方式
  * 第一种方式：父组件中定义个回调函数，接收子组件的传值
+ * 单向数据流：
+ * 1.子组件向父组件传值，将父组件中方法以属性的方式注入到子组件
+ * 2.子组件的props属性拿到方法名，继而传入参数
+ * 
  *
  */
 import React from 'react';
@@ -47,6 +51,7 @@ class Son extends React.Component {
 		);
 	}
 	sendFat = () => {
+		// 调用父组件中的getMsg方法，getMsg(ReceiveData)
 		this.props.getMsg(this.state.smsg);
 	};
 }

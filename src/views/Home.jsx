@@ -8,7 +8,7 @@ import List from '../components/list/List.jsx';
 import Counter from '../components/counter/Counter.jsx';
 import Parent from '../components/receiveProps/TestReceiveProps.jsx';
 import ThisBind from '../components/bind/ThisBind.jsx';
-import Fat from '../components/comunication/SonToFat.jsx';
+import ServalWays from '../components/comunication/ServalWays.jsx';
 import Comment from '../components/comment/Comment.jsx';
 import MyContext from '../components/context/Context.jsx';
 import Count from '../components/redux/Count.jsx';
@@ -100,19 +100,22 @@ export default class Home extends React.Component {
 				<Link to="/home/div_com">
 					一、父组件给子组件DivCom绑定属性person
 				</Link>
+				{/* 文件夹fat_toson */}
 				<Link to="/home/hello2">
 					二、父组件给子组件Hello2绑定属性person和info
 				</Link>
+				{/* 文件夹list */}
 				<Link to="/home/list">
 					三、评论列表的渲染Array.map()的返回值还是数组
 				</Link>
+				{/* 文件夹counter */}
 				<Link to="/home/counter">
 					四、计数器案例-体会defaultProps默认属性和类型校验，以及生命周期钩子
 				</Link>
-				<Link to="/home/to_fat">五、子组件给父组件传值</Link>
 				<Link to="/home/receive_props">
-					六、演示生命周期钩子componentWillReceiveProps
+					五、演示生命周期钩子componentWillReceiveProps
 				</Link>
+				<Link to="/home/com">六、子组件给父组件传值</Link>
 				<Link to="/home/context">
 					Context特性：getChildContextProps，前三、后三、后二
 				</Link>
@@ -177,9 +180,9 @@ export default class Home extends React.Component {
 					<Route path="/home/list" component={List}></Route>
 					<Route
 						path="/home/counter"
-						component={() => <Counter initVal={3}></Counter>}
+						component={() => <Counter initVal={0}></Counter>}
 					></Route>
-					<Route path="/home/to_fat" component={Fat}></Route>
+					<Route path="/home/com" component={ServalWays}></Route>
 					<Route
 						path="/home/receive_props"
 						component={Parent}
