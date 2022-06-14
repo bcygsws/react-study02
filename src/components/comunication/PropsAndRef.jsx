@@ -1,10 +1,11 @@
 /**
  *
- * 组件通信方式 2：props和ref实例
+ * 组件通信方式 2：props
  * props 接收父组件给子组件传递的值
  * 那么，如何在父组件拿到子组件的方法和属性呢？
  * 可以使用Ref实例
  *
+ * 组件通信方式3：ref对象实例获取子组件
  * 本案例中使用ref的函数方式，拿到原生子组件对象
  * <MyChild ref={ele=>this.myRef=ele}></MyChild>
  * this.myRef就是子组件的实例
@@ -46,6 +47,7 @@ export default class PropsAndRef extends React.Component {
 	}
 	handle = () => {
 		// 在父组件汇总调用了子组件的myFun方法
+		console.log(this.myRef);
 		const x = this.myRef.myFun();
 		this.setState({
 			info: x
