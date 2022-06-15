@@ -112,16 +112,22 @@ export default class Home extends React.Component {
 				<Link to="/home/counter">
 					四、计数器案例-体会defaultProps默认属性和类型校验，以及生命周期钩子
 				</Link>
+				{/* receiveProps文件夹 */}
 				<Link to="/home/receive_props">
 					五、演示生命周期钩子componentWillReceiveProps
 				</Link>
+				{/* fat_toson文件夹 */}
 				<Link to="/home/com">六、子组件给父组件传值</Link>
+				{/* context文件夹 */}
 				<Link to="/home/context">
-					Context特性：getChildContextProps，前三、后三、后二
+					七、Context特性：getChildContextProps，前三、后三、后二
 				</Link>
-				<Link to="/home/bind">绑定this的三种方式</Link>
-				<Link to="/home/comment">手动添加评论，实时显示评论列表</Link>
-				<Link to="/home/redux">同级组件Count和Person之间共享状态</Link>
+				{/* bind文件夹 */}
+				<Link to="/home/bind">八、绑定this的三种方式</Link>
+				{/* 文件夹comment  */}
+				<Link to="/home/comment">九、手动添加评论，实时显示评论列表</Link>
+				{/* Redux文件夹 */}
+				<Link to="/home/redux">十、同级组件Count和Person之间共享状态</Link>
 				<Link to="/home/useRef">
 					使用forwardRef演示ref的使用，并体会高阶组件
 				</Link>
