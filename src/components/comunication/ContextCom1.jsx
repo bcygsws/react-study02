@@ -22,7 +22,7 @@
  *  static contextType=MyContext;
  * 或者
  * 孙子组件.contextType=MyContext;
- * 
+ *
  * this.context就直接拿到注入的value值，这是和传统方式的区别，传统方式使用this.context.info才能拿到数据
  *
  */
@@ -70,15 +70,29 @@ class Son1 extends React.Component {
 		);
 	}
 }
-class GrandSon1 extends React.Component {
-	render() {
-		return (
-			<div>
-				<h5>这是GrandSon1孙子组件</h5>
-				<Consumer>
-					{(value) => <div>孙子组件接收祖父的传值时：{value}</div>}
-				</Consumer>
-			</div>
-		);
-	}
+// 特别注意：static contextType=MainContext;配合this.context的方式只适用于类组件
+// 而MainContext.Consumer这种接收方式，类和函数组件都适用
+
+// a. Consumer接收方式适用于类组件
+// class GrandSon1 extends React.Component {
+// 	render() {
+// 		return (
+// 			<div>
+// 				<h5>这是GrandSon1孙子组件</h5>
+// 				<Consumer>
+// 					{(value) => <div>孙子组件接收祖父的传值时：{value}</div>}
+// 				</Consumer>
+// 			</div>
+// 		);
+// 	}
+// }
+function GrandSon1() {
+	return (
+		<div>
+			<h5>这是GrandSon1孙子组件</h5>
+			<Consumer>
+				{(value) => <div>孙子组件接收祖父的传值时：{value}</div>}
+			</Consumer>
+		</div>
+	);
 }
