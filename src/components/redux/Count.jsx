@@ -62,7 +62,7 @@ class Count extends React.Component {
  * mapStateToProps
  * 1.负责输入逻辑，将state数据映射成UI组件的输入参数
  * 2.mapStateToProps会订阅store,每当state数据变化，mapStateToProps就重新计算UI组件的参数，然后重新更新页面
- * mapDispatchToProps负责输出逻辑，将View视图上的动作映射成Action,然后由UI组件派送出去
+ * mapDispatchToProps负责输出逻辑(dispatch迪斯八奇)，将View视图上的动作映射成Action,然后由UI组件派送出去
  *
  *
  */

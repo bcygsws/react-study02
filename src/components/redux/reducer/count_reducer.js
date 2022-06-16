@@ -15,6 +15,25 @@ export default function countReducer(preState = initState, action) {
 	}
 }
 /**
+ * 加+1后
+ * 1.返回一个新的state，用伪代码说明：
+ * 
+ * 伪代码
+ * const newState=countReducer(0,{
+ * 	type:'INCREMENT'，
+ * 	data:1
+ * })
+ * 
+ * 2.新的状态通过createStore(allReducers,applyMiddware(thunk))进入store状态管理仓库
+ * 3.再通过react-redux包中Provider组件统一注入到根组件中，供各级子组件渲染界面使用{this.props.count}
+ * <Provider store={store}>
+ *  <App/>
+ * </Provider>
+ * 
+ * 
+ * 
+ */
+/**
  * count组件的4种行为，映射成了3种action，纯函数中的两种分支
  *
  * @ Reducer功能：接收action,计算得到新的state
