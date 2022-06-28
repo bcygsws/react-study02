@@ -9,6 +9,7 @@ import React from 'react';
 import Base from './Base.jsx';
 // 导入样式文件comment.less
 import MyCom from '../../css/comment.less';
+import axios from 'axios';
 export default class Comment extends React.Component {
 	// 定义文本框存储Ref的容器
 	txtRef = React.createRef();
@@ -71,6 +72,9 @@ export default class Comment extends React.Component {
 				CommentList: JSON.parse(localStorage.getItem('list'))
 			});
 		}
+		axios.get("https://pcw-api.iqiyi.com/search/recommend/list?channel_id=1&data_type=1&mode=24&page_id=1&ret_num=48").then(res=>{
+			console.log(res);
+		})
 	}
 	// userChange监听文本框中的内容的实时变化
 	userChange = (e) => {
