@@ -81,7 +81,19 @@ class MyChild extends React.Component {
  * 
  * 
  * 三、dom事件流
+ * 参考文档：https://blog.csdn.net/Moony_wy/article/details/122813290
  * 
+ * dom事件流是指事件发生时，会按照特定的顺序传播，叫做事件流
+ * 
+ * 捕获阶段
+ * 目标元素
+ * 冒泡阶段
+ * 
+ * 3.1 js代码只能执行捕获或冒泡中的一个阶段
+ * 3.2 onclick和attachEvent只得到冒泡阶段
+ * 3.3 如果addEventListener第三个参数为true,得到捕获阶段；缺省或者false值时，处理冒泡阶段
+ * 3.4 实际开发中，我们更关注冒泡阶段
+ * 3.5 有些事件是没有冒泡的，onfocus、onblur、onmouseenter、onmouseleave
  * 
  * 
  * 
