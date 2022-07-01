@@ -86,6 +86,8 @@ class Son extends React.Component {
  * 2.当父组件传递的属性值，变化时，componentWillReceiveProps会被触发，该钩子只有一个参数。表示属性变化后的对象
  * this.props中获取的还是旧值pmsg: '这是父组件传递的值'}
  * 但该钩子自带的参数nextProps，打印的是变化后的属性对象{pmsg: '娃哈哈'}
+ * 3.在子组件Son中 完成更新的生命周期钩子componentDidUpdate阶段，在这个钩子函数中打印this.props才能拿到的是this.props更新
+ * 后的值
  *
  *
  */
