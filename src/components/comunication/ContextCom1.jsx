@@ -91,7 +91,11 @@ function GrandSon1() {
 		<div>
 			<h5>这是GrandSon1孙子组件</h5>
 			<Consumer>
-				{(value) => <div>孙子组件接收祖父的传值时：{value}</div>}
+				{(val) => {
+					console.log(val); // 祖父组件 data to 孙子ContextE
+					// 进一步验证了 value值，是传入info字符串
+					return <div>孙子组件接收祖父的传值时：{val}</div>;
+				}}
 			</Consumer>
 		</div>
 	);
