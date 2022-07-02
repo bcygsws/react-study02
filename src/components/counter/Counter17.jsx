@@ -12,6 +12,12 @@
  */
 import React from 'react';
 export default class Count17 extends React.Component {
+	constructor(props){
+		super(props);
+		this.state={
+			info:'演示React17生命周期钩子'
+		}
+	}
 	render() {
 		return (
 			<div>
@@ -19,4 +25,5 @@ export default class Count17 extends React.Component {
 			</div>
 		);
 	}
+
 }
