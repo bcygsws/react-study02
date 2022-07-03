@@ -24,6 +24,8 @@ import UseQuery from '../components/route/UseQuery.jsx';
 import Film from '../components/nprogress/Film.jsx';
 // 视频播放器组件演示
 import MyVideo from '../components/player/MyVideo.jsx';
+// 十五、react-router v4和v5版本的比较
+import UsingRouter from '../components/router_version/UsingRouter.jsx';
 // 导入样式
 import RouteStyle from '../css/route.less';
 /**
@@ -153,6 +155,7 @@ export default class Home extends React.Component {
 				<Link to="/home/play_video">
 					第三方视频播放器插件react-player的使用
 				</Link>
+				<Link to="/home/router_version">十五、比较react-router的版本v4和v5</Link>
 				<Switch>
 					{/* 父组件给子组件传值显示，DivCom组件和Hello2组件 */}
 					<Route
@@ -214,6 +217,7 @@ export default class Home extends React.Component {
 					<Route path="/home/use_query" component={UseQuery}></Route>
 					<Route path="/home/film" component={Film}></Route>
 					<Route path="/home/play_video" component={MyVideo}></Route>
+					<Route path="/home/router_version" component={UsingRouter}></Route>
 				</Switch>
 				{/* 计数器组件，注释掉下面一行。不为initVal传默认属性，让它走defaultProps这个途径，获取默认值 */}
 				{/* <Counter initVal="3"></Counter> */}
