@@ -20,11 +20,12 @@ export default class UsingRouter extends React.Component {
 				{/* 在UsingRouter下设置两级路由，使用两层map来循环遍历 + routes.js，第一层<Route render=（props)=>{}></Route> */}
 				{/* 利用render渲染第二层路由 */}
 				<Switch>
-					{routes.map((route, index) => {
+					{routes.map((route, index) =>(
 						<Route
-							path={route.path}
 							key={index}
+							path={route.path}
 							render={(props) => {
+								// 利用render方法处理children里的子路由
 								if (route.children) {
 									return (
 										<div>
@@ -60,12 +61,9 @@ export default class UsingRouter extends React.Component {
 									);
 								}
 							}}
-						/>;
-					})}
-					<Redirect
-						from="/home/router_version"
-						to="/home/router_version/first"
-					/>
+						/>
+						))}
+					<Redirect to="/home/router_version/first" />
 				</Switch>
 			</div>
 		);
