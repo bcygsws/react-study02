@@ -115,7 +115,7 @@ export default class Counter extends React.Component {
 			count: this.state.count + 1
 		});
 	};
-		// 组件即将要挂载，还没有开始渲染虚拟DOM--->类比vue中的created阶段
+	// 组件即将要挂载，还没有开始渲染虚拟DOM--->类比vue中的created阶段
 	// UNSAFE_componentWillMount() {
 	// 	// 此时还不能操作虚拟dom
 	// 	console.log(document.getElementById('myVal')); // null

@@ -6,6 +6,7 @@ import Hello2 from '../components/fat_toson/Hello2.jsx';
 import List from '../components/list/List.jsx';
 // 导入计数器组件
 import Counter from '../components/counter/Counter.jsx';
+import Fat17 from '../components/counter/Fat17.jsx';
 import Parent from '../components/receiveProps/TestReceiveProps.jsx';
 import ThisBind from '../components/bind/ThisBind.jsx';
 import ServalWays from '../components/comunication/ServalWays.jsx';
@@ -114,6 +115,9 @@ export default class Home extends React.Component {
 				<Link to="/home/counter">
 					四、计数器案例-体会defaultProps默认属性和类型校验，以及生命周期钩子
 				</Link>
+				<Link to="/home/counter17">
+					四、计数器案例-体会React17生命周期钩子
+				</Link>
 				{/* receiveProps文件夹 */}
 				<Link to="/home/receive_props">
 					五、演示生命周期钩子componentWillReceiveProps
@@ -127,9 +131,13 @@ export default class Home extends React.Component {
 				{/* bind文件夹 */}
 				<Link to="/home/bind">八、绑定this的三种方式</Link>
 				{/* 文件夹comment  */}
-				<Link to="/home/comment">九、手动添加评论，实时显示评论列表</Link>
+				<Link to="/home/comment">
+					九、手动添加评论，实时显示评论列表
+				</Link>
 				{/* Redux文件夹 */}
-				<Link to="/home/redux">十、同级组件Count和Person之间共享状态</Link>
+				<Link to="/home/redux">
+					十、同级组件Count和Person之间共享状态
+				</Link>
 				<Link to="/home/useRef">
 					使用forwardRef演示ref的使用，并体会高阶组件
 				</Link>
@@ -155,7 +163,9 @@ export default class Home extends React.Component {
 				<Link to="/home/play_video">
 					第三方视频播放器插件react-player的使用
 				</Link>
-				<Link to="/home/router_version">十五、比较react-router的版本v4和v5</Link>
+				<Link to="/home/router_version">
+					十五、比较react-router的版本v4和v5
+				</Link>
 				<Switch>
 					{/* 父组件给子组件传值显示，DivCom组件和Hello2组件 */}
 					<Route
@@ -191,6 +201,10 @@ export default class Home extends React.Component {
 						path="/home/counter"
 						component={() => <Counter initVal={0}></Counter>}
 					></Route>
+					<Route
+						path="/home/counter17"
+						component={Fat17}
+					></Route>
 					<Route path="/home/com" component={ServalWays}></Route>
 					<Route
 						path="/home/receive_props"
@@ -217,7 +231,10 @@ export default class Home extends React.Component {
 					<Route path="/home/use_query" component={UseQuery}></Route>
 					<Route path="/home/film" component={Film}></Route>
 					<Route path="/home/play_video" component={MyVideo}></Route>
-					<Route path="/home/router_version" component={UsingRouter}></Route>
+					<Route
+						path="/home/router_version"
+						component={UsingRouter}
+					></Route>
 				</Switch>
 				{/* 计数器组件，注释掉下面一行。不为initVal传默认属性，让它走defaultProps这个途径，获取默认值 */}
 				{/* <Counter initVal="3"></Counter> */}
