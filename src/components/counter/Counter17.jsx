@@ -12,6 +12,30 @@
  * React.createRef()的用法
  * https://blog.csdn.net/weixin_33971977/article/details/86027673
  *
+ * 面试：this.setState是同步还是异步？讲解的最透彻的文档，参考掘金
+ * 掘金：https://juejin.cn/post/6918712057118507015
+ * setState，先了解react的批量更新(batchUpdate)机制 的主要流程：
+ * 1.调用setState(newState)
+ * 2.newState存入队列
+ * 3.判断是不是batchUpdate
+ * 4.如果是batchUpdate,组件就会优先保存在脏组件dirtyComponents中；如果不是batchUpdate,就会遍历所有的脏组件，并更新它们
+ * 因此，问题的落脚点在于：如何判断是否命中batchUpdate
+ *
+ * increase=>{
+ * // 开始的时候，都默认命中batchUpdate,是异步
+ * // isBatchingUpdates=true;
+ * settimeout(()=>{
+ *    // 这部分代码时异步宏任务，会放入队列，导致isBatchingUpdates立即又被置位false,导致setTimeout setInterval
+ *    // 以及addEventListener等原生事件中，setState表现为同步；在普通方法和生命周期钩子中，表现为异步
+ * },1000)
+ * // isBatchingUpdates=false;
+ *
+ * }
+ *
+ *
+ *
+ *
+ *
  *
  */
 import React from 'react';
