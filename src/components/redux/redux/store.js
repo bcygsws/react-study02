@@ -30,11 +30,11 @@ const allReducer = combineReducers({
 });
 // 中间件，参考文档：http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_two_async_operations.html
 // applyMiddleware(thunk,promise,logger)三个参数顺序不能改变
-export default createStore(
+const store = createStore(
 	allReducer,
 	composeWithDevTools(applyMiddleware(thunk))
 );
-
+export default store;
 // const reducer = combineReducers({
 // 	a: doSomethingWithA,
 // 	b: processB,

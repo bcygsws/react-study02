@@ -8,7 +8,7 @@ import App from './App.jsx';
 // 导入Redux相关的
 // import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import createStore from './components/redux/redux/store.js';
+import store from './components/redux/redux/store.js';
 // 引入子组件DivCom,子组件必须暴露一个接口
 // 导入类学习文件
 import MyClass from './class_study.js';
@@ -265,7 +265,7 @@ import './bindUse.js';
 ReactDOM.render(
 	// <DivCom name={name} age={age}></DivCom>,
 	// ...person中用到扩展符，表示属性扩散，
-	<Provider store={createStore}>
+	<Provider store={store}>
 		<App></App>
 	</Provider>,
 	document.getElementById('app')
