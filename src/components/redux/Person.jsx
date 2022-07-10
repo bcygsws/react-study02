@@ -26,7 +26,9 @@ class Person extends React.Component {
 		// 在person_reducer.js文件纯函数中默认preState值
 		// const initState = [{ id: 1, name: 'tom', age: 18 }];
 		const { person } = this.props;
-		const id = person.length + 1;
+		// const id = person.length + 1;
+		const id = parseInt(Date.now());
+
 		var personObj = { id, name, age };
 		this.props.addPerson(personObj);
 	};
@@ -51,7 +53,7 @@ class Person extends React.Component {
 					{this.props.person.map((item, index) => {
 						return (
 							<li key={index}>
-								{item.name}--{item.age}
+								{item.id}--{item.name}--{item.age}
 							</li>
 						);
 					})}
