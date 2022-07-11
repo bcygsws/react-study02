@@ -19,7 +19,6 @@ import { composeWithDevTools } from '@redux-devtools/extension';
  *  mapStateToProps中的键1: 对应的reducer1
  *  mapStateToProps中的键2: 对应的reducer2
  *  mapStateToProps中的键3: 对应的reducer3
- *
  * })
  *
  */
