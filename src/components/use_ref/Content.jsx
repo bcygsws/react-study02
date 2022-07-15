@@ -5,6 +5,9 @@ const Content = (props, ref) => {
 	return (
 		<div>
 			<input type="password" name="pwd" id="pwd" ref={ref} />
+			{/* 从props中拿注入Content组件的属性 */}
+			<p>姓名：{props.name}</p>
+			<p>数量：{props.count}</p>
 		</div>
 	);
 };

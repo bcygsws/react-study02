@@ -57,7 +57,7 @@ const RefHome1 = () => {
 			<button onClick={handleFocus}>
 				点击按钮，让子组件Content的密码框获得焦点
 			</button>
-			<Content1 forwardedRef={connectRef} />
+			<Content1 forwardedRef={connectRef} init={1} name="红尘外" />
 		</div>
 	);
 };

@@ -58,7 +58,7 @@ const RefHome = (props) => {
 			<button onClick={handle}>
 				点击按钮，让子组件Content的密码框获得焦点
 			</button>
-			<Content ref={connectRef} />
+			<Content ref={connectRef} count={1} name="张三" />
 		</div>
 	);
 };

@@ -29,7 +29,10 @@ const Hoc = (WrappedComponent) => {
 const Content1 = (props) => {
 	return (
 		<div>
+			{/* 父组件自定义属性forwardedRef */}
 			<input type="password" ref={props.forwardedRef} />
+			<p>{props.init}</p>
+			<p>{props.name}</p>
 		</div>
 	);
 };
