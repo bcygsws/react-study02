@@ -18,14 +18,16 @@ import { withRouter } from 'react-router-dom';
 
 // 第二种写法：定义一个高阶组件HOC
 // 被包装的组件
+
 export default React.forwardRef((props, ref) => {
 	const Wrapper = withRouter(Content2);
-	return <Wrapper {...props} forwardedRef={ref} />;
+	return <Wrapper {...props} forRef={ref} />;
 });
 const Content2 = (props) => {
 	return (
 		<div>
-			<input type="password" ref={props.forwardedRef} />
+			{/* 在props上挂载一个属性，forRef */}
+			<input type="password" ref={props.forRef} />
 		</div>
 	);
 };

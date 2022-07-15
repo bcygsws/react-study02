@@ -31,6 +31,8 @@ const Content1 = (props) => {
 		<div>
 			{/* 父组件自定义属性forwardedRef */}
 			<input type="password" ref={props.forwardedRef} />
+			<p>{props.init}</p>
+			<p>{props.name}</p>
 		</div>
 	);
 };

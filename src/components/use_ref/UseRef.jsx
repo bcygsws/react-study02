@@ -5,6 +5,16 @@ import RefHome from './RefHome.jsx';
 import RefHome1 from './RefHome1.jsx';
 import RefHome2 from './RefHome2.jsx';
 // 导入模块化样式
+/**
+ *
+ * 三种方式
+ * 记忆方式：
+ * Content子组件中都是ref
+ * 1.ref={ref}
+ * 2.<Content forwardedRef={connectRef}/> 在父组件中定义forwardRef ref={props.forwardedRef}
+ * 3.ref={props.forRef} 
+ *
+ */
 import RefStyles from '../../css/useRef.less';
 export default class UseRef extends Component {
 	render() {
