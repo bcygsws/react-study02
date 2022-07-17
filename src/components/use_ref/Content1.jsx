@@ -47,3 +47,17 @@ export default Hoc(Content1);
 // 3.高阶组件装饰器模式在React中的应用
 // 参考文档：知乎：https://zhuanlan.zhihu.com/p/61711492?utm_source=wechat_session
 // 参考文档1：https://segmentfault.com/a/1190000010307650
+
+/**
+ * 关于高阶组件：
+ * https://www.instagram.com/p/CgHX1jgunXs/?utm_source=ig_web_copy_link
+ * 总结：
+ * 1.高阶组件本质是一个函数，传入一个组件，返回一个新的组件（是增强后的组件）
+ * 2.高阶组件会把所有的接收的props传递给被包装的组件（透传）
+ * 3.ref和key,不同于props，不会透传，会绑定在外层的高阶组件上
+ * 4.高阶组件可以嵌套多层 e.g. HOC1(HOC2(HOC3(Content)))
+ *
+ *
+ *
+ *
+ */
