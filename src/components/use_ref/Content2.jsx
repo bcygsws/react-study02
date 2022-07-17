@@ -16,7 +16,9 @@ import { withRouter } from 'react-router-dom';
 // // 实现了在父组件中把ref绑定到子元素中的某个元素，forwardRef(cb)相对于接收了一个回调函数
 // export default forwardRef(Content);
 
-// 第二种写法：定义一个高阶组件HOC
+// 第三种写法：导出一个React.forwardRef(回调函数)
+// 1.先处理回调函数，为wrapper传入一个自定义属性forRef
+// 2.之后在Content2中使用ref={props.forRef}调用
 // 被包装的组件
 
 export default React.forwardRef((props, ref) => {

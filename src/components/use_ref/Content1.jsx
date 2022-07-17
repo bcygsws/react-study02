@@ -16,7 +16,7 @@ import React from 'react';
 // export default forwardRef(Content);
 
 // 第二种写法：定义一个高阶组件HOC
-// 被包装的组件
+// 被包装的组件Content1在前，然后再通过{...this.props}透传
 const Hoc = (WrappedComponent) => {
 	// 返回一个有状态组件-类组件是有状态的，有state
 	return class extends React.Component {
