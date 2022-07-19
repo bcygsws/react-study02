@@ -14,7 +14,7 @@ import axios from 'axios';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 const instance = axios.create({
-	timeout: 2000
+	timeout: 1000
 });
 export function get(url) {
 	return instance.get(url);
