@@ -5,7 +5,7 @@
  * https://blog.csdn.net/DcTbnk/article/details/107720660?spm=1001.2101.3001.6650.5&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-5.pc_relevant_aa&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-5.pc_relevant_aa&utm_relevant_index=6
  * NProgress配置参考文档；
  * https://blog.csdn.net/m0_37890289/article/details/109739783
- * 
+ *
  *
  *
  */
@@ -13,8 +13,9 @@ import axios from 'axios';
 // 导入nprogress组件和样式
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+// 创建一个新的axios instance
 const instance = axios.create({
-	timeout: 2000
+	timeout: 2000 // 新的axios实例，统一配置请求的延迟时间
 });
 export function get(url) {
 	return instance.get(url);
