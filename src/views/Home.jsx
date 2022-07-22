@@ -27,6 +27,8 @@ import Film from '../components/nprogress/Film.jsx';
 import MyVideo from '../components/player/MyVideo.jsx';
 // 十五、react-router v4和v5版本的比较
 import UsingRouter from '../components/router_version/UsingRouter.jsx';
+// 十六、React16.4以后生命周期钩子getDerivedStateFromProps
+import NewCircle from '../components/new_circle/NewCircle.jsx';
 // 导入样式
 import RouteStyle from '../css/route.less';
 /**
@@ -166,6 +168,9 @@ export default class Home extends React.Component {
 				<Link to="/home/router_version">
 					十五、比较react-router的版本v4和v5
 				</Link>
+				<Link to="/home/new_circle">
+					十六、React16.4以后，getDerivedStateFromProps生命周期钩子的理解
+				</Link>
 				<Switch>
 					{/* 父组件给子组件传值显示，DivCom组件和Hello2组件 */}
 					<Route
@@ -201,10 +206,7 @@ export default class Home extends React.Component {
 						path="/home/counter"
 						component={() => <Counter initVal={0}></Counter>}
 					></Route>
-					<Route
-						path="/home/counter17"
-						component={Fat17}
-					></Route>
+					<Route path="/home/counter17" component={Fat17}></Route>
 					<Route path="/home/com" component={ServalWays}></Route>
 					<Route
 						path="/home/receive_props"
@@ -234,6 +236,10 @@ export default class Home extends React.Component {
 					<Route
 						path="/home/router_version"
 						component={UsingRouter}
+					></Route>
+					<Route
+						path="/home/new_circle"
+						component={NewCircle}
 					></Route>
 				</Switch>
 				{/* 计数器组件，注释掉下面一行。不为initVal传默认属性，让它走defaultProps这个途径，获取默认值 */}
