@@ -36,6 +36,12 @@ export default class Son1 extends React.Component {
 	 *
 	 * 当此时再点击按钮式，state中color和preColor属性值相等，不返回新的state状态
 	 * 此时，点击按钮，state状态时，返回null,即不更新状态；setState后就可以更新页面了
+	 * 
+	 * a.在state中定义了另一个preColor，可以保证首次渲染时，传入的props.color=state.preColor
+	 * b.之后，点击按钮时，setState时，react16.4以后，还要走getDerivedStateFromProps；此时，因为选择分支走return null;
+	 * 不更新state状态。此时，setState可以更新页面了
+	 * 
+	 * 
 	 *
 	 *
 	 */
