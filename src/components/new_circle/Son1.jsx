@@ -40,6 +40,20 @@ export default class Son1 extends React.Component {
 	 * a.在state中定义了另一个preColor，可以保证首次渲染时，传入的props.color=state.preColor
 	 * b.之后，点击按钮时，setState时，react16.4以后，还要走getDerivedStateFromProps；此时，因为选择分支走return null;
 	 * 不更新state状态。此时，setState可以更新页面了
+	 * 
+	 * 参考文档：https://www.jianshu.com/p/26d7667f35ef
+	 * 使用getDerivedStateFromProps要注意以下两点：
+	 * a.要比较传入的props和之前的props值
+	 * b.getDerivedStateFromProps是静态方法，同时要保持其纯函数，不产生副作用
+	 * 
+	 * 上述a、b情况，大多数情况都使用，但是还是有产生bug的风险
+	 * 解决：
+	 * 1.将组件改成完全可控组件（方法和状态值由父组件控制）
+	 * 2.将组件改成完全不可控组件(也就是组件完全不接受通过getDerivedStateFromProps来更新状态)，而是把props挂载在构造函数
+	 * 上，设置key来处理；因为key值变化时，组件会重新进行渲染，而不再是更新
+	 * 3.保持上述组件模式，通过惟一的id来判断组件是否更新
+	 * 4.第四种不使用 getDerivedStateFromProps，通过 ref 来把改变邮箱的方法暴露出去
+	 * 
 	 *
 	 */
 	static getDerivedStateFromProps(props, state) {
