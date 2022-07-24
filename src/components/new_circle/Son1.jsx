@@ -40,9 +40,6 @@ export default class Son1 extends React.Component {
 	 * a.在state中定义了另一个preColor，可以保证首次渲染时，传入的props.color=state.preColor
 	 * b.之后，点击按钮时，setState时，react16.4以后，还要走getDerivedStateFromProps；此时，因为选择分支走return null;
 	 * 不更新state状态。此时，setState可以更新页面了
-	 * 
-	 * 
-	 *
 	 *
 	 */
 	static getDerivedStateFromProps(props, state) {
