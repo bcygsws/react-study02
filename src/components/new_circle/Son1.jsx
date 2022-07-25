@@ -54,6 +54,17 @@ export default class Son1 extends React.Component {
 	 * 3.保持上述组件模式，通过惟一的id来判断组件是否更新
 	 * 4.第四种不使用 getDerivedStateFromProps，通过 ref 来把改变邮箱的方法暴露出去
 	 * 
+	 * https://juejin.cn/post/7087197745252941861
+	 * SSR(Server-side rendering) 服务端渲染:简单来说，html是由服务端编写，
+	 * 可以动态地更改页面内容，即所谓的动态页面；早期的asp jsp php这些server page就采用的SSR。
+	 * 但基于React技术栈，又有些许不同，server bundle构建的 时候，要吐多少模块，是server端决定的。
+	 * client bundle和之前一样，差别在于这次是hydrate，而非render。
+	 * 旧生命周期的问题
+	 * componentWillMount：在SSR中这个方法会被重复触发多次。同时在这个方法内绑定事件无法解绑，这会造成
+	 * 内存泄露，这个方法因变得不够安全高效，而逐步被弃用
+	 * componentWillReceiveProps：多次更新传入不同的props,会导致不必要的异步请求
+	 * componentWillUpdate:更新前会记录DOM的一些状态，但相隔时间过长，可能会导致状态不可信
+	 * 
 	 *
 	 */
 	static getDerivedStateFromProps(props, state) {
