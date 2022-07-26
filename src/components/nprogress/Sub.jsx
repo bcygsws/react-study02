@@ -9,8 +9,9 @@ import React from 'react';
 const Sub = (props) => {
 	return (
 		<div>
-			<h3>{props.name}</h3>
-			<h3>{props.genre}</h3>
+			<h3 style={{ color: '#22ee44' }}>{props.name}</h3>
+			<h4>{props.genre}</h4>
+			<hr />
 		</div>
 	);
 };

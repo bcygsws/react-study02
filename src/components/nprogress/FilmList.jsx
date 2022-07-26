@@ -26,7 +26,24 @@ class FilmList extends Component {
 	}
 	// 请求电影列表
 	// top250数据接口
-	UNSAFE_componentWillMount() {
+	// UNSAFE_componentWillMount() {
+	// 	get(
+	// 		'https://api.wmdb.tv/api/v1/top?type=Imdb&skip=0&limit=50&lang=Cn'
+	// 	).then((res) => {
+	// 		console.log(res.data);
+	// 		this.setState({
+	// 			list: res.data
+	// 		});
+	// 	});
+	// }
+	static getDerivedStateFromProps(props, state) {
+		if (state.list !== []) {
+			return { list: state.list };
+		}
+		return null;
+	}
+	// 请求数据的方法
+	getDataList = () => {
 		get(
 			'https://api.wmdb.tv/api/v1/top?type=Imdb&skip=0&limit=50&lang=Cn'
 		).then((res) => {
@@ -35,6 +52,9 @@ class FilmList extends Component {
 				list: res.data
 			});
 		});
+	};
+	componentDidMount() {
+		this.getDataList();
 	}
 	// 循环渲染函数circleRender
 	circleRender = () => {
