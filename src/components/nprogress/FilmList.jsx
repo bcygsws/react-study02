@@ -37,17 +37,24 @@ class FilmList extends Component {
 	// 	});
 	// }
 	static getDerivedStateFromProps(props, state) {
-		return get(
+		if (state.list !== []) {
+			return { list: state.list };
+		}
+		return null;
+	}
+	// 请求数据的方法
+	getDataList = () => {
+		get(
 			'https://api.wmdb.tv/api/v1/top?type=Imdb&skip=0&limit=50&lang=Cn'
 		).then((res) => {
 			console.log(res.data);
-			// this.setState({
-			// 	list: res.data
-			// });
-			state.list = res.data;
-			return state.list;
+			this.setState({
+				list: res.data
+			});
 		});
-		// return null;
+	};
+	componentDidMount() {
+		this.getDataList();
 	}
 	// 循环渲染函数circleRender
 	circleRender = () => {
