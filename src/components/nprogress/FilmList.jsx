@@ -40,7 +40,7 @@ class FilmList extends Component {
 	 *
 	 * a.这是一个静态方法
 	 * b.顾名思义，它主要是用来返回状态state的；不返回新状态也要返回一个null;语法：return null;
-	 * c.
+	 * c.更新页面的语句，setState语句只能在componentDidMount中实施
 	 *
 	 */
 
