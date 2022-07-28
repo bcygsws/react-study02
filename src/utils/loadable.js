@@ -1,6 +1,24 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 
+/**
+ *
+ * 案例：在About和Movie组件中使用了懒加载
+ * 引入语法：const Movie = loadable(() => import('./views/Movie.jsx'));
+ * 总结懒加载组件react-loadable的使用
+ * 1.引入react-loadable包的实例Loadable
+ * 2.导出一个箭头函数，参数为loader,传入的是一个函数式组件如：()=>import('./views/Movie.jsx')
+ * 3.语法
+ * export default (loader)=>{
+ * return Loadable({
+ * 		loader,
+ * 		loading(){
+ * 			return <div>加载中……</div>
+ * 			}
+ *   })
+ * }
+ *
+ */
 export default (loader) => {
 	// loader,实际上等于loader:loader，传入的loader键值是一个组件
 	return Loadable({
