@@ -2,6 +2,8 @@
  *
  * @ 分支loadable
  * react-loadable插件实现组件懒加载
+ * App.jsx中引用，使得Movie和About组件懒加载
+ * 
  * 
  *  
  */
