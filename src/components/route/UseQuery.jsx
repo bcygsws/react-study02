@@ -15,9 +15,9 @@
  * 地址栏：http://localhost:3002/#/home/use_query
  *
  * 三种方式：各有缺点，建议使用params这种传参方式
- *
- *
- *
+ * hash模式和history模式的区别和联系
+ * 参考文档：https://zhuanlan.zhihu.com/p/337073166
+ * 参考文档1：https://blog.csdn.net/weixin_51396911/article/details/123866875
  *
  */
 import React, { Component } from 'react';
