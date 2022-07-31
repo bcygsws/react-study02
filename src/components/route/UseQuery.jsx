@@ -14,6 +14,7 @@
  * 接收参数：this.props.location.state 拿到一个对象 {name:'张三'}，在HashRouter中，刷新当前页面，参数消失
  * 地址栏：http://localhost:3002/#/home/use_query
  *
+ * 
  * 三种方式：各有缺点，建议使用params这种传参方式
  * hash模式和history模式的区别和联系
  * 参考文档：https://zhuanlan.zhihu.com/p/337073166
