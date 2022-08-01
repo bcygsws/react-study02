@@ -89,7 +89,7 @@ export default class Home extends React.Component {
 			<div className={RouteStyle.container}>
 				<h3>这是Home组件</h3>
 				<Link to="/home/use_query?name='张三'">查询参数的获取</Link>
-				{/* 	<Link
+				{/* <Link
 					to={{
 						pathname: '/home/use_query',
 						query: { name: '张三' }
@@ -97,7 +97,7 @@ export default class Home extends React.Component {
 				>
 					查询参数的获取
 				</Link> */}
-				{/* 	<Link
+				{/* <Link
 					to={{
 						pathname: '/home/use_query',
 						state: { name: '张三' }

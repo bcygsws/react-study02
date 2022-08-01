@@ -14,8 +14,8 @@
  * 接收参数：this.props.location.state 拿到一个对象 {name:'张三'}，在HashRouter中，刷新当前页面，参数消失
  * 地址栏：http://localhost:3002/#/home/use_query
  *
- * 
- * 三种方式：各有缺点，建议使用params这种传参方式
+ *
+ * 三种方式：各有缺点，建议使用match参数（而不是上面三种location参数），props.match.params.id这种传参方式
  * hash模式和history模式的区别和联系
  * 参考文档：https://zhuanlan.zhihu.com/p/337073166
  * 参考文档1：https://blog.csdn.net/weixin_51396911/article/details/123866875
@@ -66,6 +66,7 @@ export default class UseQuery extends Component {
  *
  * 解码
  * 参考文档：https://www.runoob.com/jsref/jsref-unescape.html
+ * URI 统一资源识别符，电脑术语
  * unescape已从web标准删除，不要使用它
  * decodeURI
  * decodeURIComponent
