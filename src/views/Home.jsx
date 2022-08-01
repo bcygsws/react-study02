@@ -144,7 +144,7 @@ export default class Home extends React.Component {
 					使用forwardRef演示ref的使用，并体会高阶组件
 				</Link>
 				<Link to="/home/use_query?name='张三'">查询参数的获取</Link>
-				{/* 	<Link
+				{/* <Link
 					to={{
 						pathname: '/home/use_query',
 						query: { name: '张三' }
@@ -152,7 +152,7 @@ export default class Home extends React.Component {
 				>
 					查询参数的获取
 				</Link> */}
-				{/* 	<Link
+				{/* <Link
 					to={{
 						pathname: '/home/use_query',
 						state: { name: '张三' }
