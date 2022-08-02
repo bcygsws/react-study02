@@ -16,7 +16,25 @@
  *
  *
  * 三种方式：各有缺点，建议使用match参数（而不是上面三种location参数），props.match.params.id这种传参方式
+ * 对比：vue的路由参数
+ * 参考文档：https://blog.csdn.net/michiko98/article/details/118438590
+ *
+ *
  * hash模式和history模式的区别和联系
+ * hash模式
+ * a.#叫做哈希符或者叫做锚点
+ * b. 如果url是：……login/#/abc hash值是#/abc
+ * c.hash值不会包括在http请求中，对后端完全没有影响，因此改变hash不会重载页面
+ * d.原理上不同：hash模式使用onhashchange监听hash值的变化
+ *
+ * history模式
+ * a.为了使url更美观，更规范，不使用#
+ * b.使用场景：在使用vue或者react来开发分享到另外一个应用的分享页面时，不允许使用#，因此必须使用history模式
+ * c.history模式使用h5的pushState和replaceState方法，这两个方法会导致history对象的变化，从而改变当前地址栏的url，而不会向
+ * 后端发起请求，也不会触发popState事件的执行(popState事件在点击浏览器的前进或后退按钮时触发)
+ * d.缺点：在访问url的二级页面时，刷新页面时，会报404错误；这就需要后端配合，配置Apache或者nginx服务器，配置url重定向到首页，
+ * 就ok了
+ *
  * 参考文档：https://zhuanlan.zhihu.com/p/337073166
  * 参考文档1：https://blog.csdn.net/weixin_51396911/article/details/123866875
  *
