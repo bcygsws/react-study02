@@ -22,6 +22,8 @@
  *
  * hash模式和history模式的区别和联系
  * hash模式
+ * 参考文档：https://blog.csdn.net/luanhaiyang/article/details/50731919
+ * window.location.hash 获取其值
  * a.#叫做哈希符或者叫做锚点
  * b. 如果url是：……login/#/abc hash值是#/abc
  * c.hash值不会包括在http请求中，对后端完全没有影响，因此改变hash不会重载页面
@@ -34,6 +36,7 @@
  * 后端发起请求，也不会触发popState事件的执行(popState事件在点击浏览器的前进或后退按钮时触发)
  * d.缺点：在访问url的二级页面时，刷新页面时，会报404错误；这就需要后端配合，配置Apache或者nginx服务器，配置url重定向到首页，
  * 就ok了
+ * e.location的state参数，唯独在history模式下，刷新页面，参数不消失
  *
  * 参考文档：https://zhuanlan.zhihu.com/p/337073166
  * 参考文档1：https://blog.csdn.net/weixin_51396911/article/details/123866875
