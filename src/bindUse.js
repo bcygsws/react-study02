@@ -1,6 +1,6 @@
 /**
  *
- * @ bind的三大作用
+ * @bind的三大作用
  * 一、创建绑定函数   bind是执行时绑定
  * 二、偏函数，为函数设定一个预定值
  * 三、setTimeout中使用，也是改变this指向
@@ -9,12 +9,25 @@
  * 【理解Array.prototype.slice.call(arguments)】
  * https://www.cnblogs.com/papi/p/9234964.html
  * 结合mdn文档：
- * 和理解 Array.prototype.slice.call( arguments)的含义
+ * 和理解 Array.prototype.slice.call(arguments)的含义
  * 本质是
  * pre=f1.bind(null,37)
  * pre(1,2)
  *
  * 等价于调用了3个参数(37,1,2)
+ *
+ * @什么情况下为bind、call、apply传入一个null或者undefined呢？
+ * 参考文档：https://blog.csdn.net/weixin_41652865/article/details/105226377
+ * 1.将数组参数展开为列表参数
+ * 2.将传入的参数进行柯里化（预设一个参数），下面有两个例子
+ * 下面的apply(null,[1,2])或者bind(null,37)都使用了null
+ * apply或bind方法都需要传入一个this对象，如果我们不关注this对象，传入一个null,作为占位符就很合适
+ *
+ * 仅演示，展开数组参数
+ * function sum(a,b){
+ * 	console.log("a:"+a,"b:"+b);
+ * }
+ * sum.apply(null,[1,2]);// 打印结果：a:1,b:2
  *
  *
  */
@@ -62,6 +75,7 @@ console.log(bindGetY()); // 88
 
 // 二、偏函数-最基本的用途就是使得函数有一个预设的初始值
 function list() {
+	// 功能：Array的slice方法将传入的列表参数转化为一个数组
 	return Array.prototype.slice.call(arguments);
 }
 function addArg(arg1, arg2) {
