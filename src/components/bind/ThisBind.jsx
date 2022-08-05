@@ -4,7 +4,7 @@
  * 2. input:text 文本框中value绑定了state中属性值后，需要配合onChange方法，来实时更新文本框中的内容
  *
  * @ 关于this绑定的三种方式
- * 
+ *
  */
 // 导入样式文件
 import React from 'react';
@@ -27,9 +27,9 @@ export default class BindThis extends React.Component {
 				<h3>绑定this并传参的几种方式</h3>
 				{/* 注意区分：bind 以及apply/call都可以改变this指向。不同之处在于bind改变this指向不是立即执行。而后者，call/apply改变
       this指向后，立即执行 */}
-				{/* 插件Emoji Code的使用：键入ji根据提示选择需要的表情符号 */}
-				{/* 插件 Emoji插件，ctrl+shift+p 选择insert emoji ,进入选择emoji框，然后直接enter */}
-				{/* git Emoji commit中文版，点击源代码管理器中笑脸图标，会弹出选择emoji的下拉菜单供选择，即可切换 */}
+				{/* 1.插件Emoji Code的使用：键入ji根据提示选择需要的表情符号 */}
+				{/* 2.插件 Emoji插件，ctrl+shift+p 选择insert emoji ,进入选择emoji框，然后直接enter */}
+				{/* 3.git Emoji commit中文版，点击源代码管理器中笑脸图标，会弹出选择emoji的下拉菜单供选择，即可切换 */}
 				<p>{this.state.msg}</p>
 				<input
 					type="button"
