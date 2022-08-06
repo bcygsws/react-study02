@@ -1,6 +1,3 @@
-import React from 'react';
-import Loadable from 'react-loadable';
-
 /**
  *
  * 案例：在About和Movie组件中使用了懒加载
@@ -19,6 +16,8 @@ import Loadable from 'react-loadable';
  * }
  *
  */
+import React from 'react';
+import Loadable from 'react-loadable';
 export default (loader) => {
 	// loader,实际上等于loader:loader，传入的loader键值是一个组件
 	return Loadable({
