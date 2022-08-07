@@ -23,7 +23,9 @@ export default class Comment extends React.Component {
 				{ user: '陆小凤', content: '天下无双的轻功' },
 				{ user: '乔峰', content: '教单于折箭，搵英雄泪' }
 			],
-			username: ''
+			username: '',
+			// proArr,存储上一次本地存储中的数据
+			proArr: null
 		};
 	}
 	render() {
@@ -65,7 +67,27 @@ export default class Comment extends React.Component {
 	// 	return JSON.parse(localStorage.getItem('list'));
 	// };
 	// 初始化数据在componentWillMount钩子中进行
-	UNSAFE_componentWillMount() {
+	// UNSAFE_componentWillMount() {
+	// 	if (localStorage.getItem('list')) {
+	// 		this.setState({
+	// 			CommentList: JSON.parse(localStorage.getItem('list'))
+	// 		});
+	// 	}
+	// }
+	// static getDerivedStateFromProps(props, state) {
+	// 	// 声明字符arr，存储每次启动时，localStorage中的数据
+	// 	const arr = localStorage.getItem('list');
+	// 	console.log(arr);
+	// 	console.log(state.proArr);
+	// 	if (arr !== state.proArr) {
+	// 		return {
+	// 			commentList: JSON.parse(arr),
+	// 			proArr: JSON.parse(arr)
+	// 		};
+	// 	}
+	// 	return null;
+	// }
+	componentDidMount() {
 		if (localStorage.getItem('list')) {
 			// 这个阶段，就是在组件渲染前，获取CommentList
 			this.setState({
@@ -102,6 +124,10 @@ export default class Comment extends React.Component {
 			CommentList: this.state.CommentList
 		});
 		// 清空user和content中内容
-		this.txtRef.current.value = this.myRef.current.value = '';
+		this.myRef.current.value = '';
+		// 输入文本框的清空使用this.setState方法，username变化，导致onChange事件触发，进而清空了输入文本框
+		this.setState({
+			username: ''
+		});
 	}
 }
