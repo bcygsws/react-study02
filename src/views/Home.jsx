@@ -124,8 +124,8 @@ export default class Home extends React.Component {
 				<Link to="/home/receive_props">
 					五、演示生命周期钩子componentWillReceiveProps
 				</Link>
-				{/* fat_toson文件夹 */}
-				<Link to="/home/com">六、子组件给父组件传值</Link>
+				{/* communication文件夹 */}
+				<Link to="/home/com">六、React组件通信方法汇总</Link>
 				{/* context文件夹 */}
 				<Link to="/home/context">
 					七、Context特性：getChildContextProps，前三、后三、后二
