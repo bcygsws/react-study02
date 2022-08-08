@@ -5,8 +5,8 @@
  * context实现跨级组件通信的步骤
  * https://blog.csdn.net/qzw752890913/article/details/125141227
  * https://blog.csdn.net/weixin_45745641/article/details/123489191
- * 
- * 
+ *
+ *
  *
  * context特性实现跨级组件通信
  * 传统父子都要校验的方式；
@@ -24,9 +24,6 @@
  *  c1. <MyContext.Consumer>{value=>{进行渲染}}</MyContext.Consumer>
  *  c2. 校验MyContext
  *  static contextType=MyContext;
- * 或者
- * 孙子组件.contextTypes=MyContext;
- *
  * this.context就直接拿到注入的value值，这是和传统方式的区别，传统方式使用this.context.info才能拿到数据
  *
  */

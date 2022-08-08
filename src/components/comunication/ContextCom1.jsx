@@ -20,9 +20,6 @@
  *  c1. <MyContext.Consumer>{value=>{进行渲染}}</MyContext.Consumer>
  *  c2. 校验MyContext
  *  static contextType=MyContext;
- * 或者
- * 孙子组件.contextType=MyContext;
- *
  * this.context就直接拿到注入的value值，这是和传统方式的区别，传统方式使用this.context.info才能拿到数据
  *
  */
@@ -37,7 +34,7 @@ export default class ContextCom extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			info: '祖父组件 data to 孙子ContextE'
+			info: '祖父组件 data to 孙子GrandSon1'
 		};
 	}
 	render() {
