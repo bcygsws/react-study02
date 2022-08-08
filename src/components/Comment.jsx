@@ -22,9 +22,9 @@ export default class Comment extends React.Component {
 				{ user: '陆小凤', content: '天下无双的轻功' },
 				{ user: '乔峰', content: '教单于折箭，搵英雄泪' }
 			],
-			username: '',
+			username: ''
 			// proArr,存储上一次本地存储中的数据
-			proArr: null
+			// proArr: null
 		};
 	}
 	render() {
@@ -61,10 +61,6 @@ export default class Comment extends React.Component {
 			</div>
 		);
 	}
-	// 定义一个函数专门处理本地存储的数据
-	// persistData = () => {
-	// 	return JSON.parse(localStorage.getItem('list'));
-	// };
 	// 初始化数据在componentWillMount钩子中进行
 	// UNSAFE_componentWillMount() {
 	// 	if (localStorage.getItem('list')) {
@@ -108,7 +104,7 @@ export default class Comment extends React.Component {
 		const content = this.myRef.current.value;
 		console.log(user, content);
 		// 先在数组开始位置添加一个对象
-		// 1.这一步必须在存储和更新操作this.setState之前，为的是使得数组CommentList发生变化 
+		// 1.这一步必须在存储和更新操作this.setState之前，为的是使得数组CommentList发生变化
 		this.state.CommentList.unshift({
 			user: user,
 			content: content
