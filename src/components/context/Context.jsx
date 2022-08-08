@@ -1,3 +1,17 @@
+/**
+ *
+ * @Context特性
+ * getChildContextTypes
+ * 记忆：前三个、后三个、后两个
+ * 两个静态属性，1个方法
+ *
+ * 使用步骤
+ * 1.在父组件中定义一个函数function,这个function有固定的名字，叫做getChildContext,这个函数必须返回一个对象
+ * 2.属性校验，规定父组件向子组件传递数据的类型
+ * 3.在孙子组件中，属性校验，验证接收到祖父组件传递的数据。Context特性可以绕过儿子组件了
+ *
+ *
+ */
 import React from 'react';
 import Son from './Son.jsx';
 // Context特性用到属性校验包，要导入
@@ -27,20 +41,7 @@ export default class MyContext extends React.Component {
 			fontSize: this.state.fontSize + 1
 		});
 	}
-	/**
-	 *
-	 * @Context特性
-	 * getChildContextTypes
-	 * 记忆：前三个、后三个、后两个
-	 * 两个静态属性，1个方法
-	 *
-	 * 使用步骤
-	 * 1.在父组件中定义一个函数function,这个function有固定的名字，叫做getChildContext,这个函数必须返回一个对象
-	 * 2.属性校验，规定父组件向子组件传递数据的类型
-	 * 3.在孙子组件中，属性校验，验证接收到祖父组件传递的数据。Context特性可以绕过儿子组件了
-	 *
-	 *
-	 */
+
 	getChildContext() {
 		return {
 			fontSize: this.state.fontSize
