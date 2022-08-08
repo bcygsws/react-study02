@@ -108,6 +108,7 @@ export default class Comment extends React.Component {
 		const content = this.myRef.current.value;
 		console.log(user, content);
 		// 先在数组开始位置添加一个对象
+		// 1.这一步必须在存储和更新操作this.setState之前，为的是使得数组CommentList发生变化 
 		this.state.CommentList.unshift({
 			user: user,
 			content: content
@@ -115,13 +116,12 @@ export default class Comment extends React.Component {
 		// 将数据存入本地存储
 		localStorage.setItem('list', JSON.stringify(this.state.CommentList));
 		this.setState({
-			CommentList: this.state.CommentList
-		});
-		// 清空user和content中内容
-		this.myRef.current.value = '';
-		// 输入文本框的清空使用this.setState方法，username变化，导致onChange事件触发，进而清空了输入文本框
-		this.setState({
+			CommentList: this.state.CommentList,
+			// a.清空文本输入框中username值
+			// 输入文本框的清空使用this.setState方法，username变化，导致onChange事件触发，进而清空了输入文本框
 			username: ''
 		});
+		// b.清空user和content中内容
+		this.myRef.current.value = '';
 	}
 }
