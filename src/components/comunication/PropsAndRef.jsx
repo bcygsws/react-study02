@@ -38,6 +38,7 @@ export default class PropsAndRef extends React.Component {
 	render() {
 		return (
 			<div>
+				<h2>这是父组件</h2>
 				<MyChild ref={(ele) => (this.myRef = ele)}></MyChild>
 				<p>{this.state.info}</p>
 				{/* 更改info值前后 */}
