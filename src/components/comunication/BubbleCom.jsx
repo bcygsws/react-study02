@@ -1,7 +1,7 @@
  /**
  *
  * 组件通信方式四；dom事件机制实现通信
- * @dom事件机制实现通信
+ * @ dom事件机制实现通信
  * 要区分：e.target和ref对象
  * e.target 拿到的是引起冒泡的事件源对象，但是它并不是子组件实例
  * 而ref才是子组件实例
@@ -77,7 +77,7 @@ class MyChild extends React.Component {
  * 
  * DOM3事件的处理方式：
  * 使用 【事务工具包类】UtilEvent
- * utilEvent.addListener(input对象,'textInput',f)
+ * utilEvent.addListener(input对象,'textInput',f),三个参数是要绑定事件的对象、事件名称和事件处理函数
  * 
  * 
  * 三、dom事件流
@@ -89,8 +89,9 @@ class MyChild extends React.Component {
  * 目标元素
  * 冒泡阶段
  * 
+ * 记忆：5个要点都提到冒泡
  * 3.1 js代码只能执行捕获或冒泡中的一个阶段
- * 3.2 onclick和attachEvent只得到冒泡阶段
+ * 3.2 onclick和attachEvent（DOM2兼容低版本IE,attachEvent和detachEvent）只得到冒泡阶段
  * 3.3 如果addEventListener第三个参数为true,得到捕获阶段；缺省或者false值时，处理冒泡阶段
  * 3.4 实际开发中，我们更关注冒泡阶段
  * 3.5 有些事件是没有冒泡的，onfocus、onblur、onmouseenter、onmouseleave
