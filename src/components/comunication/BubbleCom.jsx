@@ -117,6 +117,4 @@ class MyChild extends React.Component {
  * DOM事件执行顺序案例：
  * E:\web-prj\7.javascriptTest\36-事件的执行捕获、冒泡顺序.html
  *
- *
- *
  */
