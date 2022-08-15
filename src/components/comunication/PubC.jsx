@@ -24,6 +24,7 @@ export default class PubC extends React.Component {
 			</div>
 		);
 	}
+	// 孙子组件PubC向父组件PubA和祖父组件ObserveMode传递数据
 	handleTo = () => {
 		PubSub.publish('toYe', this.state.cmsg);
 	};
