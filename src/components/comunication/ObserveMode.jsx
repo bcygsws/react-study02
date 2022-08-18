@@ -12,7 +12,6 @@
  * 使用PubSubJS实现父子或兄弟组件之间的通信
  * 参考文档：https://blog.csdn.net/weixin_48850734/article/details/123365910
  *
- *
  * 消息订阅-发布机制
  * 插件：pubsub-js
  * 安装：cnpm i pubsub-js --save
