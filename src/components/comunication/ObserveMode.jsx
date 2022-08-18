@@ -55,6 +55,9 @@ export default class ObserveMode extends React.Component {
 	};
 	componentDidMount() {
 		this.receMode = PubSub.subscribe('toYe', (msg, data) => {
+			// 回调中的第一个参数，打印的是传送数据约定的标识字符串，其类型就是string
+			console.log(msg); // toYe
+			console.log(typeof msg); // string
 			this.setState({
 				cmsg: data
 			});
