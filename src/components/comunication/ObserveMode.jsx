@@ -24,7 +24,6 @@
  *    PubA
  * PubB  PubC
  *
- *
  */
 import React from 'react';
 // 引入子组件PubA
