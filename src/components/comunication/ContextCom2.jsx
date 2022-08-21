@@ -25,6 +25,7 @@
  *
  */
 import React from 'react';
+// createContext括号内可以填入默认值
 const MainContext = React.createContext();
 const { Provider } = MainContext;
 // 类型校验
