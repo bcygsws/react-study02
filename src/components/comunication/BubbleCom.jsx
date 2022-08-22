@@ -1,6 +1,6 @@
 /**
  *
- * 组件通信方式四；dom事件机制实现通信
+ * 组件通信方式三；dom事件机制实现通信
  * @ dom事件机制实现通信
  * 要区分：e.target和ref对象
  * e.target 拿到的是引起冒泡的事件源对象，但是它并不是子组件实例
@@ -45,8 +45,7 @@ class MyChild extends React.Component {
 	render() {
 		return (
 			<div
-				style={{ width: 300, height: 300, backgroundColor: 'hotpink' }}
-			>
+				style={{ width: 300, height: 300, backgroundColor: 'hotpink' }}>
 				<h4>这是dom事件机制通信子组件</h4>
 			</div>
 		);
@@ -113,7 +112,7 @@ class MyChild extends React.Component {
  * -   目标元素：依据事件绑定顺序：先绑定的事件先执行（不依据捕获冒泡标准）
  * -   最终顺序：父元素捕获->目标元素事件 1->目标元素事件 2->子元素捕获->子元素冒泡->父元素冒泡
  * -   注意：子元素事件执行前提 事件确实“落”到子元素布局区域上，而不是简单的具有嵌套关系(比如使用定位，将子盒子移出了父盒子区域)
- * 
+ *
  * DOM事件执行顺序案例：
  * E:\web-prj\7.javascriptTest\36-事件的执行捕获、冒泡顺序.html
  *
