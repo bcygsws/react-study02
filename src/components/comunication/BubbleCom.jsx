@@ -68,6 +68,7 @@ class MyChild extends React.Component {
  * 原生obj.onclick=function(){} // 绑定事件
  * 原生obj.onclick=null // 解绑事件
  *
+ * 
  * DOM2事件的处理方式：
  * 绑定事件：原生obj.addEventListener('click',f,false) false可以不写，默认是false,表示在冒泡阶段执行
  * 解绑事件：原生obj.removeEventListener('click',f,false) false可以不写，默认是false,表示在冒泡阶段执行
