@@ -72,9 +72,9 @@ class MyChild extends React.Component {
  * DOM2事件的处理方式：
  * 绑定事件：原生obj.addEventListener('click',f,false) false可以不写，默认是false,表示在冒泡阶段执行
  * 解绑事件：原生obj.removeEventListener('click',f,false) false可以不写，默认是false,表示在冒泡阶段执行
- *
  * 兼容性处理，对于IE8以下，使用attachListener()和detachListener()
  *
+ * 
  * DOM3事件的处理方式：
  * 使用 【事务工具包类】UtilEvent
  * utilEvent.addListener(input对象,'textInput',f),三个参数是要绑定事件的对象、事件名称和事件处理函数
