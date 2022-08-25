@@ -61,11 +61,12 @@ class MyChild extends React.Component {
  * DOM0 提供了操作web文档内容的api,但未形成标准，实现混乱
  * DOM1 简化了dom的操作，如js中的document对象
  * DOM2 在原有基础上扩充鼠标等细分模块，增加了对css的支持；比如：getComputedStyle(),会引起回流
- * DOM3 增加了dom的加载和保存（Load and Save）模块，验证模块（XPathEvaluator）、DOM的核心扩展
+ * DOM3 增加了dom的加载和保存（Load and Save）模块、验证模块（XPathEvaluator）、DOM的核心扩展
  * 二、dom事件级别
  * DOM 0
  * 最普通的方式
  * 原生obj.onclick=function(){} // 绑定事件
+ * 
  * 原生obj.onclick=null // 解绑事件
  *
  * 
