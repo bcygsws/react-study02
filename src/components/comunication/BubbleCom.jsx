@@ -67,6 +67,7 @@ class MyChild extends React.Component {
  * 最普通的方式
  * 原生obj.onclick=function(){} // 绑定事件
  * 
+ * 
  * 原生obj.onclick=null // 解绑事件
  *
  * 
@@ -105,8 +106,8 @@ class MyChild extends React.Component {
  *
  * 四、事件执行次数（DOM2-addEventListener）：元素上绑定事件的个数
  *
- * -   注意 1：前提是事件被确实触发
- * -   注意 2：事件绑定几次就算几个事件，即使类型和功能完全一样也不会“覆盖”
+ * -   注意 1：前提是事件被确实触发【确实触发】
+ * -   注意 2：事件绑定几次就算几个事件，即使类型和功能完全一样也不会“覆盖”【不会覆盖】
  *
  * 事件执行顺序：判断的关键是否目标元素
  *
