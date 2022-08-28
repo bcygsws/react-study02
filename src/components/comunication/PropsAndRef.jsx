@@ -1,7 +1,7 @@
 /**
  *
- * 组件通信方式 2：props
- * props 接收父组件给子组件传递的值
+ * 组件通信方式 2：props，最简单的方式：父组件向子组件传值
+ * 
  * 那么，如何在父组件拿到子组件的方法和属性呢？
  * 可以使用Ref实例
  *
@@ -15,6 +15,12 @@
 import React from 'react';
 // 子组件MyChild
 class MyChild extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			cldData: '还顾望旧乡，长路漫浩浩'
+		};
+	}
 	render() {
 		return (
 			<div>
@@ -23,7 +29,7 @@ class MyChild extends React.Component {
 		);
 	}
 	myFun = () => {
-		return '同心以离居，忧伤以终老';
+		return this.state.cldData;
 	};
 }
 
