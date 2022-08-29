@@ -118,7 +118,7 @@ class MyChild extends React.Component {
  * DOM事件执行顺序案例,测试该案例：
  * E:\web-prj\7.javascriptTest\36-事件的执行捕获、冒泡顺序.html
  * 
- * GIT的用法
+ * GIT commit的描述文字不规范，推送到远程了，如何修改？
  * 参考文档：http://t.zoukankan.com/yadongliang-p-15097062.html
  * 参考文档2：https://www.jianshu.com/p/c101edfbb6d8   修改 git commit --amend 
  * 参考文档3：https://www.php.cn/tool/git/484979.html  丢弃某次commit pick改成
