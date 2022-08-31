@@ -66,17 +66,17 @@ class MyChild extends React.Component {
  * DOM 0
  * 最普通的方式
  * 原生obj.onclick=function(){} // 绑定事件
- * 
- * 
+ *
+ *
  * 原生obj.onclick=null // 解绑事件
  *
- * 
+ *
  * DOM2事件的处理方式：
  * 绑定事件：原生obj.addEventListener('click',f,false) false可以不写，默认是false,表示在冒泡阶段执行
  * 解绑事件：原生obj.removeEventListener('click',f,false) false可以不写，默认是false,表示在冒泡阶段执行
  * 兼容性处理，对于IE8以下，使用attachListener()和detachListener()
  *
- * 
+ *
  * DOM3事件的处理方式：
  * 使用 【事务工具包类】UtilEvent
  * utilEvent.addListener(input对象,'textInput',f),三个参数是要绑定事件的对象、事件名称和事件处理函数
@@ -95,7 +95,7 @@ class MyChild extends React.Component {
  * 3.1 js代码只能执行捕获或冒泡中的一个阶段
  * 3.2 onclick和attachEvent（DOM2兼容低版本IE,attachEvent和detachEvent）只得到冒泡阶段
  * 3.3 如果addEventListener第三个参数为true,得到捕获阶段；缺省或者false值时，处理冒泡阶段
- * 3.4 实际开发中，我们更关注冒泡阶段
+ * 3.4 实际开发中，我们更关注冒泡阶段(事件委托的基础，就是冒泡这一机制)
  * 3.5 有些事件是没有冒泡的，onfocus、onblur、onmouseenter、onmouseleave
  * ### 事件的三个阶段
  * 捕获、目标、冒泡
@@ -117,10 +117,10 @@ class MyChild extends React.Component {
  *
  * DOM事件执行顺序案例,测试该案例：
  * E:\web-prj\7.javascriptTest\36-事件的执行捕获、冒泡顺序.html
- * 
+ *
  * GIT commit的描述文字不规范，推送到远程了，如何修改？
  * 参考文档：http://t.zoukankan.com/yadongliang-p-15097062.html
- * 参考文档2：https://www.jianshu.com/p/c101edfbb6d8   修改 git commit --amend 
+ * 参考文档2：https://www.jianshu.com/p/c101edfbb6d8   修改 git commit --amend
  * 参考文档3：https://www.php.cn/tool/git/484979.html  丢弃某次commit pick改成
  *
  */
