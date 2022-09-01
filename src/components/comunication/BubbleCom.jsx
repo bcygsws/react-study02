@@ -117,6 +117,8 @@ class MyChild extends React.Component {
  *
  * DOM事件执行顺序案例：
  * E:\web-prj\7.javascriptTest\36-事件的执行捕获、冒泡顺序.html
+ * 面试题：非ASCII字符排序的问题
+ * E:\web-prj\7.javascriptTest\83-面试-汉字等非ASCII字符串排序.html
  *
  * GIT commit的描述文字不规范，推送到远程了，如何修改？
  * 参考文档：http://t.zoukankan.com/yadongliang-p-15097062.html
