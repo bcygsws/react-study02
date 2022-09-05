@@ -19,6 +19,7 @@
  * 在componentUnmount中取消订阅--->unsubscribe(this.sub)
  * 发送消息-发布订阅：PubSub.publish('标识符',data数据)
  *
+ * 
  * 组件层级关系
  * ObserveMode
  *    PubA
