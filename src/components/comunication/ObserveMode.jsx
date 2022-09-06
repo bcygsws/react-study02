@@ -15,11 +15,12 @@
  * 消息订阅-发布机制
  * 插件：pubsub-js
  * 安装：cnpm i pubsub-js --save
- * 接收信息:this.sub=PubSub.subscribe('标识符',function(msg,data){}) 在接收的组件的componentDidMount中订阅，
- * 在componentUnmount中取消订阅--->unsubscribe(this.sub)
+ * 1.发布信息-PubSub.publish('标识符',待发布数据)
+ * 2.接收信息-this.sub=PubSub.subscribe('标识符',function(msg,data){}) 在接收的组件的componentDidMount中订阅，
+ * 3.取消订阅-在componentUnmount中取消订阅--->unsubscribe(this.sub)
  * 发送消息-发布订阅：PubSub.publish('标识符',data数据)
  *
- * 
+ *
  * 组件层级关系
  * ObserveMode
  *    PubA
