@@ -6,8 +6,6 @@
  * https://blog.csdn.net/qzw752890913/article/details/125141227
  * https://blog.csdn.net/weixin_45745641/article/details/123489191
  *
- *
- *
  * context特性实现跨级组件通信
  * 传统父子都要校验的方式；
  * getChildContextTypes
