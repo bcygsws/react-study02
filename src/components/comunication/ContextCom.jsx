@@ -18,6 +18,7 @@
  * b. 发送数据的祖父组件用MyContext.Provider包裹
  * <MyContext.Provider value={某个值}></MyContext.Provider>
  *
+ * 
  * c.接收有两种方式
  *  c1. <MyContext.Consumer>{value=>{进行渲染}}</MyContext.Consumer>
  *  c2. 校验MyContext
