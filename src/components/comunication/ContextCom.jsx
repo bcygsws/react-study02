@@ -7,13 +7,13 @@
  * https://blog.csdn.net/weixin_45745641/article/details/123489191
  *
  * context特性实现跨级组件通信
- * 传统父子都要校验的方式；
+ * 1.传统父子都要校验的方式；
  * getChildContextTypes
  * 前三 后三 后二,使用驼峰命名法
  * 两个静态属性：childContextType contextTypes
  * 一个方法：getChildContext
  *
- * 创建Context对象的方式
+ * 2.创建Context对象的方式
  * a. const MyContext=React.CreateContext('默认值');
  * b. 发送数据的祖父组件用MyContext.Provider包裹
  * <MyContext.Provider value={某个值}></MyContext.Provider>
