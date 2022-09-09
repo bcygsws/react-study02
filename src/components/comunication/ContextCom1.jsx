@@ -48,14 +48,6 @@ export default class ContextCom extends React.Component {
 			</div>
 		);
 	}
-	getChildContext() {
-		// 传递给孙子组件ContextE info的值
-		return { info: this.state.info };
-	}
-	// 祖父组件中的校验
-	static childContextTypes = {
-		info: ReactTypes.string
-	};
 }
 class Son1 extends React.Component {
 	render() {
