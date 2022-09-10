@@ -33,7 +33,7 @@ export default class ContextCom2 extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			info: '祖父组件 data to 孙子ContextE'
+			info: '祖父组件 data to 孙子GrandSon2'
 		};
 	}
 	render() {
