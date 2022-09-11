@@ -4,6 +4,7 @@
  * context实现跨级组件的通信
  * context实现跨级组件通信的步骤
  *
+ * 
  * context特性实现跨级组件通信
  * 传统父子都要校验的方式；
  * getChildContextTypes
