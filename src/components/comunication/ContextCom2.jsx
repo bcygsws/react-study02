@@ -21,7 +21,7 @@
  *  c1. <MyContext.Consumer>{value=>{进行渲染}}</MyContext.Consumer>
  *  c2. 校验MyContext，this.context拿到祖先组件注入的数据，但是这种接收方式只适用于类组件
  *  static contextType=MyContext;
- * this.context就直接拿到注入的value值，这是和传统方式的区别，传统方式使用this.context.info才能拿到数据
+ *  this.context就直接拿到注入的value值，这是和传统方式的区别，传统方式使用this.context.info才能拿到数据
  *
  *
  */
