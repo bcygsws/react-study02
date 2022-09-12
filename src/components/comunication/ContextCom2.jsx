@@ -1,5 +1,4 @@
 /**
- *
  * React组件通信八：
  * context实现跨级组件的通信
  * context实现跨级组件通信的步骤
@@ -17,7 +16,7 @@
  * b. 发送数据的祖父组件用MyContext.Provider包裹
  * <MyContext.Provider value={某个值}></MyContext.Provider>
  *
- * c.接收有两种方式
+ *  c.接收有两种方式
  *  c1. <MyContext.Consumer>{value=>{进行渲染}}</MyContext.Consumer>
  *  c2. 校验MyContext，this.context拿到祖先组件注入的数据，但是这种接收方式只适用于类组件
  *  static contextType=MyContext;

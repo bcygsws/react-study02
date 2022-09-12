@@ -24,8 +24,6 @@
  *
  */
 import React from 'react';
-// 类型校验
-import ReactTypes from 'prop-types';
 // 创建context对象
 const MainContext = React.createContext();
 // 解构出Provider和Consumer,MainContext.Provider和MainContext.Consumer的简写方式
