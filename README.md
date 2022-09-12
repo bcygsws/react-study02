@@ -127,6 +127,7 @@ L## 一、项目构建
 
 -   父组件传递给子组件属性，只有当父组件中传递的这个值变化时，才触发这个钩子，结合 TestReceiveProps.jsx 案例理解
 -   nextProps 中返回的是传递过来的变化后的对象，当前子组件的 this.props 打印的还是传递的旧对象
+
 ### React16 生命周期钩子
 
 #### 关于 componentWillReceiveProps 生命周期钩子的说明
@@ -187,7 +188,9 @@ L## 一、项目构建
 -   祖父级组件给孙子组件传递一个属性，常规情况下，需要层层传递。祖父传给父组件，父组件才传递给子组件，这种方式将不需要接收数据的父组件也牵涉其中。更何苦，如果层级更深，这种传递灵活性低，而且代码冗余
 -   为此，React 引入了 Context 特性来解决这个问题
 
-### 使用步骤
+### 传统 Context 特性方式
+
+#### 使用步骤
 
 1. 在需要发送数据的顶层组件，定义一个方法，getChildContext,该方法有返回值，返回一个对象，对象的键是要传递的属性的键。如：eturn {fontSize:this.state.fontSize}
 
@@ -197,13 +200,24 @@ L## 一、项目构建
 
 4. 在 render 函数或者其他位置，使用 this.context.键名来获取值。例如：this.context.fontSize
 
-### 记忆方式+
+#### 记忆方式+
 
 -   getChildContextTypes,前三、后三、后二
 -   一个方法，两个静态属性
 -   在发送数据处，前三、后三，即：getChildContext 方法，childContextTypes 类型校验
 -   在接收数据处，后二，contextTypes
 -   然后，获取值使用，this.context.[键名]
+
+### React.createContext 方法
+
+#### 使用步骤
+
+-   创建 Context 对象，const MainContext=React.createContext('可以设定默认值');
+-   从新建的 Context 对象 MainContext 中解构出，Provider 和 Consumer,const {Provider,Consumer}=MainContext;
+-   Provider 和 Consumer 作为标签，分别包含发送数据和接收数据的组件\<Provider value={发送的数据}\>\<\/Provider\>
+-   接收有两种方式
+    -   方式 1：static contextType=MainContext;这种方式只适用于类组件,接收只需要 this.context 来接收 Provider 中传递的值
+    -   方式 2：\<Consumer\>{(val)=>return \<div\>{val}\<\/div>}\<\/Consumer\>
 
 ## 十、react 的路由
 
@@ -249,8 +263,8 @@ L## 一、项目构建
 -   loader,
 -   loading(){
 -   return <div>加载中……</div>
--                                      }
--                                  })
+-                                                                }
+-                                                            })
 -   }
 
 ### 定义一函数，模拟上面 export default 暴露的函数
