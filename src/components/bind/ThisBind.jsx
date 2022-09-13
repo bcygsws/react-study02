@@ -5,6 +5,7 @@
  *
  * @ 关于this绑定的三种方式
  *
+ *
  */
 // 导入样式文件
 import React from 'react';
@@ -14,8 +15,8 @@ export default class BindThis extends React.Component {
 	constructor(props) {
 		super(props);
 		// this指向实例
-		this.state = { msg: '这是默认的msg', txt_msg: '这是文本框原有的值' };
-		// a.第二种绑定方式：在构造函数中绑定
+		this.state = { msg: '这是默认的msg' };
+		// a.第二种绑定方式：在构造函数之中绑定
 		// b.bind绑定 后的返回值是原函数的一个拷贝，并包括改造后的this指向和参数
 		// 必须重新赋值，否则仅仅this.secondHandle.bind(this, '〽️', '⬅️');事件处理函数中的this还是指向undefined
 		this.secondHandle = this.secondHandle.bind(this, '〽️', '⬅️');
