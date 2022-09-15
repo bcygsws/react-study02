@@ -19,6 +19,9 @@
  * @什么情况下为bind、call、apply传入一个null或者undefined呢？
  * 参考文档：https://blog.csdn.net/weixin_41652865/article/details/105226377
  * 1.将数组参数展开为列表参数
+ * 特别注意
+ * f.bind(thisArg,[,arg1[,arg2[,arg3]]])
+ * 如果bind里面参数为空，或者thisArg值为null或者undefined，那么执行作用域的this将被当做是绑定后创建的新函数的thisArg
  * 2.将传入的参数进行柯里化（预设一个参数），下面有两个例子
  * 下面的apply(null,[1,2])或者bind(null,37)都使用了null
  * apply或bind方法都需要传入一个this对象，如果我们不关注this对象，传入一个null,作为占位符就很合适
@@ -97,10 +100,12 @@ function list(37,arg1,arg2,……){
 
 */
 
-const add1 = addArg(1, 2);
-console.log(add1); // 3
+// 1.没有设定初始值的情形
+// const add1 = addArg(1, 2);
+// console.log(add1); // 3
+// 2.设置初始参数值值37
 const pre = addArg.bind(null, 37);
-const add2 = pre(2, 3); // addArg只有两个参数；37已经是第一个参数了，addArg只接收2,3被借去掉了
+const add2 = pre(2, 3); // addArg只有两个参数；37已经是第一个参数了，addArg只接收2,数字3被截取掉了
 console.log(add2); // 39
 
 // 三、和定时器一起使用，也是更改this指向，主要是setTimeout默认是winodow.setTimeout，不做演示了
