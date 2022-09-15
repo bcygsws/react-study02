@@ -99,7 +99,6 @@ export default class BindThis extends React.Component {
 	 *
 	 * }
 	 *
-	 *
 	 */
 	firstHandle(arg1, arg2) {
 		console.log(this); // 经过bind修改后，普通函数此处的this已经是当前组件实例了
