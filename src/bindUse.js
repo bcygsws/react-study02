@@ -123,3 +123,14 @@ LateBloomer.prototype.delay = function () {
 };
 const flower = new LateBloomer(); // new时，做三件事：分配空间存flower实例对象、构造函数执行、返回实例this
 flower.bloom();
+/**
+ *
+ * new 创建对象时做三件事：
+ * 参考文档：https://blog.csdn.net/m0_47531829/article/details/123770057
+ * 三件事总结：
+ * 1.创建一个新对象，将新对象的隐式原型(_proto_)赋值给构造函数的显式原型(prototype)
+ * 2.将构造函数的作用域赋值给新对象，执行构造函数的代码，为新对象添加属性
+ * 3.返回新对象
+ *
+ *
+ */
