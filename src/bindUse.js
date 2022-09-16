@@ -30,8 +30,8 @@
  * function sum(a,b){
  * 	console.log("a:"+a,"b:"+b);
  * }
+ * 短列表，指得call;长数组，指apply
  * sum.apply(null,[1,2]);// 打印结果：a:1,b:2
- *
  *
  */
 // list中不要传参，因为你不知道要传几个参数，让它使用默认的arguments来读取参数表列即可
@@ -108,4 +108,18 @@ const pre = addArg.bind(null, 37);
 const add2 = pre(2, 3); // addArg只有两个参数；37已经是第一个参数了，addArg只接收2,数字3被截取掉了
 console.log(add2); // 39
 
-// 三、和定时器一起使用，也是更改this指向，主要是setTimeout默认是winodow.setTimeout，不做演示了
+// 三、和定时器一起使用，也是更改this指向，主要是setTimeout默认是window.setTimeout
+function LateBloomer() {
+	this.petalCount = Math.ceil(Math.random() * 12) + 1; // petal花瓣的意思
+}
+// 定义两个原型方法
+LateBloomer.prototype.bloom = function () {
+	// 正常setTimeout时，延时的事件处理函数this指向window；window中并没有delay函数，我们将delay函数也定义成了一个原型方法，
+	// 故而需要使用bind,改变this的指向
+	window.setTimeout(this.delay.bind(this), 1000);
+};
+LateBloomer.prototype.delay = function () {
+	console.log('I am a flower with:' + this.petalCount);
+};
+const flower = new LateBloomer(); // new时，做三件事：分配空间存flower实例对象、构造函数执行、返回实例this
+flower.bloom();
