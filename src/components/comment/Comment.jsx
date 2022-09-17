@@ -29,6 +29,7 @@ export default class Comment extends React.Component {
 		};
 	}
 	render() {
+		const { username } = this.state;
 		return (
 			<div className={MyCom.c_container}>
 				{/* 添加一条评论，立即显示到评论列表中 */}
@@ -37,7 +38,7 @@ export default class Comment extends React.Component {
 					type="text"
 					name="user"
 					id="user"
-					value={this.state.username}
+					value={username}
 					ref={this.txtRef}
 					onChange={this.userChange}
 				/>
@@ -47,12 +48,10 @@ export default class Comment extends React.Component {
 					id="user"
 					placeholder="请输入评论内容"
 					className={MyCom.area}
-					ref={this.myRef}
-				></textarea>
+					ref={this.myRef}></textarea>
 				<button
 					className={MyCom.commit}
-					onClick={this.handle.bind(this)}
-				>
+					onClick={this.handle.bind(this)}>
 					发表评论
 				</button>
 				<h3>评论列表案例</h3>
@@ -121,6 +120,7 @@ export default class Comment extends React.Component {
 			CommentList: this.state.CommentList,
 			// a.清空文本输入框中username值
 			// 输入文本框的清空使用this.setState方法，username变化，导致onChange事件触发，进而清空了输入文本框
+			// b.从来源上来讲，username所在输入文本框中的数据，需要setState来改变，清除时同样适用setState
 			username: ''
 		});
 		// b.清空user和content中内容
