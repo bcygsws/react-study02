@@ -20,6 +20,7 @@ export default class Comment extends React.Component {
 			CommentList: [
 				{ user: '李寻欢', content: '小李飞刀，例不虚发' },
 				{ user: '陆小凤', content: '天下无双的轻功' },
+
 				{ user: '乔峰', content: '教单于折箭，搵英雄泪' }
 			],
 			username: ''
@@ -113,8 +114,8 @@ export default class Comment extends React.Component {
 		this.setState({
 			CommentList: this.state.CommentList,
 			// a.清空文本输入框中username值
-			// 输入文本框的清空使用this.setState方法，username变化，导致onChange事件触发，进而清空了输入文本框
-			// b.从来源上来讲，username所在输入文本框中的数据，需要setState来改变，清除时同样适用setState
+			// 1.输入文本框的清空使用this.setState方法，username变化，导致onChange事件触发，进而清空了输入文本框
+			// 2.从来源上来讲，username所在输入文本框中的数据，需要setState来改变，清除时同样适用setState
 			username: ''
 		});
 		// b.清空user和content中内容
