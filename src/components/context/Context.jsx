@@ -1,6 +1,6 @@
 /**
  *
- * @Context特性
+ * @ Context特性-这是使用Context的传统方式
  * getChildContextTypes
  * 记忆：前三个、后三个、后两个
  * 两个静态属性，1个方法
