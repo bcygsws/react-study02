@@ -83,6 +83,7 @@ export default class Comment extends React.Component {
 	// 	}
 	// 	return null;
 	// }
+	// 判断本地是否有存储数据？如有，使用本地存储；如果没有，则使用原本的CommentList
 	componentDidMount() {
 		if (localStorage.getItem('list')) {
 			// 这个阶段，就是在组件渲染前，获取CommentList
