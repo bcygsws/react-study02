@@ -1,6 +1,7 @@
 /**
  *
  * @ 单独的组件演示React生命周期钩子钩子 componentWillReceiveProps
+ * 
  *
  */
 import React from 'react';
