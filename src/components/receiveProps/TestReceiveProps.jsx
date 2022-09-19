@@ -1,6 +1,7 @@
 /**
  *
  * @ 单独的组件演示React生命周期钩子钩子 componentWillReceiveProps
+ * 
  *
  * 父组件注入的属性发生改变时，子组件中最早在componentWillReceiveProps的唯一参数nextProps可以拿到最新的props值
  * 而对于this.props,只能在componentDidUpdated(){
