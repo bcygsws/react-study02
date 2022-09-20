@@ -1,4 +1,13 @@
-/* 计数器小案例；理解react的生命周期 */
+/**
+ *
+ * hook分支
+ * 计数器小案例；理解react的生命周期
+ *
+ * 组件层次：
+ * 父组件 main.js
+ * 子组件为 Counter.jsx
+ *
+ */
 // 组件创建和生命周期依赖的包react
 import React from 'react';
 // react@15.3 以上，类型校验需要单独安装prop-types包
@@ -10,7 +19,8 @@ export default class Counter extends React.Component {
 		// 初始化数据
 		console.log(props); // {initVal: '0'}
 		console.log(typeof props.initVal); // string类型
-		// 居然不是number类型。在属性中传递number型，应该用initVal={0}。而不是initVal="0"
+		// 居然不是number类型。在属性中传递number型，应该使用initVal={0}，而不是initVal="0"，此时，上面两行代码的输出是：
+		// {initVal:0}  number
 		this.state = {
 			msg: 'ok',
 			count: props.initVal
