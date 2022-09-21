@@ -28,6 +28,9 @@ export default class Counter extends React.Component {
 		console.log(this.myRef);
 	}
 	// 组件即将要挂载，还没有开始渲染虚拟DOM--->类比vue中的created阶段
+	// 类比：React117中，该钩子被抛弃；使用有返回值的静态方法getDerivedStateFromProps代替
+  // 回顾vue生命周期钩子：https://blog.csdn.net/weixin_48337566/article/details/116057090
+	
 	// componentWillMount() {
 	// 	// 此时还不能操作虚拟dom
 	// 	console.log(document.getElementById('myVal')); // null
