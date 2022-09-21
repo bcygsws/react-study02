@@ -27,6 +27,18 @@ export default class Counter extends React.Component {
 		};
 		console.log(this.myRef); // 初始渲染时，{current:null}
 	}
+	// 组件即将要挂载，还没有开始渲染虚拟DOM--->类比vue中的created阶段
+	// 类比：React117中，该钩子被抛弃；使用有返回值的静态方法getDerivedStateFromProps代替
+  // 回顾vue生命周期钩子：https://blog.csdn.net/weixin_48337566/article/details/116057090
+	
+	// componentWillMount() {
+	// 	// 此时还不能操作虚拟dom
+	// 	console.log(document.getElementById('myVal')); // null
+	// 	// 但是在此之前，state数据已经初始化了，可以访问
+	// 	console.log(this.state.msg); // ok
+	// 	// 调用自定义函数myFun,在组件即将挂载阶段，已经可以调用自定义函数了
+	// 	this.myFun(); // 这是我自定义的函数myFun，和生命周期无关
+	// }
 	/**
 	 * @ defaultProps
 	 * 在一个组件中，一定有一些数据是必须的。哪怕用户又没有传这种【启动参数】。这是组件内部默认给自己提供一个默认值。这是一种保护机制
