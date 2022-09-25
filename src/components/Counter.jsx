@@ -21,14 +21,15 @@ export default class Counter extends React.Component {
 		console.log(props); // {initVal: '0'}
 		console.log(typeof props.initVal); // string类型
 		// 居然不是number类型。在属性中传递number型，应该使用initVal={0}，而不是initVal="0"，此时，上面两行代码的输出是：
-		// {initVal:0}  number
+		// {initVal:0}
+		// number
 		this.state = {
 			msg: 'ok',
 			count: props.initVal
 		};
 		console.log(this.myRef);
 	}
-	
+
 	// 组件即将要挂载，还没有开始渲染虚拟DOM--->类比vue中的created阶段
 	// 类比：React17中，该钩子被抛弃；使用有返回值的静态方法getDerivedStateFromProps代替
   // 回顾vue生命周期钩子：https://blog.csdn.net/weixin_48337566/article/details/116057090
