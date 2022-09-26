@@ -7,7 +7,6 @@
  * 父组件 main.js
  * 子组件为 Counter.jsx
  * 
- *
  */
 // 组件创建和生命周期依赖的包react
 import React from 'react';
