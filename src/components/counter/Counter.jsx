@@ -35,11 +35,11 @@ export default class Counter extends React.Component {
 	// 参考文档https://blog.csdn.net/weixin_48337566/article/details/116057090
 	
 	// componentWillMount() {
-	// 	// 此时还不能操作虚拟dom
+	// 	// 1.此时还不能操作虚拟dom
 	// 	console.log(document.getElementById('myVal')); // null
-	// 	// 但是在此之前，state数据已经初始化了，可以访问
+	// 	// 2.但是在此之前，state数据已经初始化了，可以访问
 	// 	console.log(this.state.msg); // ok
-	// 	// 调用自定义函数myFun,在组件即将挂载阶段，已经可以调用自定义函数了
+	// 	// 3.调用自定义函数myFun,在组件即将挂载阶段，已经可以调用自定义函数了
 	// 	this.myFun(); // 这是我自定义的函数myFun，和生命周期无关
 	// }
 	/**
