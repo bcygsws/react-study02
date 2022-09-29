@@ -64,7 +64,6 @@ export default class Counter extends React.Component {
 	 in Counter
 	 *
 	 * b.如果没有为Counter组件传值，则默认走默认属性defaultProps中的值
-	 *
 	 * 在class类中，定义一个静态成员defaultProps
 	 * static defaultProps={initVal:0};
 	 *
