@@ -3,7 +3,7 @@
  * hook分支
  * 计数器小案例；理解react的生命周期
  *
- * 组件层次：
+ * a.组件层次：
  * 父组件 main.js
  * 子组件为 Counter.jsx
  * 
