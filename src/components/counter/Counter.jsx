@@ -6,7 +6,7 @@
  * a.组件层次：
  * 父组件 main.js
  * 子组件为 Counter.jsx
- 
+
  * 
  */
 // 组件创建和生命周期依赖的包react
@@ -29,8 +29,6 @@ export default class Counter extends React.Component {
 		};
 		console.log(this.myRef); // 初始渲染时，{current:null}
 	}
-
-	
 	// 组件即将要挂载，还没有开始渲染虚拟DOM--->类比vue中的created到beforeMount阶段
 	// 类比：React17中，该钩子被抛弃；使用有返回值的静态方法getDerivedStateFromProps代替
   // 回顾vue生命周期钩子
