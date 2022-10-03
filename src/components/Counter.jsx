@@ -30,7 +30,7 @@ export default class Counter extends React.Component {
 	}
 	// 组件即将要挂载，还没有开始渲染虚拟DOM--->类比vue中的created到beforeMount阶段
 	// 类比：React17中，该钩子被抛弃；使用有返回值的静态方法getDerivedStateFromProps代替
-  // 回顾vue生命周期钩子
+  // 回顾vue生命周期钩子-了解vue生命周期钩子的始末
 	// 参考文档https://blog.csdn.net/weixin_48337566/article/details/116057090
 	
 	// componentWillMount() {
